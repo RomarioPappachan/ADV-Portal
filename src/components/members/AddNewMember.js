@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useMemberStore } from "@/store/memberStore";
 import { createPortal } from "react-dom";
 import InputText from "../ui/InputText";
 import InputSelect from "../ui/InputSelect";
 import InputTextarea from "../ui/InputTextarea";
+import InputTel from "../ui/InputTel";
+
+import toast from "react-hot-toast";
 
 const membershipOptions = [
   { label: "Ordinary", value: 1 },
@@ -12,11 +16,13 @@ const membershipOptions = [
 ];
 
 const genderOptions = [
-  { label: "Male", value: "male" },
-  { label: "Female", value: "female" },
+  { label: "Male", value: "Male" },
+  { label: "Female", value: "Female" },
 ];
 
 function AddNewMember({ isOpen, onClose }) {
+  const { addMember, getAllMembers } = useMemberStore();
+
   const [memberData, setMemberData] = useState({
     fullname: "",
     adv_code: "",
@@ -36,8 +42,6 @@ function AddNewMember({ isOpen, onClose }) {
     gender: "",
   });
 
-  console.log(memberData);
-
   const handleOnChange = (event) => {
     const { name, value } = event.target;
     setMemberData((prevValue) => ({
@@ -46,9 +50,25 @@ function AddNewMember({ isOpen, onClose }) {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Form submitted");
+
+    console.log("Form submitted", memberData);
+
+    try {
+      const response = await addMember(memberData);
+      console.log(response);
+      if (response?.data?.adv_id) {
+        toast.success(response?.data?.message);
+        getAllMembers();
+      }
+      setTimeout(() => {
+        onClose(false);
+      }, 2000);
+    } catch (err) {
+      toast.error(err.message || "Failed to create a new member");
+      // console.log(err);
+    }
   };
 
   return createPortal(
@@ -137,31 +157,34 @@ function AddNewMember({ isOpen, onClose }) {
               formData={memberData}
             />
 
-            <InputText
+            <InputTel
               type="tel"
               id="mobile"
               name="mobile"
               label="Mobile number"
               value={memberData.mobile}
+              maxLength={10}
               onChange={handleOnChange}
               formData={memberData}
             />
 
-            <InputText
+            <InputTel
               type="tel"
               id="office_ph"
               name="office_ph"
               label="Office phone number"
               value={memberData.office_ph}
+              maxLength={10}
               onChange={handleOnChange}
               formData={memberData}
             />
-            <InputText
+            <InputTel
               type="tel"
               id="home_ph"
               name="home_ph"
               label="Home phone number"
               value={memberData.home_ph}
+              maxLength={10}
               onChange={handleOnChange}
               formData={memberData}
             />

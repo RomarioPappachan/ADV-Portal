@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import toast from "react-hot-toast";
 
 function Logout({ setIsLogoutOpen }) {
-  const { adminLogout } = useAuthStore();
+  const { logout } = useAuthStore();
   const router = useRouter();
 
   return createPortal(
@@ -29,7 +29,7 @@ function Logout({ setIsLogoutOpen }) {
           <button
             className="w-36 h-10 px-4 py-2 text-base font-semibold rounded-lg bg-rose-400 hover:bg-rose-500 cursor-pointer"
             onClick={() => {
-              adminLogout();
+              logout();
               toast.success("Logout Successfull");
               router.push("/admin");
             }}

@@ -14,15 +14,17 @@
 // export default page;
 
 "use client";
+import React, { useEffect, useState } from "react";
 import AddMember from "@/components/members/AddMember";
 import AddNewMember from "@/components/members/AddNewMember";
-import React, { useState } from "react";
+import MembersTable from "@/components/members/MembersTable";
 
 const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="w-full p-4 bg-white rounded-lg">
+    <div className="w-full p-4 bg-white rounded-lg relative">
+      {/* <div className="sticky top-4 left-4 rounded-lg"> */}
       <h1 className="text-blue-950 text-xl pt-4 pb-6">Members</h1>
       <div className="flex justify-end">
         {/* Add Member Button */}
@@ -32,6 +34,11 @@ const Page = () => {
         >
           Add Member
         </button>
+      </div>
+      {/* </div> */}
+
+      <div className="mt-6 h-[55vh] relative rounded-lg overflow-y-auto">
+        <MembersTable />
       </div>
 
       {/* Add Member Modal */}

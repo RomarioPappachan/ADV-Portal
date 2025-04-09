@@ -1,25 +1,82 @@
+// "use client";
+// import { useEffect, useState } from "react";
+// import { useRouter } from "next/navigation";
+// import { useAuthStore } from "@/store/authStore";
+
+// const ProtectedRoute = ({ children }) => {
+//   const { adminToken, checkAdminAuth, adminLogout } = useAuthStore();
+//   const router = useRouter();
+
+//   const [loading, setLoading] = useState(true); // Add loading state
+
+//   useEffect(() => {
+//     checkAdminAuth();
+//     setLoading(false);
+//   }, []);
+
+//   useEffect(() => {
+//     if (!loading && !adminToken) {
+//       adminLogout();
+//       router.push("/admin");
+//     }
+//   }, [adminToken, loading, router, adminLogout]);
+
+//   if (loading)
+//     return (
+//       <div className="flex justify-center items-center h-screen">
+//         Loading...
+//       </div>
+//     );
+
+//   return adminToken ? children : null;
+// };
+
+// export default ProtectedRoute;
+
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 
-const ProtectedRoute = ({ children }) => {
-  const { adminToken, checkAdminAuth, adminLogout } = useAuthStore();
+const ProtectedRoute = ({ children, role }) => {
   const router = useRouter();
+  const { token, userType, isSessionRestored, restoreSession } = useAuthStore();
 
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
 
+  // Restore session on mount
   useEffect(() => {
-    checkAdminAuth();
+    restoreSession();
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-    if (!loading && !adminToken) {
-      adminLogout();
-      router.push("/admin");
+  // If session hasn't been restored yet, don't render anything
+  if (!isSessionRestored) {
+    return null; // or a loader if you want
+  }
+
+  // After restore, check authentication
+  if (!loading && !token) {
+    if (role === "admin") {
+      router.replace("/admin");
+    } else {
+      router.replace("/");
     }
-  }, [adminToken, loading, router, adminLogout]);
+    return null;
+  }
+
+  // If user is authenticated but role doesn't match
+  if (role === "admin" && userType !== role) {
+    router.replace("/admin");
+    return null;
+  }
+
+  if (role === "user" && userType !== role) {
+    router.replace("/");
+    return null;
+  }
+
+  // return <>{children}</>;
 
   if (loading)
     return (
@@ -28,7 +85,7 @@ const ProtectedRoute = ({ children }) => {
       </div>
     );
 
-  return adminToken ? children : null;
+  return token ? children : null;
 };
 
 export default ProtectedRoute;

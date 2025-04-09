@@ -11,7 +11,7 @@ function InputSelect({
   formData = {},
 }) {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full" key={name}>
       <select
         id={id}
         name={name}
@@ -20,14 +20,14 @@ function InputSelect({
         required
         className="peer w-full p-3 border text-gray-600 border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       >
-        <option value="" disabled selected>
+        <option value={""} disabled selected>
           -- Select {label} --
         </option>
         {optionsArray.map((option) => (
-          <option value={option.value}>{option.label}</option>
+          <option value={option.value} key={option.value}>
+            {option.label}
+          </option>
         ))}
-        {/* <option value="1">Ordinary</option>
-        <option value="0">Life</option> */}
       </select>
       <label
         htmlFor="membershipType"

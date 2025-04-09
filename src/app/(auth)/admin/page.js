@@ -1,15 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { adminLogin } from "@/api/auth";
 import { useAuthStore } from "@/store/authStore";
+import { useRouter } from "next/navigation";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 const AdminLogin = () => {
-  const { adminLogin: setAuth, checkAdminAuth } = useAuthStore();
+  const { loginAdmin, restoreSession } = useAuthStore();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,8 +19,8 @@ const AdminLogin = () => {
 
   useEffect(function () {
     async function isLogged() {
-      const res = await checkAdminAuth();
-      if (!res.isAdminLoggedIn) {
+      const res = await restoreSession();
+      if (!res.isAuthenticated) {
         return;
       } else {
         router.push("/dashboard");
@@ -36,14 +35,13 @@ const AdminLogin = () => {
     setError("");
 
     try {
-      console.log("hello");
-      const data = await adminLogin(email, password);
-      console.log(data);
-      setAuth(data.data.role, data.data.token);
-      toast.success(data.data.message);
+      // console.log("hello");
+      const response = await loginAdmin(email, password);
+      toast.success(response.data.message);
       router.push("/dashboard");
     } catch (err) {
-      setError("Invalid email or password");
+      // setError("Invalid email or password");
+      toast.error("Invalid email or password");
     }
   };
 

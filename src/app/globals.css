@@ -24,3 +24,26 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.bg-card {
+  background-image: url("/card-bg.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-idcard {
+  background-image: url("/id-card.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-medical {
+  background-image: url("/medical-card.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

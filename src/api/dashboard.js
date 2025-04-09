@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL; // Base API URL
 
 // Get token from localStorage
-const getToken = () => localStorage.getItem("adminToken");
+const getToken = () => localStorage.getItem("auth_token");
 
 // Fetch total number of members
 export const fetchTotalMembers = async () => {
@@ -28,7 +28,6 @@ export const fetchTotalPayments = async (paymentType) => {
         headers: { Authorization: `${getToken()}` },
       }
     );
-    console.log(res);
 
     return res;
   } catch (error) {
