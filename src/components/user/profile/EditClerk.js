@@ -128,7 +128,7 @@ function EditClerk({ clerk, onClose }) {
           <div className="pt-4">
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition duration-200 text-sm sm:text-base"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition duration-200 text-sm sm:text-base cursor-pointer"
             >
               Update Clerk
             </button>

@@ -1,12 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useUserStore } from "@/store/userStore";
-
 import { LuPencil } from "react-icons/lu"; // Lucide icon from react-icons
+import EditUserDetail from "./EditUserDetail";
 
 export default function UserDetailsSection() {
-  const { userDetails } = useUserStore();
+  const { userDetails, additionalInfo } = useUserStore();
+
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   const renderBadge = (value, type) => {
     let text = "";
@@ -37,22 +39,29 @@ export default function UserDetailsSection() {
 
   return (
     <div className="relative bg-white border border-gray-300 rounded-lg p-6 shadow-sm">
-      <button className="absolute top-4 right-4 text-gray-600 hover:text-blue-600">
+      <button
+        className="absolute top-4 right-4 text-gray-600 hover:text-blue-600"
+        onClick={() => setIsEditOpen(true)}
+      >
         <LuPencil size={18} />
       </button>
-      <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-        Profile Information
-      </h2>
+
+      <div className="flex flex-col sm:flex-row items-center gap-6 mb-6">
+        <img
+          // src={userDetails?.profile_image || "/user-icon.jpg"}
+          src="/user-icon.jpg"
+          alt="Profile"
+          className="w-28 h-28 rounded-full object-cover border border-gray-300 shadow-sm"
+        />
+        <div className="text-center sm:text-left">
+          <h2 className="text-2xl font-semibold text-gray-800">
+            {userDetails?.fullname}
+          </h2>
+          <p className="text-gray-500">{userDetails?.email}</p>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 text-sm">
-        <div>
-          <p className="text-gray-500 font-medium">Name</p>
-          <p className="text-gray-900 font-semibold">{userDetails?.fullname}</p>
-        </div>
-        <div>
-          <p className="text-gray-500 font-medium">Email</p>
-          <p className="text-gray-900 font-semibold">{userDetails?.email}</p>
-        </div>
         <div>
           <p className="text-gray-500 font-medium">Mobile</p>
           <p className="text-gray-900 font-semibold">{userDetails?.mobile}</p>
@@ -92,7 +101,37 @@ export default function UserDetailsSection() {
         <div>
           <p className="text-gray-500 font-medium">Date of Birth</p>
           <p className="text-gray-900 font-semibold">
-            {new Date(userDetails?.date_of_birth).toLocaleDateString()}
+            {userDetails?.date_of_birth
+              ? new Date(userDetails?.date_of_birth).toLocaleDateString()
+              : "N/A"}
+          </p>
+        </div>
+        <div>
+          <p className="text-gray-500 font-medium">Gender</p>
+          <p className="text-gray-900 font-semibold">
+            {additionalInfo?.gender || "N/A"}
+          </p>
+        </div>
+        <div>
+          <p className="text-gray-500 font-medium">Qualification</p>
+          <p className="text-gray-900 font-semibold">
+            {additionalInfo?.qualification || "N/A"}
+          </p>
+        </div>
+        <div>
+          <p className="text-gray-500 font-medium">Date of Enrolment</p>
+          <p className="text-gray-900 font-semibold">
+            {additionalInfo?.date_of_enrol
+              ? new Date(additionalInfo.date_of_enrol).toLocaleDateString()
+              : "N/A"}
+          </p>
+        </div>
+        <div>
+          <p className="text-gray-500 font-medium">Date of Admission</p>
+          <p className="text-gray-900 font-semibold">
+            {additionalInfo?.date_of_admission
+              ? new Date(additionalInfo.date_of_admission).toLocaleDateString()
+              : "N/A"}
           </p>
         </div>
         <div>
@@ -114,6 +153,8 @@ export default function UserDetailsSection() {
           </div>
         </div>
       </div>
+
+      {isEditOpen && <EditUserDetail onClose={() => setIsEditOpen(false)} />}
     </div>
   );
 }

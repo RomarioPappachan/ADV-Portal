@@ -39,6 +39,7 @@ export const useMemberStore = create((set) => ({
       return res;
     } catch (error) {
       set({ error: error.message, loading: false });
+      throw error;
     }
   },
 }));

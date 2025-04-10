@@ -42,7 +42,6 @@ export const updateMember = async (memberData) => {
     const res = await axios.put(`${API_URL}/dashboard/upd-member`, memberData, {
       headers: { Authorization: `${getToken()}` },
     });
-    console.log(res);
     return res;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to update member");

@@ -5,7 +5,8 @@ export const useUserStore = create((set) => ({
   userDetails: {},
   vehicleDetails: [],
   clerkDetails: [],
-  qualification: {},
+  paymentDetails: [],
+  additionalInfo: {},
   loading: false,
   error: null,
 
@@ -15,10 +16,11 @@ export const useUserStore = create((set) => ({
     try {
       const res = await fetchUserById(userId);
       set({
-        userDetails: res.data.advocate,
-        vehicleDetails: res.data.vehicles,
-        clerkDetails: res.data.clerk,
-        qualification: res.data.info,
+        userDetails: res?.data?.advocate,
+        vehicleDetails: res?.data?.vehicles,
+        clerkDetails: res?.data?.clerk,
+        paymentDetails: res?.data?.payments,
+        additionalInfo: res?.data?.info,
         loading: false,
         error: null,
       });
@@ -27,4 +29,15 @@ export const useUserStore = create((set) => ({
       throw err;
     }
   },
+
+  resetUserStore: () =>
+    set({
+      userDetails: {},
+      vehicleDetails: [],
+      clerkDetails: [],
+      paymentDetails: [],
+      additionalInfo: {},
+      loading: false,
+      error: null,
+    }),
 }));

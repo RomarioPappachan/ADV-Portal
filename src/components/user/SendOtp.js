@@ -34,6 +34,8 @@ function SendOtp({ mobileNo, setMobileNo, onSendOtp }) {
         </label>
       </div>
 
+      <div className="h-8"></div>
+
       <button
         type="submit"
         className="w-full h-12 flex justify-center items-center text-xl text-white font-semibold rounded-lg bg-[#3f51b5] cursor-pointer"
