@@ -91,7 +91,7 @@ export const useAuthStore = create((set) => ({
       set({ isAuthenticated: true, userType: "user", token, userInfo: user });
       return { message, status: true };
     } catch (err) {
-      console.error("Verify OTP failed");
+      // console.error("Verify OTP failed");
       throw err;
     }
   },

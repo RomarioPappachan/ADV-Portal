@@ -20,7 +20,7 @@ function InputSelect({
         required
         className="peer w-full p-3 border text-gray-600 border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       >
-        <option value={""} disabled selected>
+        <option value="" disabled selected>
           -- Select {label} --
         </option>
         {optionsArray.map((option) => (

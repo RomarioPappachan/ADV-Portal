@@ -1,13 +1,14 @@
-import Navbar from "@/components/Navbar";
+import BackToHomeButton from "@/components/ui/BackToHomeButton";
 import NavLink from "@/components/user/NavLink";
 
 export default function UserServiceLayout({ children }) {
   return (
     <>
-      <div>
+      <BackToHomeButton />
+      <div className="rounded-t-lg mt-4 overflow-hidden">
         <NavLink />
       </div>
-      <div>{children}</div>
+      <div className="rounded-b-lg overflow-hidden">{children}</div>
     </>
   );
 }

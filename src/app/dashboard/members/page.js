@@ -1,18 +1,3 @@
-// import React from "react";
-
-// const page = () => {
-//   return (
-//     <div className="w-full p-4 bg-white rounded-lg ">
-//       <h1 className="text-blue-950 text-xl pt-4 pb-6">Members</h1>
-//       <div className="flex justify-end">
-//         <button className="w-32 h-10 bg-blue-800 text-white font-semibold rounded-lg hover:border border-blue-800 hover:bg-white hover:text-blue-800 ease-in-out duration-300 cursor-pointer">Add Member</button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default page;
-
 "use client";
 import React, { useEffect, useState } from "react";
 import AddMember from "@/components/members/AddMember";
@@ -25,19 +10,19 @@ const Page = () => {
   return (
     <div className="w-full p-4 bg-white rounded-lg relative">
       {/* <div className="sticky top-4 left-4 rounded-lg"> */}
-      <h1 className="text-blue-950 text-xl pt-4 pb-6">Members</h1>
+      <h1 className="text-gray-800 text-xl">Members</h1>
       <div className="flex justify-end">
         {/* Add Member Button */}
         <button
           onClick={() => setIsModalOpen(true)}
-          className="w-32 h-10 bg-blue-800 text-white font-semibold rounded-lg hover:border border-blue-800 hover:bg-white hover:text-blue-800 ease-in-out duration-300 cursor-pointer"
+          className="w-32 h-10 bg-[#3f51b5] text-white font-semibold rounded-lg hover:border border-[#3f51b5] hover:bg-white hover:text-[#3f51b5] ease-in-out duration-300 cursor-pointer"
         >
           Add Member
         </button>
       </div>
       {/* </div> */}
 
-      <div className="mt-6 h-[55vh] relative rounded-lg overflow-y-auto">
+      <div className="mt-6 relative rounded-lg overflow-y-auto">
         <MembersTable />
       </div>
 

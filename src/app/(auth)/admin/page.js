@@ -49,14 +49,14 @@ const AdminLogin = () => {
     <div className="w-screen h-screen flex justify-center items-center bg-gray-100">
       <div className="min-w-md max-w-4xl min-h-[400px] shadow-2xl rounded-lg bg-white">
         {/* Header */}
-        <div className="w-full h-20 flex justify-center items-center gap-3 bg-blue-900 rounded-t-lg">
+        <div className="w-full h-20 flex justify-center items-center gap-3 bg-[#3f51b5] rounded-t-lg">
           <img src="/khcaa-logo.png" alt="logo" className="size-16" />
           <h1 className="text-4xl text-white font-bold">KHCAA</h1>
         </div>
 
         {/* Login Form */}
         <form className="py-6 px-6 space-y-6" onSubmit={handleSubmit}>
-          <h1 className="text-blue-900 text-xl font-semibold text-center">
+          <h1 className="text-[#3f51b5] text-xl font-semibold text-center">
             Admin Login
           </h1>
 
@@ -117,7 +117,7 @@ const AdminLogin = () => {
               {error}
             </span>
           </div>
-          <button className="w-full h-12 flex justify-center items-center text-xl text-white font-semibold rounded-lg bg-blue-900 cursor-pointer">
+          <button className="w-full h-12 flex justify-center items-center text-xl text-white font-semibold rounded-lg bg-[#3f51b5] cursor-pointer">
             Login
           </button>
         </form>

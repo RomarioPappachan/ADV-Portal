@@ -2,7 +2,7 @@
 
 function SendOtp({ mobileNo, setMobileNo, onSendOtp }) {
   return (
-    <form className="py-6 px-6 space-y-6" onSubmit={onSendOtp}>
+    <form className="py-6 px-6 space-y-8" onSubmit={onSendOtp}>
       <h1 className="text-[#3f51b5] text-xl font-semibold text-center">
         Member Login
       </h1>
@@ -34,11 +34,9 @@ function SendOtp({ mobileNo, setMobileNo, onSendOtp }) {
         </label>
       </div>
 
-      <div className="h-8"></div>
-
       <button
         type="submit"
-        className="w-full h-12 flex justify-center items-center text-xl text-white font-semibold rounded-lg bg-[#3f51b5] cursor-pointer"
+        className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-[#3f51b5] cursor-pointer"
       >
         Send OTP
       </button>

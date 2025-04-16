@@ -12,7 +12,7 @@ const Sidebar = () => {
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
 
   const menuItems = [
-    { name: "Dashboard", icon: <FiHome size={20} />, path: "/admin" },
+    { name: "Dashboard", icon: <FiHome size={20} />, path: "/dashboard" },
     {
       name: "Members",
       icon: <FiUsers size={20} />,
@@ -23,7 +23,7 @@ const Sidebar = () => {
   return (
     <div className="w-64 h-80 bg-white shadow-lg rounded-lg flex flex-col">
       {/* Navigation */}
-      <nav className="flex-1 px-4 py-6 space-y-2">
+      <nav className="flex-1 p-4 space-y-2">
         {menuItems.map((item) => (
           <button
             key={item.name}
@@ -31,10 +31,10 @@ const Sidebar = () => {
               setActiveTab(item.name);
               router.push(item.path);
             }}
-            className={`flex items-center gap-3 p-3 w-full rounded-lg text-gray-700 hover:bg-blue-100 transition 
+            className={`flex items-center gap-3 p-3 w-full rounded-lg text-gray-700 hover:bg-gray-100 transition cursor-pointer
               ${
                 activeTab === item.name
-                  ? "bg-blue-200 text-blue-900 font-semibold"
+                  ? "bg-gray-200 text-gray-800 font-semibold"
                   : ""
               }`}
           >
@@ -54,7 +54,9 @@ const Sidebar = () => {
           Logout
         </button>
       </div>
-      {isLogoutOpen && <Logout setIsLogoutOpen={setIsLogoutOpen} />}
+
+      {/* logout popup   */}
+      <Logout isOpen={isLogoutOpen} onClose={() => setIsLogoutOpen(false)} />
     </div>
   );
 };

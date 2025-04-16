@@ -130,6 +130,7 @@
 import React from "react";
 import Link from "next/link";
 import { useAuthStore } from "@/store/authStore";
+import { useUserStore } from "@/store/userStore";
 import {
   LuMail,
   LuPhone,
@@ -144,26 +145,40 @@ import {
 
 const Page = () => {
   const { userInfo } = useAuthStore();
+  const { userDetails } = useUserStore();
   console.log(userInfo);
 
   return (
-    <div className="w-full flex flex-col lg:flex-row gap-6 pb-10 bg-transparent p-4">
+    <div className="w-full flex flex-col lg:flex-row gap-6 pb-10 bg-transparent">
       {/* Left Section */}
       <div className="w-full lg:w-3/4 bg-white rounded-xl p-6 border border-gray-200 shadow-sm flex flex-col gap-6">
         {/* Profile Header */}
         <div className="flex flex-col sm:flex-row items-center gap-6">
           <div className="w-28 h-28 bg-gray-200 rounded-full overflow-hidden border">
             <img
-              src="/user-icon.jpg"
+              src={
+                userDetails?.profile_image
+                  ? userDetails.profile_image
+                  : userInfo.profile_image
+                  ? userInfo.profile_image
+                  : "/user-icon.jpg"
+              }
+              // src="/user-icon.jpg"
               alt="profile"
               className="w-full h-full object-cover rounded-full"
             />
           </div>
           <div className="text-center sm:text-left">
             <h1 className="text-2xl font-bold text-gray-800">
-              {userInfo?.fullname?.toUpperCase()}
+              {userDetails?.fullname
+                ? userDetails?.fullname?.toUpperCase()
+                : userInfo?.fullname?.toUpperCase()}
             </h1>
-            <p className="text-gray-500">{userInfo?.adv_code}</p>
+            <p className="text-gray-500">
+              {userDetails?.adv_code
+                ? userDetails?.adv_code
+                : userInfo?.adv_code}
+            </p>
           </div>
         </div>
 
@@ -174,21 +189,25 @@ const Page = () => {
               <LuMail /> Email
             </div>
             <p className="text-black font-semibold break-all">
-              {userInfo?.email}
+              {userDetails?.email ? userDetails?.email : userInfo?.email}
             </p>
           </div>
           <div>
             <div className="flex items-center gap-2 text-gray-500 mb-1">
               <LuPhone /> Mobile Number
             </div>
-            <p className="text-black font-semibold">{userInfo?.mobile}</p>
+            <p className="text-black font-semibold">
+              {userDetails?.mobile ? userDetails?.mobile : userInfo?.mobile}
+            </p>
           </div>
           <div>
             <div className="flex items-center gap-2 text-gray-500 mb-1">
               <LuUserCheck /> Enrollment ID
             </div>
             <p className="text-black font-semibold">
-              {userInfo?.enrollment_id}
+              {userDetails?.enrollment_id
+                ? userDetails?.enrollment_id
+                : userInfo?.enrollment_id}
             </p>
           </div>
         </div>
@@ -201,14 +220,20 @@ const Page = () => {
                 <LuMapPin /> Residential Address
               </div>
               <p className="text-black font-semibold">
-                {userInfo?.res_address}
+                {userDetails?.res_address
+                  ? userDetails?.res_address
+                  : userInfo?.res_address}
               </p>
             </div>
             <div>
               <div className="flex items-center gap-2 text-gray-500 mb-1">
                 <LuPhone /> Home Phone
               </div>
-              <p className="text-black font-semibold">{userInfo?.home_ph}</p>
+              <p className="text-black font-semibold">
+                {userDetails?.home_ph
+                  ? userDetails?.home_ph
+                  : userInfo?.home_ph}
+              </p>
             </div>
           </div>
           <div className="space-y-3">
@@ -217,14 +242,20 @@ const Page = () => {
                 <LuBuilding2 /> Office Address
               </div>
               <p className="text-black font-semibold">
-                {userInfo?.off_address}
+                {userDetails?.off_address
+                  ? userDetails?.off_address
+                  : userInfo?.off_address}
               </p>
             </div>
             <div>
               <div className="flex items-center gap-2 text-gray-500 mb-1">
                 <LuPhone /> Office Phone
               </div>
-              <p className="text-black font-semibold">{userInfo?.office_ph}</p>
+              <p className="text-black font-semibold">
+                {userDetails?.office_ph
+                  ? userDetails?.office_ph
+                  : userInfo?.office_ph}
+              </p>
             </div>
           </div>
         </div>

@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { useUserStore } from "@/store/userStore";
+import { useMemberStore } from "@/store/memberStore";
+import EditMemberDetail from "./EditMemberDetail";
 import { LuPencil } from "react-icons/lu"; // Lucide icon from react-icons
-import EditUserDetail from "./EditUserDetail";
 
-export default function UserDetailsSection() {
-  const { userDetails, additionalInfo } = useUserStore();
+export default function MemberDetailsSection() {
+  const { userDetails, additionalInfo } = useMemberStore();
 
   const [isEditOpen, setIsEditOpen] = useState(false);
 
@@ -159,7 +159,7 @@ export default function UserDetailsSection() {
         </div>
       </div>
 
-      {isEditOpen && <EditUserDetail onClose={() => setIsEditOpen(false)} />}
+      {isEditOpen && <EditMemberDetail onClose={() => setIsEditOpen(false)} />}
     </div>
   );
 }

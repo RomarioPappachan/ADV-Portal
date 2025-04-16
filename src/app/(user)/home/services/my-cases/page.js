@@ -2,7 +2,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="p-3 text-gray-800">
+    <div className="p-3 text-gray-800 bg-white">
       <h1 className="text-black font-semibold text-2xl mb-4">My Cases</h1>
 
       <div className="flex flex-col md:flex-row flex-wrap gap-4">
