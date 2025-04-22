@@ -107,10 +107,10 @@
 import { useEffect } from "react";
 import { useDashboardStore } from "@/store/dashboardStore";
 
-import { FiUsers } from "react-icons/fi";
-import { PiStickerFill } from "react-icons/pi";
-import { FaIdCard } from "react-icons/fa6";
-import { BsJournalMedical } from "react-icons/bs";
+import { LuUsers } from "react-icons/lu";
+import { PiStickerFill, PiTicketFill } from "react-icons/pi";
+import { FaUsers, FaPeopleGroup, FaIdCard } from "react-icons/fa6";
+import { BsFillHeartPulseFill } from "react-icons/bs";
 
 function Stats() {
   const {
@@ -143,13 +143,13 @@ function Stats() {
   const cards = [
     {
       title: "Members",
-      icon: <FiUsers className="text-5xl text-white/80" />,
+      icon: <FaPeopleGroup className="text-5xl text-white/80" />,
       value: totalMembers,
       gradient: "from-teal-400 to-teal-600",
     },
     {
       title: "Parking Sticker",
-      icon: <PiStickerFill className="text-6xl text-white/80" />,
+      icon: <PiTicketFill className="text-6xl text-white/80" />,
       value: totalStickerPayment,
       gradient: "from-blue-400 to-blue-600",
     },
@@ -161,7 +161,7 @@ function Stats() {
     },
     {
       title: "Medical Aid & Scheme",
-      icon: <BsJournalMedical className="text-5xl text-white/80" />,
+      icon: <BsFillHeartPulseFill className="text-5xl text-white/80" />,
       value: totalMedicalPayment,
       gradient: "from-rose-400 to-rose-600",
     },
@@ -181,7 +181,7 @@ function Stats() {
                 {title}
               </h1>
               <p className="text-3xl sm:text-4xl font-bold drop-shadow-sm">
-                {value || "-"}
+                {value}
               </p>
             </div>
           </div>

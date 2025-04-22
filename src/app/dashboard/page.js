@@ -25,7 +25,7 @@ import Statistics from "@/components/dashboard/Statistics";
 
 const page = () => {
   return (
-    <div className="w-full p-4 bg-white rounded-lg shadow-sm">
+    <div className="w-full bg-white rounded-lg">
       <h1 className="text-blue-950 text-xl lg:text-2xl font-semibold mb-6">
         Dashboard
       </h1>

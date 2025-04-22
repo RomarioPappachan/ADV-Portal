@@ -14,6 +14,8 @@ function EditVehicle({ vehicle, onClose }) {
 
   const userId = userInfo?.id;
 
+  const [isEditting, setIsEditting] = useState(false);
+
   const [form, setForm] = useState({
     regno: vehicle.regno || "",
     brand: vehicle.brand || "",
@@ -33,6 +35,7 @@ function EditVehicle({ vehicle, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsEditting(true);
 
     try {
       const updatedVehicleData = {
@@ -47,6 +50,8 @@ function EditVehicle({ vehicle, onClose }) {
       onClose(); // close the edit popup
     } catch (error) {
       toast.error("Failed to update vehicle details");
+    } finally {
+      setIsEditting(false);
     }
   };
 
@@ -127,8 +132,9 @@ function EditVehicle({ vehicle, onClose }) {
             <button
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition duration-200 text-sm sm:text-base"
+              disabled={isEditting}
             >
-              Update Vehicle
+              {isEditting ? "Updating..." : "Update Vehicle"}
             </button>
           </div>
         </form>

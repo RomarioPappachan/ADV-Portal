@@ -31,7 +31,7 @@ export const sendOtpApi = async (mobileNo) => {
   }
 };
 
-// Member Login Send OTP
+// Member Login Verify OTP
 export const verifyOtpApi = async (mobileNo, otp) => {
   // console.log(mobileNo, otp);
   try {

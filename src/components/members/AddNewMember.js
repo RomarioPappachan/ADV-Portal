@@ -298,6 +298,8 @@ function AddNewMember({ isOpen, onClose }) {
   const { addMember, getAllMembers } = useMemberStore();
   const fileInputRef = useRef(null);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [formData, setFormData] = useState({
     fullname: "",
     adv_code: "",
@@ -344,7 +346,7 @@ function AddNewMember({ isOpen, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    setIsSubmitting(true);
 
     try {
       const response = await addMember(formData);
@@ -357,6 +359,8 @@ function AddNewMember({ isOpen, onClose }) {
       }
     } catch (err) {
       toast.error(err.message || "Failed to create a new member");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -524,8 +528,9 @@ function AddNewMember({ isOpen, onClose }) {
             <button
               type="submit"
               className="w-32 h-10 px-4 py-2 text-sm font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600"
+              disabled={isSubmitting}
             >
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>

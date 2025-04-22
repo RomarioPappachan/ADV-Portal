@@ -8,7 +8,7 @@ const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="w-full p-4 bg-white rounded-lg relative">
+    <div className="w-full bg-white rounded-lg relative">
       {/* <div className="sticky top-4 left-4 rounded-lg"> */}
       <h1 className="text-gray-800 text-xl">Members</h1>
       <div className="flex justify-end">
@@ -22,7 +22,7 @@ const Page = () => {
       </div>
       {/* </div> */}
 
-      <div className="mt-6 relative rounded-lg overflow-y-auto">
+      <div className="mt-6 relative overflow-y-auto">
         <MembersTable />
       </div>
 

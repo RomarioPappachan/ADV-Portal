@@ -31,7 +31,7 @@ const UserNavbar = () => {
   return (
     <>
       <nav className="w-full bg-[#3f51b5] text-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="px-3 sm:px-4 md:px-8 lg:px-16">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/home">

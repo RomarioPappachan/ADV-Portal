@@ -20,11 +20,11 @@ export const useMemberStore = create((set) => ({
     try {
       const res = await fetchAllMembers();
       const allMembers = res?.data?.result;
-      const startPoint = allMembers?.length - 50;
-      const updatedMembers = allMembers?.splice(startPoint, 50);
-      console.log(updatedMembers);
+      // const startPoint = allMembers?.length - 50;
+      // const updatedMembers = allMembers?.splice(startPoint, 50);
+      // console.log(updatedMembers);
       set({
-        members: updatedMembers,
+        members: allMembers,
         loading: false,
       });
     } catch (error) {

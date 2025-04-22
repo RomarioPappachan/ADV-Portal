@@ -280,6 +280,8 @@ function EditUserDetail({ onClose }) {
 
   const fileInputRef = useRef(null);
 
+  const [isEditting, setIsEditting] = useState(false);
+
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -338,7 +340,8 @@ function EditUserDetail({ onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    setIsEditting(true);
+    // console.log(formData);
 
     try {
       const userId = userInfo?.id;
@@ -361,6 +364,8 @@ function EditUserDetail({ onClose }) {
     } catch (error) {
       console.log(error);
       toast.error("Failed to update details");
+    } finally {
+      setIsEditting(false);
     }
   };
 
@@ -592,8 +597,9 @@ function EditUserDetail({ onClose }) {
             <button
               type="submit"
               className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition duration-200 text-sm sm:text-base cursor-pointer"
+              disabled={isEditting}
             >
-              Save Changes
+              {isEditting ? "Saving..." : "Save Changes"}
             </button>
           </div>
         </form>

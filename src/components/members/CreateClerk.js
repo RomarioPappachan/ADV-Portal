@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 function CreateClerk({ onClose }) {
   const { selectedMemberId, getMemberById } = useMemberStore();
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [form, setForm] = useState({
     name: "",
     designation: "",
@@ -30,6 +32,8 @@ function CreateClerk({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsSubmitting(true);
+
     try {
       const clerkData = {
         adv_id: selectedMemberId,
@@ -41,6 +45,8 @@ function CreateClerk({ onClose }) {
       onClose(); // Close the popup after submission
     } catch (error) {
       toast.error("Failed to add new clerk");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -124,8 +130,9 @@ function CreateClerk({ onClose }) {
             <button
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition duration-200 text-sm sm:text-base"
+              disabled={isSubmitting}
             >
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>

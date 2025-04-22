@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 function CreateVehicle({ onClose }) {
   const { selectedMemberId, getMemberById } = useMemberStore();
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [form, setForm] = useState({
     regno: "",
     brand: "",
@@ -29,6 +31,7 @@ function CreateVehicle({ onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       const vehicleData = {
@@ -41,6 +44,8 @@ function CreateVehicle({ onClose }) {
       onClose(); // Close the popup after submission
     } catch (error) {
       toast.error("Failed to add new vehicle");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -122,8 +127,9 @@ function CreateVehicle({ onClose }) {
             <button
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition duration-200 text-sm sm:text-base"
+              disabled={isSubmitting}
             >
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>

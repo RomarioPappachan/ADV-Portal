@@ -15,6 +15,8 @@ const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
+  const [isLogging, setIsLogging] = useState(false);
+
   const router = useRouter();
 
   useEffect(function () {
@@ -32,6 +34,7 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLogging(true);
     setError("");
 
     try {
@@ -42,6 +45,8 @@ const AdminLogin = () => {
     } catch (err) {
       // setError("Invalid email or password");
       toast.error("Invalid email or password");
+    } finally {
+      setIsLogging(false);
     }
   };
 
@@ -117,8 +122,11 @@ const AdminLogin = () => {
               {error}
             </span>
           </div>
-          <button className="w-full h-12 flex justify-center items-center text-xl text-white font-semibold rounded-lg bg-[#3f51b5] cursor-pointer">
-            Login
+          <button
+            className="w-full h-12 flex justify-center items-center text-xl text-white font-semibold rounded-lg bg-[#3f51b5] cursor-pointer"
+            disabled={isLogging}
+          >
+            {isLogging ? "Logging..." : "Login"}
           </button>
         </form>
       </div>

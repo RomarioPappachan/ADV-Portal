@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { FiHome, FiUsers, FiLogOut } from "react-icons/fi";
+import { LuShieldCheck } from "react-icons/lu";
 import Logout from "./Logout";
 
 const Sidebar = () => {
+  const pathname = usePathname();
+
   const router = useRouter();
+
   const [activeTab, setActiveTab] = useState("Dashboard");
 
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
@@ -18,12 +22,24 @@ const Sidebar = () => {
       icon: <FiUsers size={20} />,
       path: "/dashboard/members",
     },
+    {
+      name: "Subscriptions",
+      icon: <LuShieldCheck size={20} />,
+      path: "/dashboard/payments/parking",
+    },
   ];
 
+  useEffect(() => {
+    if (pathname === "/dashboard") setActiveTab("Dashboard");
+    else if (pathname.startsWith("/dashboard/members")) setActiveTab("Members");
+    else if (pathname.startsWith("/dashboard/payments"))
+      setActiveTab("Subscriptions");
+  }, [pathname]);
+
   return (
-    <div className="w-64 h-80 bg-white shadow-lg rounded-lg flex flex-col">
+    <div className="w-64 min-h-screen h-full bg-white shadow-lg flex flex-col">
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-2">
+      <nav className=" p-4 space-y-2">
         {menuItems.map((item) => (
           <button
             key={item.name}
@@ -45,7 +61,7 @@ const Sidebar = () => {
       </nav>
 
       {/* Logout Button */}
-      <div className="border-t-[1px] border-t-gray-300 px-2 pt-2">
+      <div className="border-t-[1px] border-t-gray-300 p-4">
         <button
           className="flex items-center gap-3 p-3 w-full rounded-lg text-rose-600 hover:bg-rose-100 transition mb-4 cursor-pointer"
           onClick={() => setIsLogoutOpen(true)}

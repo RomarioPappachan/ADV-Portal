@@ -20,7 +20,7 @@ function MemberProfile({ params }) {
   }, [memberId]);
 
   return (
-    <div className="w-full p-4 bg-white rounded-lg relative">
+    <div className="w-full bg-white rounded-lg relative">
       <div className="bg-transparent">
         <Link
           href="/dashboard/members"

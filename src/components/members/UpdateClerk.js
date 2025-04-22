@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 function UpdateClerk({ clerk, onClose }) {
   const { selectedMemberId, getMemberById } = useMemberStore();
 
+  const [isEditting, setIsEditting] = useState(false);
+
   const [form, setForm] = useState({
     name: clerk.name || "",
     designation: clerk.designation || "",
@@ -29,6 +31,7 @@ function UpdateClerk({ clerk, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsEditting(true);
 
     try {
       const updatedClerkData = {
@@ -43,6 +46,8 @@ function UpdateClerk({ clerk, onClose }) {
       onClose(); // close the edit popup
     } catch (error) {
       toast.error("Failed to update clerk details");
+    } finally {
+      setIsEditting(false);
     }
   };
 
@@ -125,8 +130,9 @@ function UpdateClerk({ clerk, onClose }) {
             <button
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition duration-200 text-sm sm:text-base cursor-pointer"
+              disabled={isEditting}
             >
-              Update Clerk
+              {isEditting ? "Updating..." : "Update Clerk"}
             </button>
           </div>
         </form>

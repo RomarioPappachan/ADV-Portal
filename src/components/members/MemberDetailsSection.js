@@ -40,7 +40,7 @@ export default function MemberDetailsSection() {
   return (
     <div className="relative bg-white border border-gray-300 rounded-lg p-6 shadow-sm">
       <button
-        className="absolute top-4 right-4 text-gray-600 hover:text-blue-600"
+        className="absolute top-4 right-4 text-gray-600 hover:text-blue-600 cursor-pointer"
         onClick={() => setIsEditOpen(true)}
       >
         <LuPencil size={18} />

@@ -22,6 +22,8 @@ function VerifyOtp({ mobileNo, setVerifyOpen, onSendOtp }) {
   const [isResend, setIsResend] = useState(false);
   const [isOtpError, setIsOtpError] = useState(false);
 
+  const [isLogging, setIsLogging] = useState(false);
+
   // Timer logic
   useEffect(() => {
     let interval = null;
@@ -69,6 +71,7 @@ function VerifyOtp({ mobileNo, setVerifyOpen, onSendOtp }) {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     setIsOtpError(false);
+    setIsLogging(true);
     const { num1, num2, num3, num4, num5, num6 } = otp;
     if (!num1 || !num2 || !num3 || !num4 || !num5 || !num6) {
       setIsOtpError(true);
@@ -90,6 +93,8 @@ function VerifyOtp({ mobileNo, setVerifyOpen, onSendOtp }) {
         toast.error(error.message);
 
         setIsOtpError(true);
+      } finally {
+        setIsLogging(false);
       }
     }
   };
@@ -164,8 +169,9 @@ function VerifyOtp({ mobileNo, setVerifyOpen, onSendOtp }) {
       <button
         type="submit"
         className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-[#3f51b5] cursor-pointer"
+        disabled={isLogging}
       >
-        Login
+        {isLogging ? "Logging..." : "Login"}
       </button>
       <span className="text-gray-500 text-xs">
         Want to change mobile number?{" "}

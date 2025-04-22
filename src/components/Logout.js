@@ -61,7 +61,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { LuX } from "react-icons/lu";
 
-const LogoutConfirmation = ({ isOpen, onClose }) => {
+const Logout = ({ isOpen, onClose }) => {
   const { logout } = useAuthStore();
 
   const { resetSelectedMember } = useMemberStore();
@@ -126,4 +126,4 @@ const LogoutConfirmation = ({ isOpen, onClose }) => {
   );
 };
 
-export default LogoutConfirmation;
+export default Logout;
