@@ -6,6 +6,7 @@ import { useMemberStore } from "@/store/memberStore";
 import MemberDetailsSection from "@/components/members/MemberDetailsSection";
 import MemberClerkListSection from "@/components/members/MemberClerkListSection";
 import MemberVehicleListSection from "@/components/members/MemberVehicleListSection";
+import MemberPaymentListSection from "@/components/members/MemberPaymentListSection";
 import { LuUsers } from "react-icons/lu";
 
 function MemberProfile({ params }) {
@@ -39,6 +40,8 @@ function MemberProfile({ params }) {
         <MemberClerkListSection />
 
         <MemberVehicleListSection />
+
+        <MemberPaymentListSection />
       </div>
       {/* </div> */}
 

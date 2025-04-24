@@ -22,3 +22,16 @@ export const fetchAllPayments = async (paymentType) => {
     );
   }
 };
+
+// Add new payment
+export const createPayment = async (paymentData) => {
+  try {
+    const res = await axios.post(`${API_URL}/payment/others`, paymentData, {
+      headers: { Authorization: `${getToken()}` },
+    });
+    console.log(res);
+    return res;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Failed to add payment");
+  }
+};

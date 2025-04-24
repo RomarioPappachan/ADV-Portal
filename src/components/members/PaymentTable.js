@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { useUserStore } from "@/store/userStore";
+import { useMemberStore } from "@/store/memberStore";
 
-function SubscriptionTable() {
-  const { paymentDetails } = useUserStore();
+function PaymentTable() {
+  const { paymentDetails } = useMemberStore();
   const payments = paymentDetails ?? [];
 
   /* ------------------------------------------------------------------ */
@@ -115,7 +115,7 @@ function SubscriptionTable() {
     <div className="p-4 text-gray-800">
       {/* --- header --- */}
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-base font-semibold">Subscription Payments</h2>
+        <h2 className="text-base font-semibold">Subscription Payment List</h2>
         <input
           type="search"
           placeholder="Search..."
@@ -238,4 +238,4 @@ function SubscriptionTable() {
   );
 }
 
-export default SubscriptionTable;
+export default PaymentTable;

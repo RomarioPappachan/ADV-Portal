@@ -36,22 +36,20 @@ function EditMemberDetail({ onClose }) {
   });
 
   useEffect(() => {
-    if (userDetails && additionalInfo) {
-      setFormData({
-        fullname: userDetails.fullname || "",
-        email: userDetails.email || "",
-        profile_image: userDetails.profile_image || "",
-        office_ph: userDetails.office_ph || "",
-        home_ph: userDetails.home_ph || "",
-        res_address: userDetails.res_address || "",
-        off_address: userDetails.off_address || "",
-        date_of_birth: userDetails.date_of_birth?.slice(0, 10) || "",
-        qualification: additionalInfo.qualification || "",
-        date_of_enrol: additionalInfo.date_of_enrol?.slice(0, 10) || "",
-        date_of_admission: additionalInfo.date_of_admission?.slice(0, 10) || "",
-        gender: additionalInfo.gender || "Male",
-      });
-    }
+    setFormData({
+      fullname: userDetails?.fullname || "",
+      email: userDetails?.email || "",
+      profile_image: userDetails?.profile_image || "",
+      office_ph: userDetails?.office_ph || "",
+      home_ph: userDetails?.home_ph || "",
+      res_address: userDetails?.res_address || "",
+      off_address: userDetails?.off_address || "",
+      date_of_birth: userDetails?.date_of_birth?.slice(0, 10) || "",
+      qualification: additionalInfo?.qualification || "",
+      date_of_enrol: additionalInfo?.date_of_enrol?.slice(0, 10) || "",
+      date_of_admission: additionalInfo?.date_of_admission?.slice(0, 10) || "",
+      gender: additionalInfo?.gender || "Male",
+    });
   }, [userDetails, additionalInfo]);
 
   const handleChange = (e) => {

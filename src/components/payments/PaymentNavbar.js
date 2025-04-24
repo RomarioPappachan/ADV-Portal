@@ -3,7 +3,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LuCar, LuIdCard, LuHeartPulse } from "react-icons/lu";
+import {
+  LuCar,
+  LuIdCard,
+  LuHeartPulse,
+  LuBadgePoundSterling,
+} from "react-icons/lu";
 
 export default function PaymentNavbar() {
   const pathname = usePathname();
@@ -25,6 +30,11 @@ export default function PaymentNavbar() {
       href: "/dashboard/payments/medical",
       label: "Medical Aid Scheme",
       icon: <LuHeartPulse size={28} />,
+    },
+    {
+      href: "/dashboard/payments/other-payments",
+      label: "Other Payments",
+      icon: <LuBadgePoundSterling size={28} />,
     },
   ];
 

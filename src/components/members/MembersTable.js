@@ -235,9 +235,9 @@ function MembersTable() {
                       {/* <button className="text-xs text-gray-600 hover:text-cyan-500 font-semibold cursor-pointer hover:underline">
                         Edit
                       </button> */}
-                      <button className="text-xs text-gray-600 hover:text-rose-500 font-semibold cursor-pointer hover:underline">
+                      {/* <button className="text-xs text-gray-600 hover:text-rose-500 font-semibold cursor-pointer hover:underline">
                         Delete
-                      </button>
+                      </button> */}
                     </div>
                   </td>
                 </tr>
