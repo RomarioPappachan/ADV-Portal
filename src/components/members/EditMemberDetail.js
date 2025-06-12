@@ -7,6 +7,22 @@ import { ImageToBase64 } from "@/utilities/ImageToBase64";
 import { LuX } from "react-icons/lu";
 import toast from "react-hot-toast";
 
+const genderOptions = [
+  { label: "Male", value: "Male" },
+  { label: "Female", value: "Female" },
+  { label: "Others", value: "others" },
+];
+
+const membershipOptions = [
+  { label: "Ordinary", value: 1 },
+  { label: "Life", value: 0 },
+];
+
+const chamberOptions = [
+  { label: "Yes", value: 1 },
+  { label: "No", value: 0 },
+];
+
 function EditMemberDetail({ onClose }) {
   const {
     selectedMemberId,
@@ -32,7 +48,9 @@ function EditMemberDetail({ onClose }) {
     qualification: "",
     date_of_enrol: "",
     date_of_admission: "",
-    gender: "Male",
+    gender: "",
+    membership: null,
+    chamber: null,
   });
 
   useEffect(() => {
@@ -45,16 +63,22 @@ function EditMemberDetail({ onClose }) {
       res_address: userDetails?.res_address || "",
       off_address: userDetails?.off_address || "",
       date_of_birth: userDetails?.date_of_birth?.slice(0, 10) || "",
+      membership: userDetails?.membership,
+      chamber: userDetails?.chamber,
       qualification: additionalInfo?.qualification || "",
       date_of_enrol: additionalInfo?.date_of_enrol?.slice(0, 10) || "",
       date_of_admission: additionalInfo?.date_of_admission?.slice(0, 10) || "",
-      gender: additionalInfo?.gender || "Male",
+      gender: additionalInfo?.gender || "",
     });
   }, [userDetails, additionalInfo]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === "membership" || name === "chamber") {
+      setFormData((prev) => ({ ...prev, [name]: Number(value) }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleImageChange = async (e) => {
@@ -184,6 +208,78 @@ function EditMemberDetail({ onClose }) {
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
+              Date of Enrolment
+            </label>
+            <input
+              type="date"
+              name="date_of_enrol"
+              value={formData.date_of_enrol}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Date of Admission
+            </label>
+            <input
+              type="date"
+              name="date_of_admission"
+              value={formData.date_of_admission}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Membership Type
+            </label>
+            <select
+              name="membership"
+              value={formData.membership}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            >
+              <option value="" selected disabled>
+                Select
+              </option>
+              {membershipOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Chamber
+            </label>
+            <select
+              name="chamber"
+              value={formData.chamber}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            >
+              <option value="" selected disabled>
+                Select
+              </option>
+              {chamberOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
               Office Phone
             </label>
             <input
@@ -258,6 +354,28 @@ function EditMemberDetail({ onClose }) {
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
+              Gender
+            </label>
+            <select
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            >
+              <option value="" selected disabled>
+                Select
+              </option>
+              {genderOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
               Qualification
             </label>
             <input
@@ -268,50 +386,6 @@ function EditMemberDetail({ onClose }) {
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
-          </div>
-
-          <div>
-            <label className="block text-sm text-gray-600 font-medium">
-              Date of Enrolment
-            </label>
-            <input
-              type="date"
-              name="date_of_enrol"
-              value={formData.date_of_enrol}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm text-gray-600 font-medium">
-              Date of Admission
-            </label>
-            <input
-              type="date"
-              name="date_of_admission"
-              value={formData.date_of_admission}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm text-gray-600 font-medium">
-              Gender
-            </label>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            >
-              <option>Male</option>
-              <option>Female</option>
-            </select>
           </div>
 
           {/* Read-only Info */}

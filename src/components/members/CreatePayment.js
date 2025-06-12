@@ -20,12 +20,11 @@ function CreatePayment({ onClose }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [form, setForm] = useState({
-    amount: "",
+    amount: null,
     customer_name: "",
     customer_email: "",
     customer_mobile: "",
     category: "",
-    payment_type: "others",
     signature: "",
   });
 
@@ -44,6 +43,8 @@ function CreatePayment({ onClose }) {
   }, [userDetails]);
 
   const handleChange = (e) => {
+    console.log(form);
+
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -55,6 +56,7 @@ function CreatePayment({ onClose }) {
     try {
       const paymentData = {
         adv_id: selectedMemberId,
+        payment_type: "others",
         status: "completed",
         ...form,
       };
@@ -97,7 +99,7 @@ function CreatePayment({ onClose }) {
               Amount
             </label>
             <input
-              type="text"
+              type="number"
               name="amount"
               value={form.amount}
               onChange={handleChange}
@@ -171,24 +173,6 @@ function CreatePayment({ onClose }) {
                   {option.label}
                 </option>
               ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm text-gray-600 font-medium">
-              Payment Type
-            </label>
-            <select
-              name="payment_type"
-              value={form.payment_type}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            >
-              <option value="" disabled selected>
-                -- Select --
-              </option>
-              <option value="others">Others</option>
             </select>
           </div>
 

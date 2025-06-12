@@ -273,6 +273,12 @@ import { ImageToBase64 } from "@/utilities/ImageToBase64";
 import { LuX } from "react-icons/lu";
 import toast from "react-hot-toast";
 
+const genderOptions = [
+  { label: "Male", value: "Male" },
+  { label: "Female", value: "Female" },
+  { label: "Others", value: "others" },
+];
+
 function EditUserDetail({ onClose }) {
   const { userInfo } = useAuthStore();
   const { userDetails, additionalInfo, getUserById } = useUserStore();
@@ -285,6 +291,8 @@ function EditUserDetail({ onClose }) {
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
+    adv_code: "",
+    enrollment_id: "",
     profile_image: "",
     office_ph: "",
     home_ph: "",
@@ -294,13 +302,15 @@ function EditUserDetail({ onClose }) {
     qualification: "",
     date_of_enrol: "",
     date_of_admission: "",
-    gender: "Male",
+    gender: "",
   });
 
   useEffect(() => {
     setFormData({
       fullname: userDetails?.fullname || "",
       email: userDetails?.email || "",
+      adv_code: userDetails?.adv_code || "",
+      enrollment_id: userDetails?.enrollment_id || "",
       profile_image: userDetails?.profile_image || "",
       office_ph: userDetails?.office_ph || "",
       home_ph: userDetails?.home_ph || "",
@@ -310,9 +320,11 @@ function EditUserDetail({ onClose }) {
       qualification: additionalInfo?.qualification || "",
       date_of_enrol: additionalInfo?.date_of_enrol?.slice(0, 10) || "",
       date_of_admission: additionalInfo?.date_of_admission?.slice(0, 10) || "",
-      gender: additionalInfo?.gender || "Male",
+      gender: additionalInfo?.gender || "",
     });
   }, [userDetails, additionalInfo]);
+
+  console.log(userDetails);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -346,8 +358,8 @@ function EditUserDetail({ onClose }) {
 
       const updatedMember = {
         id: userId,
-        adv_code: userDetails.adv_code,
-        enrollment_id: userDetails.enrollment_id,
+        // adv_code: userDetails.adv_code,
+        // enrollment_id: userDetails.enrollment_id,
         membership: userDetails.membership,
         ...formData,
       };
@@ -438,6 +450,34 @@ function EditUserDetail({ onClose }) {
               type="email"
               name="email"
               value={formData.email}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Membership ID
+            </label>
+            <input
+              type="text"
+              name="adv_code"
+              value={formData.adv_code}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Enrolment ID
+            </label>
+            <input
+              type="text"
+              name="enrollment_id"
+              value={formData.enrollment_id}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
@@ -571,8 +611,14 @@ function EditUserDetail({ onClose }) {
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             >
-              <option>Male</option>
-              <option>Female</option>
+              <option value="" selected disabled>
+                Select
+              </option>
+              {genderOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </select>
           </div>
 

@@ -14,6 +14,7 @@ const Login = () => {
   const { sendOtp, restoreSession } = useAuthStore();
 
   const [mobileNo, setMobileNo] = useState("");
+  const [sessionId, setSessionId] = useState("");
   const [isVerifyOpen, setVerifyOpen] = useState(false);
 
   useEffect(function () {
@@ -38,10 +39,11 @@ const Login = () => {
     } else {
       try {
         const response = await sendOtp(mobileNo);
+        console.log("Session Id :", response);
         if (response.status) {
+          setSessionId(response?.session_id);
           setTimeout(() => {
-            toast.success(response.message);
-            toast.success(response.otp);
+            toast.success(response?.message);
             setVerifyOpen(true);
           }, 1000);
         }
@@ -70,6 +72,7 @@ const Login = () => {
         ) : (
           <VerifyOtp
             mobileNo={mobileNo}
+            sessionId={sessionId}
             setMobileNo={setMobileNo}
             onSendOtp={handleSendOtp}
             setVerifyOpen={setVerifyOpen}

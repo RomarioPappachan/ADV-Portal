@@ -13,7 +13,7 @@ export const adminLoginApi = async (email, password) => {
 
     return res; // Return the response data (user & token)
   } catch (error) {
-    // throw new Error(error.response?.data?.message || "Invalid credentials");
+    throw new Error(error.response?.data?.message || "Invalid credentials");
     console.log(error);
   }
 };
@@ -32,11 +32,11 @@ export const sendOtpApi = async (mobileNo) => {
 };
 
 // Member Login Verify OTP
-export const verifyOtpApi = async (mobileNo, otp) => {
+export const verifyOtpApi = async (sessionId, mobileNo, otp) => {
   // console.log(mobileNo, otp);
   try {
     const res = await axios.post(`${API_URL}/otp/verify-otp`, {
-      session_id: "1234567890abcdef",
+      session_id: sessionId,
       otp: otp,
       mobile: mobileNo,
     });
@@ -45,5 +45,36 @@ export const verifyOtpApi = async (mobileNo, otp) => {
     return res; // Return the response data (user & token)
   } catch (error) {
     throw new Error(error.response?.data?.message || "Invalid credentials");
+  }
+};
+
+// Set members password on first login
+export const setPasswordApi = async (adv_id, mobile, password) => {
+  try {
+    const res = await axios.post(`${API_URL}/otp/setpwd`, {
+      adv_id,
+      mobile,
+      password,
+    });
+    return res;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Set password failed");
+  }
+};
+
+// Member login using password
+export const loginWithPasswordApi = async (mobile, password) => {
+  try {
+    const res = await axios.post(`${API_URL}/otp/advlogin`, {
+      mobile,
+      password,
+    });
+    console.log(res);
+
+    return res;
+  } catch (error) {
+    console.log(error);
+
+    throw new Error(error.response?.data?.message || "Login Failed");
   }
 };

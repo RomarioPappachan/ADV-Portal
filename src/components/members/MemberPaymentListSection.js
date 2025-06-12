@@ -13,7 +13,7 @@ export default function MemberPaymentListSection() {
       {/* Section Header */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
-          Subscription Details
+          Payment Details
         </h2>
         <button
           onClick={() => setShowCreatePayment(true)}

@@ -10,8 +10,8 @@ import toast from "react-hot-toast";
 const AdminLogin = () => {
   const { loginAdmin, restoreSession } = useAuthStore();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("admin@portal.com");
+  const [password, setPassword] = useState("admin@1234");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 

@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import AddMember from "@/components/members/AddMember";
 import AddNewMember from "@/components/members/AddNewMember";
 import MembersTable from "@/components/members/MembersTable";
 

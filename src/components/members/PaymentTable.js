@@ -115,7 +115,7 @@ function PaymentTable() {
     <div className="p-4 text-gray-800">
       {/* --- header --- */}
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-base font-semibold">Subscription Payment List</h2>
+        <h2 className="text-base font-semibold">Payment List</h2>
         <input
           type="search"
           placeholder="Search..."

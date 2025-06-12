@@ -36,9 +36,15 @@ import { create } from "zustand";
 //   },
 // }));
 
-import { adminLoginApi, sendOtpApi, verifyOtpApi } from "@/api/auth";
+import {
+  adminLoginApi,
+  loginWithPasswordApi,
+  sendOtpApi,
+  setPasswordApi,
+  verifyOtpApi,
+} from "@/api/auth";
 
-export const useAuthStore = create((set) => ({
+export const useAuthStore = create((set, get) => ({
   isAuthenticated: false,
   isSessionRestored: false,
   userType: null,
@@ -76,9 +82,9 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  verifyOtp: async (mobileNo, otp) => {
+  verifyOtp: async (sessionId, mobileNo, otp) => {
     try {
-      const res = await verifyOtpApi(mobileNo, otp);
+      const res = await verifyOtpApi(sessionId, mobileNo, otp);
 
       const token = res.data.token; // token is inside response
       const user = res.data.result1; // user object available here
@@ -89,10 +95,53 @@ export const useAuthStore = create((set) => ({
       localStorage.setItem("user_info", JSON.stringify(user));
 
       set({ isAuthenticated: true, userType: "user", token, userInfo: user });
-      return { message, status: true };
+      return { message, status: true, firstLogin: user?.first_login };
     } catch (err) {
       // console.error("Verify OTP failed");
       throw err;
+    }
+  },
+
+  setPassword: async (password) => {
+    try {
+      const { userInfo } = get(); // ✅ get() pulls from store state
+      const mobile = userInfo?.mobile;
+      const adv_id = userInfo?.id;
+
+      if (!mobile || !adv_id) {
+        throw new Error("Missing user information. Cannot set password.");
+      }
+
+      const res = await setPasswordApi(adv_id, mobile, password);
+      return { message: res.data.message, status: true };
+    } catch (error) {
+      throw new Error(error.message || "Failed to set password");
+    }
+  },
+
+  loginWithPassword: async (mobile, password) => {
+    try {
+      const res = await loginWithPasswordApi(mobile, password);
+
+      const token = res.data.token;
+      const user = res.data.result1;
+
+      localStorage.setItem("auth_token", token);
+      localStorage.setItem("user_type", "user");
+      localStorage.setItem("user_info", JSON.stringify(user));
+
+      set({
+        isAuthenticated: true,
+        token,
+        userInfo: user,
+        userType: "user",
+      });
+
+      return { status: true, message: res.data.message };
+    } catch (err) {
+      console.error("Login failed with:", { mobile, password });
+      console.error("API Error:", err?.response?.data || err.message);
+      throw new Error(err?.response?.data?.message || "Login failed");
     }
   },
 

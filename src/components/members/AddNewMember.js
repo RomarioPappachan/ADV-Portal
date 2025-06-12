@@ -292,6 +292,12 @@ const membershipOptions = [
 const genderOptions = [
   { label: "Male", value: "Male" },
   { label: "Female", value: "Female" },
+  { label: "Others", value: "others" },
+];
+
+const chamberOptions = [
+  { label: "Yes", value: 1 },
+  { label: "No", value: 0 },
 ];
 
 function AddNewMember({ isOpen, onClose }) {
@@ -304,7 +310,8 @@ function AddNewMember({ isOpen, onClose }) {
     fullname: "",
     adv_code: "",
     enrollment_id: "",
-    membership: "",
+    membership: null,
+    chamber: null,
     mobile: "",
     res_address: "",
     off_address: "",
@@ -319,12 +326,15 @@ function AddNewMember({ isOpen, onClose }) {
     gender: "",
   });
 
+  console.log(formData);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    if (name === "membership" || name === "chamber") {
+      setFormData((prev) => ({ ...prev, [name]: Number(value) }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleImageClick = () => {
@@ -449,6 +459,28 @@ function AddNewMember({ isOpen, onClose }) {
           {/* Select Fields */}
           <div>
             <label className="block text-sm text-gray-600 font-medium">
+              Gender
+            </label>
+            <select
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            >
+              <option value="" selected disabled>
+                Select
+              </option>
+              {genderOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
               Membership Type
             </label>
             <select
@@ -466,20 +498,19 @@ function AddNewMember({ isOpen, onClose }) {
               ))}
             </select>
           </div>
-
           <div>
             <label className="block text-sm text-gray-600 font-medium">
-              Gender
+              Chamber
             </label>
             <select
-              name="gender"
-              value={formData.gender}
+              name="chamber"
+              value={formData.chamber}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             >
               <option value="">Select</option>
-              {genderOptions.map((option) => (
+              {chamberOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>

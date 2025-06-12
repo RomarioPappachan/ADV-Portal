@@ -15,11 +15,11 @@ export default function UserDetailsSection() {
     let color = "";
 
     if (type === "membership") {
-      text = value === 1 ? "Lifelong" : "Ordinary";
+      text = value === 1 ? "Ordinary" : "Lifelong";
       color =
         value === 1
-          ? "bg-green-100 text-green-700"
-          : "bg-yellow-100 text-yellow-700";
+          ? "bg-yellow-100 text-yellow-700"
+          : "bg-green-100 text-green-700";
     } else if (type === "chamber") {
       text = value === 1 ? "Has Chamber" : "No Chamber";
       color =
