@@ -102,8 +102,9 @@ function NewPassword() {
           <div
             className="absolute right-4 top-[42px] cursor-pointer text-gray-500"
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            title={showPassword ? "Hide" : "Show"}
           >
-            {showConfirmPassword ? <LuEye size={20} /> : <LuEyeOff size={20} />}
+            {showConfirmPassword ? <LuEyeOff size={20} /> : <LuEye size={20} />}
           </div>
         </div>
 

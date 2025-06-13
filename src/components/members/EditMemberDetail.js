@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useMemberStore } from "@/store/memberStore";
 import { ImageToBase64 } from "@/utilities/ImageToBase64";
 
-import { LuX } from "react-icons/lu";
+import { LuImagePlus, LuX } from "react-icons/lu";
 import toast from "react-hot-toast";
 
 const genderOptions = [
@@ -50,7 +50,7 @@ function EditMemberDetail({ onClose }) {
     date_of_admission: "",
     gender: "",
     membership: null,
-    chamber: null,
+    chamber: 0,
   });
 
   useEffect(() => {
@@ -64,7 +64,7 @@ function EditMemberDetail({ onClose }) {
       off_address: userDetails?.off_address || "",
       date_of_birth: userDetails?.date_of_birth?.slice(0, 10) || "",
       membership: userDetails?.membership,
-      chamber: userDetails?.chamber,
+      chamber: userDetails?.chamber || 0,
       qualification: additionalInfo?.qualification || "",
       date_of_enrol: additionalInfo?.date_of_enrol?.slice(0, 10) || "",
       date_of_admission: additionalInfo?.date_of_admission?.slice(0, 10) || "",
@@ -74,8 +74,10 @@ function EditMemberDetail({ onClose }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "membership" || name === "chamber") {
+    if (name === "membership") {
       setFormData((prev) => ({ ...prev, [name]: Number(value) }));
+    } else if (name === "chamber") {
+      setFormData((prev) => ({ ...prev, [name]: Number(value) || 0 }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
@@ -150,9 +152,9 @@ function EditMemberDetail({ onClose }) {
           {/* Image Upload  */}
 
           <div className="sm:col-span-2">
-            <label className="block text-sm text-gray-600 font-medium mb-1">
+            {/* <label className="block text-sm text-gray-600 font-medium mb-1">
               Profile Image
-            </label>
+            </label> */}
             <div
               onClick={handleImageClick}
               className="w-32 h-32 rounded-full border-2 border-dashed border-gray-300 cursor-pointer flex items-center justify-center overflow-hidden"
@@ -164,10 +166,17 @@ function EditMemberDetail({ onClose }) {
                   className="w-full h-full object-cover bg-gray-100 text-gray-600"
                 />
               ) : (
-                <span className="text-gray-400 text-sm">Click to Upload</span>
+                <span className="flex flex-col justify-center items-center gap-y-2">
+                  <LuImagePlus className="text-gray-400 text-3xl" />
+                  <span className="text-gray-400 text-sm">Click to Upload</span>
+                </span>
               )}
             </div>
-            <span className="text-gray-400 text-sm ps-4">Click to Upload</span>
+            {formData?.profile_image && (
+              <span className="text-gray-400 text-sm ps-4">
+                Click to Upload
+              </span>
+            )}
 
             <input
               type="file"
@@ -260,7 +269,15 @@ function EditMemberDetail({ onClose }) {
             <label className="block text-sm text-gray-600 font-medium">
               Chamber
             </label>
-            <select
+            <input
+              type="text"
+              name="chamber"
+              value={formData.chamber}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+            {/* <select
               name="chamber"
               value={formData.chamber}
               onChange={handleChange}
@@ -275,7 +292,7 @@ function EditMemberDetail({ onClose }) {
                   {option.label}
                 </option>
               ))}
-            </select>
+            </select> */}
           </div>
 
           <div>

@@ -51,7 +51,7 @@
 import React, { useState } from "react";
 import PasswordLogin from "./PasswordLogin";
 
-function SendOtp({ mobileNo, setMobileNo, onSendOtp }) {
+function SendOtp({ mobileNo, setMobileNo, isSendingOtp, onSendOtp }) {
   const [showPasswordLogin, setShowPasswordLogin] = useState(false);
 
   if (showPasswordLogin) {
@@ -92,8 +92,9 @@ function SendOtp({ mobileNo, setMobileNo, onSendOtp }) {
         <button
           type="submit"
           className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-[#3f51b5] cursor-pointer"
+          disabled={isSendingOtp}
         >
-          Send OTP
+          {isSendingOtp ? "Sending..." : "Send OTP"}
         </button>
       </div>
 

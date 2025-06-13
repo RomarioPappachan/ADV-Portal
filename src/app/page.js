@@ -17,6 +17,8 @@ const Login = () => {
   const [sessionId, setSessionId] = useState("");
   const [isVerifyOpen, setVerifyOpen] = useState(false);
 
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+
   useEffect(function () {
     async function isLogged() {
       const res = await restoreSession();
@@ -32,6 +34,7 @@ const Login = () => {
 
   const handleSendOtp = async (e) => {
     e.preventDefault();
+    setIsSendingOtp(true);
     if (!mobileNo) {
       toast.error("Enter mobile number");
       setVerifyOpen(false);
@@ -50,6 +53,9 @@ const Login = () => {
         // alert("Send Otp");
       } catch (error) {
         console.log(error);
+        toast.error("Error sending OTP");
+      } finally {
+        setIsSendingOtp(false);
       }
     }
   };
@@ -67,6 +73,7 @@ const Login = () => {
           <SendOtp
             mobileNo={mobileNo}
             setMobileNo={setMobileNo}
+            isSendingOtp={isSendingOtp}
             onSendOtp={handleSendOtp}
           />
         ) : (

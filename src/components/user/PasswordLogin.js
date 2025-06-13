@@ -95,6 +95,7 @@ function PasswordLogin({ onBack }) {
           <span
             className="absolute right-3 top-3 text-xl text-gray-500 cursor-pointer"
             onClick={() => setShowPassword(!showPassword)}
+            title={showPassword ? "Hide" : "Show"}
           >
             {showPassword ? <LuEyeOff /> : <LuEye />}
           </span>

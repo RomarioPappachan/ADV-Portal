@@ -108,10 +108,10 @@ function VerifyOtp({ mobileNo, sessionId, setVerifyOpen, onSendOtp }) {
 
   async function handleResendOtp(e) {
     setOtp({ num1: "", num2: "", num3: "", num4: "", num5: "", num6: "" });
-    setTimer(150);
     setIsResend(false);
     setIsOtpError(false);
-    onSendOtp(e); // call resend api
+    await onSendOtp(e); // call resend api
+    setTimer(150);
   }
 
   return (
@@ -153,24 +153,26 @@ function VerifyOtp({ mobileNo, sessionId, setVerifyOpen, onSendOtp }) {
         )}
 
         <p className="text-[#707784] text-xs  flex justify-center items-center gap-3">
-          <span>
-            Resend OTP in{" "}
-            <span className="text-[#191C21] text-xs">
-              {/* {timer > 0 ? `00:${timer < 10 ? `0${timer}` : timer}` : "00:00"} */}
-              {timer > 0
-                ? `${String(Math.floor(timer / 60)).padStart(2, "0")}:${String(
-                    timer % 60
-                  ).padStart(2, "0")}`
-                : "00:00"}
-            </span>
-          </span>
-          {isResend && (
+          {isResend ? (
             <button
               className="text-[#3f51b5] text-base hover:underline hover:font-semibold cursor-pointer"
               onClick={handleResendOtp}
             >
               Resend OTP
             </button>
+          ) : (
+            <span>
+              Resend OTP in{" "}
+              <span className="text-[#191C21] text-xs">
+                {/* {timer > 0 ? `00:${timer < 10 ? `0${timer}` : timer}` : "00:00"} */}
+                {timer > 0
+                  ? `${String(Math.floor(timer / 60)).padStart(
+                      2,
+                      "0"
+                    )}:${String(timer % 60).padStart(2, "0")}`
+                  : "00:00"}
+              </span>
+            </span>
           )}
         </p>
 

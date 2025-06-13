@@ -21,9 +21,9 @@ export default function MemberDetailsSection() {
           ? "bg-yellow-100 text-yellow-700"
           : "bg-green-100 text-green-700";
     } else if (type === "chamber") {
-      text = value === 1 ? "Has Chamber" : "No Chamber";
+      text = value > 0 ? value : "No Chamber";
       color =
-        value === 1 ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-700";
+        value > 0 ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-700";
     } else if (type === "status") {
       text = value === 1 ? "Active" : "Inactive";
       color =
