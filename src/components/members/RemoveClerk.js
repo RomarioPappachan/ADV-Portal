@@ -12,7 +12,7 @@ function RemoveClerk({ clerk, onClose }) {
   //handleDelete
   const handleDelete = async () => {
     try {
-      const response = await deleteClerk(clerk.id);
+      const response = await deleteClerk(clerk.id, "admin");
       if (response?.data?.message) toast.success(response?.data?.message);
       getMemberById(selectedMemberId); // re-render user data
       onClose();

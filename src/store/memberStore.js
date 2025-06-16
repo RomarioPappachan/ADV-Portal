@@ -46,10 +46,10 @@ export const useMemberStore = create((set) => ({
   },
 
   // Edit member details
-  editMember: async (memberData) => {
+  editMember: async (memberData, userRole) => {
     set({ loading: true, error: null });
     try {
-      const res = await updateMember(memberData);
+      const res = await updateMember(memberData, userRole);
       set({ loading: false });
       return res;
     } catch (error) {
@@ -63,7 +63,7 @@ export const useMemberStore = create((set) => ({
     console.log(memberId);
     set({ loading: true, error: null });
     try {
-      const res = await fetchUserById(memberId);
+      const res = await fetchUserById(memberId, "admin");
       set({
         selectedMemberId: memberId,
         userDetails: res?.data?.advocate,

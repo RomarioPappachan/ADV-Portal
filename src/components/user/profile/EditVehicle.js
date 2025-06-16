@@ -44,7 +44,7 @@ function EditVehicle({ vehicle, onClose }) {
         ...form,
       };
 
-      const response = await updateVehicle(updatedVehicleData);
+      const response = await updateVehicle(updatedVehicleData, "user");
       if (response?.data?.message) toast.success(response?.data?.message);
       getUserById(userId); // re-render user data
       onClose(); // close the edit popup

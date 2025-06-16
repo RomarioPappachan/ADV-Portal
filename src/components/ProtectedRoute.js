@@ -60,7 +60,7 @@ const ProtectedRoute = ({ children, role }) => {
     if (role === "admin") {
       router.replace("/admin");
     } else {
-      router.replace("/");
+      router.push("/");
     }
     return null;
   }
@@ -72,7 +72,7 @@ const ProtectedRoute = ({ children, role }) => {
   }
 
   if (role === "user" && userType !== role) {
-    router.replace("/");
+    router.push("/");
     return null;
   }
 

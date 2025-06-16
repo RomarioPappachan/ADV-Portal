@@ -44,7 +44,7 @@ function EditClerk({ clerk, onClose }) {
         ...form,
       };
 
-      const response = await updateClerk(updatedClerkData);
+      const response = await updateClerk(updatedClerkData, "user");
       if (response?.data?.message) toast.success(response?.data?.message);
       getUserById(userId); // re-render user data
       onClose(); // close the edit popup

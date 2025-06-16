@@ -14,7 +14,7 @@ function DeleteClerk({ clerk, onClose }) {
   //handleDelete
   const handleDelete = async () => {
     try {
-      const response = await deleteClerk(clerk.id);
+      const response = await deleteClerk(clerk.id, "user");
       if (response?.data?.message) toast.success(response?.data?.message);
       getUserById(userInfo?.id); // re-render user data
       onClose();

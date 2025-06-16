@@ -12,7 +12,7 @@ function RemoveVehicle({ vehicle, onClose }) {
   //handleDelete
   const handleDelete = async () => {
     try {
-      const response = await deleteVehicle(vehicle.id);
+      const response = await deleteVehicle(vehicle.id, "admin");
       if (response?.data?.message) toast.success(response?.data?.message);
       getMemberById(selectedMemberId); // re-render user data
       onClose();

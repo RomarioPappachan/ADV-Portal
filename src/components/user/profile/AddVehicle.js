@@ -42,7 +42,7 @@ function AddVehicle({ onClose }) {
         adv_id: userId,
         ...form,
       };
-      const response = await addVehicle(vehicleData);
+      const response = await addVehicle(vehicleData, "user");
       if (response?.data?.message) toast.success(response?.data?.message);
       getUserById(userId); // re-render user data
       onClose(); // Close the popup after submission

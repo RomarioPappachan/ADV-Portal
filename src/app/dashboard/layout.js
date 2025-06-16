@@ -1,10 +1,10 @@
 import Navbar from "@/components/Navbar";
-import ProtectedRoute from "@/components/ProtectedRoute";
+import AdminProtectedRoute from "@/components/AdminProtectedRoute";
 import Sidebar from "@/components/Sidebar";
 
 export default function AdminDashboardLayout({ children }) {
   return (
-    <ProtectedRoute role="admin">
+    <AdminProtectedRoute role="admin">
       <div className="w-screen h-screen fixed bg-gray-200">
         {/* Navbar */}
         <div className="w-full h-20 sticky top-0 z-50">
@@ -20,6 +20,6 @@ export default function AdminDashboardLayout({ children }) {
           </div>
         </div>
       </div>
-    </ProtectedRoute>
+    </AdminProtectedRoute>
   );
 }

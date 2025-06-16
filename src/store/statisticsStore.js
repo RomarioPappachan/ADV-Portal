@@ -20,15 +20,4 @@ export const useStatisticsStore = create((set) => ({
       throw err;
     }
   },
-
-  //   resetUserStore: () =>
-  //     set({
-  //       userDetails: {},
-  //       vehicleDetails: [],
-  //       clerkDetails: [],
-  //       paymentDetails: [],
-  //       additionalInfo: {},
-  //       loading: false,
-  //       error: null,
-  //     }),
 }));

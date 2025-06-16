@@ -3,13 +3,14 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL; // Base API URL
 
 // Get token from localStorage
-const getToken = () => localStorage.getItem("auth_token");
+// const getToken = () => localStorage.getItem("auth_token");
+const getAdminToken = () => localStorage.getItem("admin_token");
 
 // Fetch total number of members
 export const fetchTotalMembers = async () => {
   try {
     const res = await axios.get(`${API_URL}/dashboard/total-members`, {
-      headers: { Authorization: `${getToken()}` },
+      headers: { Authorization: `${getAdminToken()}` },
     });
     return res;
   } catch (error) {
@@ -25,7 +26,7 @@ export const fetchTotalPayments = async (paymentType) => {
     const res = await axios.get(
       `${API_URL}/dashboard/total-payments?payment_type=${paymentType}`,
       {
-        headers: { Authorization: `${getToken()}` },
+        headers: { Authorization: `${getAdminToken()}` },
       }
     );
 

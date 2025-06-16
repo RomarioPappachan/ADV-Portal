@@ -32,7 +32,7 @@ const LogoutConfirmation = ({ isOpen, onClose, onConfirm }) => {
         {/* Description */}
         <p className="text-sm sm:text-base text-gray-600 mb-6">
           Are you sure you want to logout? <br />
-          You will need to login again to access your dashboard.
+          You will need to login again to access your profile.
         </p>
 
         {/* Buttons */}

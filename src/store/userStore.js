@@ -14,7 +14,7 @@ export const useUserStore = create((set) => ({
     console.log(userId);
     set({ loading: true, error: null });
     try {
-      const res = await fetchUserById(userId);
+      const res = await fetchUserById(userId, "user");
       set({
         userDetails: res?.data?.advocate,
         vehicleDetails: res?.data?.vehicles,

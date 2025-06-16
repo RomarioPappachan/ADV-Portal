@@ -4,12 +4,13 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL; // Base API URL
 
 // Get token from localStorage
 const getToken = () => localStorage.getItem("auth_token");
+const getAdminToken = () => localStorage.getItem("admin_token");
 
 // Fetch all members
 export const fetchAllMembers = async () => {
   try {
     const res = await axios.get(`${API_URL}/dashboard/all-members`, {
-      headers: { Authorization: `${getToken()}` },
+      headers: { Authorization: `${getAdminToken()}` },
     });
     return res;
   } catch (error) {
@@ -24,7 +25,7 @@ export const createMember = async (memberData) => {
       `${API_URL}/dashboard/add-member`,
       memberData,
       {
-        headers: { Authorization: `${getToken()}` },
+        headers: { Authorization: `${getAdminToken()}` },
       }
     );
     console.log(res);
@@ -37,10 +38,13 @@ export const createMember = async (memberData) => {
 };
 
 // Update member details
-export const updateMember = async (memberData) => {
+export const updateMember = async (memberData, userRole) => {
   try {
+    const token = userRole === "admin" ? getAdminToken() : getToken();
+
+    console.log(token);
     const res = await axios.put(`${API_URL}/dashboard/upd-member`, memberData, {
-      headers: { Authorization: `${getToken()}` },
+      headers: { Authorization: token },
     });
     return res;
   } catch (error) {
@@ -49,10 +53,12 @@ export const updateMember = async (memberData) => {
 };
 
 // Add vehicle details
-export const addVehicle = async (vehicleData) => {
+export const addVehicle = async (vehicleData, userRole) => {
   try {
+    const token = userRole === "admin" ? getAdminToken() : getToken();
+
     const res = await axios.post(`${API_URL}/member/add-vehicle`, vehicleData, {
-      headers: { Authorization: `${getToken()}` },
+      headers: { Authorization: token },
     });
     console.log(res);
     return res;
@@ -64,10 +70,12 @@ export const addVehicle = async (vehicleData) => {
 };
 
 // Update vehicle details
-export const updateVehicle = async (vehicleData) => {
+export const updateVehicle = async (vehicleData, userRole) => {
   try {
+    const token = userRole === "admin" ? getAdminToken() : getToken();
+
     const res = await axios.put(`${API_URL}/member/upd-vehicle`, vehicleData, {
-      headers: { Authorization: `${getToken()}` },
+      headers: { Authorization: token },
     });
     console.log(res);
     return res;
@@ -79,12 +87,14 @@ export const updateVehicle = async (vehicleData) => {
 };
 
 // Delete vehicle details
-export const deleteVehicle = async (vehicleId) => {
+export const deleteVehicle = async (vehicleId, userRole) => {
   try {
+    const token = userRole === "admin" ? getAdminToken() : getToken();
+
     const res = await axios.delete(
       `${API_URL}/member/dlt-vehicle/${vehicleId}`,
       {
-        headers: { Authorization: `${getToken()}` },
+        headers: { Authorization: token },
       }
     );
     console.log(res);
@@ -97,10 +107,12 @@ export const deleteVehicle = async (vehicleId) => {
 };
 
 // Add clerk details
-export const addClerk = async (clerkData) => {
+export const addClerk = async (clerkData, userRole) => {
   try {
+    const token = userRole === "admin" ? getAdminToken() : getToken();
+
     const res = await axios.post(`${API_URL}/member/add-clerk`, clerkData, {
-      headers: { Authorization: `${getToken()}` },
+      headers: { Authorization: token },
     });
     console.log(res);
     return res;
@@ -110,10 +122,12 @@ export const addClerk = async (clerkData) => {
 };
 
 // Update clerk details
-export const updateClerk = async (clerkData) => {
+export const updateClerk = async (clerkData, userRole) => {
   try {
+    const token = userRole === "admin" ? getAdminToken() : getToken();
+
     const res = await axios.put(`${API_URL}/member/upd-clerk`, clerkData, {
-      headers: { Authorization: `${getToken()}` },
+      headers: { Authorization: token },
     });
     console.log(res);
     return res;
@@ -125,10 +139,12 @@ export const updateClerk = async (clerkData) => {
 };
 
 // Delete clerk details
-export const deleteClerk = async (clerkId) => {
+export const deleteClerk = async (clerkId, userRole) => {
   try {
+    const token = userRole === "admin" ? getAdminToken() : getToken();
+
     const res = await axios.delete(`${API_URL}/member/dlt-clerk/${clerkId}`, {
-      headers: { Authorization: `${getToken()}` },
+      headers: { Authorization: token },
     });
     console.log(res);
     return res;

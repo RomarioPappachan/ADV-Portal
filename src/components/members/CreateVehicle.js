@@ -38,7 +38,7 @@ function CreateVehicle({ onClose }) {
         adv_id: selectedMemberId,
         ...form,
       };
-      const response = await addVehicle(vehicleData);
+      const response = await addVehicle(vehicleData, "admin");
       if (response?.data?.message) toast.success(response?.data?.message);
       getMemberById(selectedMemberId); // re-render user data
       onClose(); // Close the popup after submission

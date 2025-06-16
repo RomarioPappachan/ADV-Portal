@@ -39,7 +39,7 @@ function CreateClerk({ onClose }) {
         adv_id: selectedMemberId,
         ...form,
       };
-      const response = await addClerk(clerkData);
+      const response = await addClerk(clerkData, "admin");
       if (response?.data?.clerkId) toast.success(response?.data?.message);
       getMemberById(selectedMemberId);
       onClose(); // Close the popup after submission

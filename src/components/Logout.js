@@ -55,16 +55,16 @@
 
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
-import { useAuthStore } from "@/store/authStore";
+import { useAdminAuthStore } from "@/store/adminAuthStore";
 import { useMemberStore } from "@/store/memberStore";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { LuX } from "react-icons/lu";
 
 const Logout = ({ isOpen, onClose }) => {
-  const { logout } = useAuthStore();
+  const { adminLogout } = useAdminAuthStore();
 
-  const { resetSelectedMember } = useMemberStore();
+  // const { resetSelectedMember } = useMemberStore();
 
   const [mounted, setMounted] = useState(false);
 
@@ -75,8 +75,8 @@ const Logout = ({ isOpen, onClose }) => {
   }, []);
 
   const handleLogout = () => {
-    resetSelectedMember();
-    logout();
+    // resetSelectedMember();
+    adminLogout();
     toast.success("Logout Successfull");
     router.push("/admin");
   };

@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useAuthStore } from "@/store/authStore";
+import { useAdminAuthStore } from "@/store/adminAuthStore";
 import { useRouter } from "next/navigation";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 const AdminLogin = () => {
-  const { loginAdmin, restoreSession } = useAuthStore();
+  const { loginAdmin, restoreAdminSession } = useAdminAuthStore();
 
   const [email, setEmail] = useState("admin@portal.com");
   const [password, setPassword] = useState("admin@1234");
@@ -21,14 +21,13 @@ const AdminLogin = () => {
 
   useEffect(function () {
     async function isLogged() {
-      const res = await restoreSession();
-      if (!res.isAuthenticated) {
+      const res = await restoreAdminSession();
+      if (!res.isAdminAuthenticated) {
         return;
       } else {
         router.push("/dashboard");
       }
     }
-
     isLogged();
   }, []);
 

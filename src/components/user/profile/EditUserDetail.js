@@ -100,7 +100,7 @@ function EditUserDetail({ onClose }) {
         ...formData,
       };
 
-      const response = await editMember(updatedMember);
+      const response = await editMember(updatedMember, "user");
 
       if (response?.data?.message)
         toast.success("Member details updated successfully");
