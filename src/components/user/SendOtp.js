@@ -52,7 +52,7 @@ import React, { useState } from "react";
 import PasswordLogin from "./PasswordLogin";
 
 function SendOtp({ mobileNo, setMobileNo, isSendingOtp, onSendOtp }) {
-  const [showPasswordLogin, setShowPasswordLogin] = useState(false);
+  const [showPasswordLogin, setShowPasswordLogin] = useState(true);
 
   if (showPasswordLogin) {
     return <PasswordLogin onBack={() => setShowPasswordLogin(false)} />;

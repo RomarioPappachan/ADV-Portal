@@ -7,6 +7,18 @@ import { ImageToBase64 } from "@/utilities/ImageToBase64";
 import { LuImagePlus, LuX } from "react-icons/lu";
 import toast from "react-hot-toast";
 
+const bloodGroupOptions = [
+  { label: "A+", value: "A+" },
+  { label: "A-", value: "A-" },
+  { label: "B+", value: "B+" },
+  { label: "B-", value: "B-" },
+  { label: "AB+", value: "AB+" },
+  { label: "AB-", value: "AB-" },
+  { label: "O+", value: "O+" },
+  { label: "O-", value: "O-" },
+  { label: "Others", value: "Others" },
+];
+
 const genderOptions = [
   { label: "Male", value: "Male" },
   { label: "Female", value: "Female" },
@@ -51,6 +63,9 @@ function EditMemberDetail({ onClose }) {
     gender: "",
     membership: null,
     chamber: 0,
+    blood: "",
+    other_bar: "",
+    senior: 0,
   });
 
   useEffect(() => {
@@ -64,7 +79,9 @@ function EditMemberDetail({ onClose }) {
       off_address: userDetails?.off_address || "",
       date_of_birth: userDetails?.date_of_birth?.slice(0, 10) || "",
       membership: userDetails?.membership,
-      chamber: userDetails?.chamber || 0,
+      blood: userDetails?.blood || "",
+      other_bar: userDetails?.other_bar || "",
+      senior: userDetails?.senior,
       qualification: additionalInfo?.qualification || "",
       date_of_enrol: additionalInfo?.date_of_enrol?.slice(0, 10) || "",
       date_of_admission: additionalInfo?.date_of_admission?.slice(0, 10) || "",
@@ -74,7 +91,7 @@ function EditMemberDetail({ onClose }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "membership") {
+    if (name === "membership" || name === "senior") {
       setFormData((prev) => ({ ...prev, [name]: Number(value) }));
     } else if (name === "chamber") {
       setFormData((prev) => ({ ...prev, [name]: Number(value) || 0 }));
@@ -225,13 +242,12 @@ function EditMemberDetail({ onClose }) {
               value={formData.date_of_enrol}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
-              Date of Admission
+              Date of Admission (KHCAA)
             </label>
             <input
               type="date"
@@ -297,7 +313,7 @@ function EditMemberDetail({ onClose }) {
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
-              Office Phone
+              Office Phone / Additional Mobile no.
             </label>
             <input
               type="text"
@@ -307,13 +323,12 @@ function EditMemberDetail({ onClose }) {
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
               maxLength="13"
               minLength="10"
-              required
             />
           </div>
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
-              Home Phone
+              Emergency Phone no.
             </label>
             <input
               type="text"
@@ -321,7 +336,6 @@ function EditMemberDetail({ onClose }) {
               value={formData.home_ph}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
               maxLength="13"
               minLength="10"
             />
@@ -393,6 +407,28 @@ function EditMemberDetail({ onClose }) {
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
+              Blood Group
+            </label>
+            <select
+              name="blood"
+              value={formData.blood}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            >
+              <option value="" selected disabled>
+                Select
+              </option>
+              {bloodGroupOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
               Qualification
             </label>
             <input
@@ -402,6 +438,42 @@ function EditMemberDetail({ onClose }) {
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium mb-2">
+              Senior Advocate
+            </label>
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="senior"
+                checked={formData.senior === 1}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    senior: e.target.checked ? 1 : 0,
+                  }))
+                }
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                Check if senior advocate
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Bar Association (If any other)
+            </label>
+            <input
+              type="text"
+              name="other_bar"
+              value={formData.other_bar}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
 

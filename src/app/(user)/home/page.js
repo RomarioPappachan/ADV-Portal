@@ -202,7 +202,7 @@ const Page = () => {
           </div>
           <div>
             <div className="flex items-center gap-2 text-gray-500 mb-1">
-              <LuUserCheck /> Enrollment ID
+              <LuUserCheck /> Bar council Enrollment No.
             </div>
             <p className="text-black font-semibold">
               {userDetails?.enrollment_id
@@ -227,7 +227,7 @@ const Page = () => {
             </div>
             <div>
               <div className="flex items-center gap-2 text-gray-500 mb-1">
-                <LuPhone /> Home Phone
+                <LuPhone /> Emergency Phone no.
               </div>
               <p className="text-black font-semibold">
                 {userDetails?.home_ph
@@ -249,7 +249,7 @@ const Page = () => {
             </div>
             <div>
               <div className="flex items-center gap-2 text-gray-500 mb-1">
-                <LuPhone /> Office Phone
+                <LuPhone /> Office Phone / Additional Mobile no.
               </div>
               <p className="text-black font-semibold">
                 {userDetails?.office_ph

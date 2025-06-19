@@ -49,6 +49,10 @@ function MemberVehicleDetails({ vehicle }) {
           <p className="text-gray-500 font-medium">Year</p>
           <p className="text-gray-900 font-semibold">{vehicle.year}</p>
         </div>
+        <div>
+          <p className="text-gray-500 font-medium">Fuel Type</p>
+          <p className="text-gray-900 font-semibold">{vehicle.fuel}</p>
+        </div>
       </div>
       {showUpdateVehicle && (
         <UpdateVehicle

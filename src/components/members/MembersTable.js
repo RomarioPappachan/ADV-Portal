@@ -107,7 +107,7 @@ function MembersTable() {
                 className="text-center cursor-pointer"
                 onClick={() => handleSort("adv_code")}
               >
-                Membership ID{" "}
+                KHCAA Membership No.{" "}
                 <span className="ml-1">
                   {sortField === "adv_code"
                     ? sortOrder === "asc"
@@ -120,7 +120,7 @@ function MembersTable() {
                 className="text-center cursor-pointer"
                 onClick={() => handleSort("enrollment_id")}
               >
-                Enrollment ID{" "}
+                Bar Council Enrollment No.{" "}
                 <span className="ml-1">
                   {sortField === "enrollment_id"
                     ? sortOrder === "asc"

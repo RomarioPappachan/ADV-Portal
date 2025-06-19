@@ -39,16 +39,16 @@ export default function ClerkDetails({ clerk }) {
           <p className="text-gray-900 font-semibold">{clerk.name}</p>
         </div>
         <div>
-          <p className="text-gray-500 font-medium">Designation</p>
-          <p className="text-gray-900 font-semibold">{clerk.designation}</p>
+          <p className="text-gray-500 font-medium">Contact No.</p>
+          <p className="text-gray-900 font-semibold">{clerk.contact_no}</p>
+        </div>
+        <div>
+          <p className="text-gray-500 font-medium">Clerk Registration No.</p>
+          <p className="text-gray-900 font-semibold">{clerk.clerk_reg_no}</p>
         </div>
         <div>
           <p className="text-gray-500 font-medium">Address</p>
           <p className="text-gray-900 font-semibold">{clerk.address}</p>
-        </div>
-        <div>
-          <p className="text-gray-500 font-medium">Contact No.</p>
-          <p className="text-gray-900 font-semibold">{clerk.contact_no}</p>
         </div>
       </div>
       {showEditClerk && (

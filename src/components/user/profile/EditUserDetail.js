@@ -9,6 +9,18 @@ import { ImageToBase64 } from "@/utilities/ImageToBase64";
 import { LuImagePlus, LuX } from "react-icons/lu";
 import toast from "react-hot-toast";
 
+const bloodGroupOptions = [
+  { label: "A+", value: "A+" },
+  { label: "A-", value: "A-" },
+  { label: "B+", value: "B+" },
+  { label: "B-", value: "B-" },
+  { label: "AB+", value: "AB+" },
+  { label: "AB-", value: "AB-" },
+  { label: "O+", value: "O+" },
+  { label: "O-", value: "O-" },
+  { label: "Others", value: "Others" },
+];
+
 const genderOptions = [
   { label: "Male", value: "Male" },
   { label: "Female", value: "Female" },
@@ -37,8 +49,10 @@ function EditUserDetail({ onClose }) {
     date_of_birth: "",
     qualification: "",
     date_of_enrol: "",
-    date_of_admission: "",
+    // date_of_admission: "",
     gender: "",
+    blood: "",
+    other_bar: "",
   });
 
   useEffect(() => {
@@ -53,9 +67,11 @@ function EditUserDetail({ onClose }) {
       res_address: userDetails?.res_address || "",
       off_address: userDetails?.off_address || "",
       date_of_birth: userDetails?.date_of_birth?.slice(0, 10) || "",
+      blood: userDetails?.blood || "",
+      other_bar: userDetails?.other_bar || "",
       qualification: additionalInfo?.qualification || "",
       date_of_enrol: additionalInfo?.date_of_enrol?.slice(0, 10) || "",
-      date_of_admission: additionalInfo?.date_of_admission?.slice(0, 10) || "",
+      // date_of_admission: additionalInfo?.date_of_admission?.slice(0, 10) || "",
       gender: additionalInfo?.gender || "",
     });
   }, [userDetails, additionalInfo]);
@@ -201,7 +217,7 @@ function EditUserDetail({ onClose }) {
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
-              Membership ID
+              KHCAA Membership No.
             </label>
             <input
               type="text"
@@ -215,7 +231,7 @@ function EditUserDetail({ onClose }) {
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
-              Enrolment ID
+              Bar council Enrollment No.
             </label>
             <input
               type="text"
@@ -229,7 +245,7 @@ function EditUserDetail({ onClose }) {
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
-              Office Phone
+              Office Phone / Additional Mobile no.
             </label>
             <input
               type="text"
@@ -239,13 +255,12 @@ function EditUserDetail({ onClose }) {
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
               maxLength="13"
               minLength="10"
-              required
             />
           </div>
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
-              Home Phone
+              Emergency Phone no.
             </label>
             <input
               type="text"
@@ -253,7 +268,6 @@ function EditUserDetail({ onClose }) {
               value={formData.home_ph}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
               maxLength="13"
               minLength="10"
             />
@@ -325,13 +339,12 @@ function EditUserDetail({ onClose }) {
               value={formData.date_of_enrol}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
 
-          <div>
+          {/* <div>
             <label className="block text-sm text-gray-600 font-medium">
-              Date of Admission
+              Date of Admission (KHCAA)
             </label>
             <input
               type="date"
@@ -341,7 +354,7 @@ function EditUserDetail({ onClose }) {
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
-          </div>
+          </div> */}
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
@@ -363,6 +376,41 @@ function EditUserDetail({ onClose }) {
                 </option>
               ))}
             </select>
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Blood Group
+            </label>
+            <select
+              name="blood"
+              value={formData.blood}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            >
+              <option value="" selected disabled>
+                Select
+              </option>
+              {bloodGroupOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Bar Association (If any other)
+            </label>
+            <input
+              type="text"
+              name="other_bar"
+              value={formData.other_bar}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
           </div>
 
           {/* Read-only Info */}

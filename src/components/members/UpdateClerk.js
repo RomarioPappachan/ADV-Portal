@@ -14,7 +14,7 @@ function UpdateClerk({ clerk, onClose }) {
 
   const [form, setForm] = useState({
     name: clerk.name || "",
-    designation: clerk.designation || "",
+    clerk_reg_no: clerk.clerk_reg_no || "",
     address: clerk.address || "",
     contact_no: clerk.contact_no || "",
   });
@@ -85,14 +85,29 @@ function UpdateClerk({ clerk, onClose }) {
 
           <div>
             <label className="block text-sm font-medium text-gray-600">
-              Designation
+              Contact No.
+            </label>
+            <input
+              type="tel"
+              name="contact_no"
+              value={form.contact_no}
+              onChange={handleChange}
+              required
+              pattern="[0-9]{10}"
+              maxLength="10"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-600">
+              Clerk Registration No.
             </label>
             <input
               type="text"
-              name="designation"
-              value={form.designation}
+              name="clerk_reg_no"
+              value={form.clerk_reg_no}
               onChange={handleChange}
-              required
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
@@ -105,23 +120,6 @@ function UpdateClerk({ clerk, onClose }) {
               name="address"
               value={form.address}
               onChange={handleChange}
-              required
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-600">
-              Contact No.
-            </label>
-            <input
-              type="tel"
-              name="contact_no"
-              value={form.contact_no}
-              onChange={handleChange}
-              required
-              pattern="[0-9]{10}"
-              maxLength="10"
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>

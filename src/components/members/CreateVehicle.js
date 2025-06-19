@@ -17,6 +17,7 @@ function CreateVehicle({ onClose }) {
     brand: "",
     model: "",
     year: "",
+    fuel: "",
   });
 
   const [mounted, setMounted] = useState(false);
@@ -121,6 +122,26 @@ function CreateVehicle({ onClose }) {
               required
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-600">
+              Fuel Type
+            </label>
+            <select
+              type="text"
+              name="fuel"
+              value={form.fuel}
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              <option value="">-- Select Fuel Type --</option>
+              <option value="Petrol">Petrol</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Electric">Electric</option>
+              <option value="CNG">CNG</option>
+            </select>
           </div>
 
           <div className="pt-4">

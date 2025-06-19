@@ -67,11 +67,13 @@ export default function MemberDetailsSection() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 text-sm">
         <div>
-          <p className="text-gray-500 font-medium">Membership ID</p>
+          <p className="text-gray-500 font-medium">KHCAA Membership No.</p>
           <p className="text-gray-900 font-semibold">{userDetails?.adv_code}</p>
         </div>
         <div>
-          <p className="text-gray-500 font-medium">Enrolment ID</p>
+          <p className="text-gray-500 font-medium">
+            Bar council Enrollment No.
+          </p>
           <p className="text-gray-900 font-semibold">
             {userDetails?.enrollment_id}
           </p>
@@ -81,11 +83,13 @@ export default function MemberDetailsSection() {
           <p className="text-gray-900 font-semibold">{userDetails?.mobile}</p>
         </div>
         <div>
-          <p className="text-gray-500 font-medium">Home Phone</p>
+          <p className="text-gray-500 font-medium">Emergency Phone no.</p>
           <p className="text-gray-900 font-semibold">{userDetails?.home_ph}</p>
         </div>
         <div>
-          <p className="text-gray-500 font-medium">Office Phone</p>
+          <p className="text-gray-500 font-medium">
+            Office Phone / Additional Mobile no.
+          </p>
           <p className="text-gray-900 font-semibold">
             {userDetails?.office_ph}
           </p>
@@ -118,6 +122,28 @@ export default function MemberDetailsSection() {
           </p>
         </div>
         <div>
+          <p className="text-gray-500 font-medium">Blood Group</p>
+          <p className="text-gray-900 font-semibold">
+            {userDetails?.blood || "N/A"}
+          </p>
+        </div>
+        <div>
+          <p className="text-gray-500 font-medium">
+            Bar Association (if any other)
+          </p>
+          <p className="text-gray-900 font-semibold">
+            {userDetails?.other_bar || "N/A"}
+          </p>
+        </div>
+        <div>
+          <p className="text-gray-500 font-medium">Designation</p>
+          <p className="text-gray-900 font-semibold">
+            {userDetails?.senior === 1
+              ? "Senior Advocate"
+              : "Advocate" || "N/A"}
+          </p>
+        </div>
+        <div>
           <p className="text-gray-500 font-medium">Qualification</p>
           <p className="text-gray-900 font-semibold">
             {additionalInfo?.qualification || "N/A"}
@@ -132,7 +158,7 @@ export default function MemberDetailsSection() {
           </p>
         </div>
         <div>
-          <p className="text-gray-500 font-medium">Date of Admission</p>
+          <p className="text-gray-500 font-medium">Date of Admission (KHCAA)</p>
           <p className="text-gray-900 font-semibold">
             {additionalInfo?.date_of_admission
               ? new Date(additionalInfo.date_of_admission).toLocaleDateString()

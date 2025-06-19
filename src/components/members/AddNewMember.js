@@ -12,6 +12,17 @@ const membershipOptions = [
   { label: "Life", value: 0 },
 ];
 
+const bloodGroupOptions = [
+  { label: "A+", value: "A+" },
+  { label: "A-", value: "A-" },
+  { label: "B+", value: "B+" },
+  { label: "B-", value: "B-" },
+  { label: "AB+", value: "AB+" },
+  { label: "AB-", value: "AB-" },
+  { label: "O+", value: "O+" },
+  { label: "O-", value: "O-" },
+  { label: "Others", value: "Others" },
+];
 const genderOptions = [
   { label: "Male", value: "Male" },
   { label: "Female", value: "Female" },
@@ -42,6 +53,9 @@ function AddNewMember({ isOpen, onClose }) {
     date_of_enrol: "",
     date_of_admission: "",
     gender: "",
+    blood: "",
+    other_bar: "",
+    senior: 0,
   });
 
   console.log(formData);
@@ -150,12 +164,20 @@ function AddNewMember({ isOpen, onClose }) {
 
           {[
             { name: "fullname", label: "Full Name", type: "text" },
-            { name: "adv_code", label: "Membership ID", type: "text" },
-            { name: "enrollment_id", label: "Enrollment ID", type: "text" },
+            { name: "adv_code", label: "KHCAA Membership No.", type: "text" },
+            {
+              name: "enrollment_id",
+              label: "Bar council Enrollment No.",
+              type: "text",
+            },
             { name: "email", label: "Email", type: "email" },
             { name: "mobile", label: "Mobile Number", type: "tel" },
-            { name: "office_ph", label: "Office Phone", type: "tel" },
-            { name: "home_ph", label: "Home Phone", type: "tel" },
+            {
+              name: "office_ph",
+              label: "Office Phone / Additional Mobile no.",
+              type: "tel",
+            },
+            { name: "home_ph", label: "Emergency Phone no.", type: "tel" },
             {
               name: "date_of_enrol",
               label: "Date of Enrollment",
@@ -163,8 +185,13 @@ function AddNewMember({ isOpen, onClose }) {
             },
             {
               name: "date_of_admission",
-              label: "Date of Admission",
+              label: "Date of Admission (KHCAA)",
               type: "date",
+            },
+            {
+              name: "other_bar",
+              label: "Bar Association (If any other)",
+              type: "text",
             },
             { name: "qualification", label: "Qualification", type: "text" },
             { name: "date_of_birth", label: "Date of Birth", type: "date" },
@@ -179,7 +206,14 @@ function AddNewMember({ isOpen, onClose }) {
                 value={formData[input.name]}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-                required
+                required={
+                  input.name === "office_ph" ||
+                  input.name === "home_ph" ||
+                  input.name === "other_bar" ||
+                  input.name === "date_of_enrol"
+                    ? false
+                    : true
+                }
               />
             </div>
           ))}
@@ -200,6 +234,28 @@ function AddNewMember({ isOpen, onClose }) {
                 Select
               </option>
               {genderOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Blood Group
+            </label>
+            <select
+              name="blood"
+              value={formData.blood}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            >
+              <option value="" selected disabled>
+                Select
+              </option>
+              {bloodGroupOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
@@ -238,6 +294,29 @@ function AddNewMember({ isOpen, onClose }) {
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium mb-2">
+              Senior Advocate
+            </label>
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="senior"
+                checked={formData.senior === 1}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    senior: e.target.checked ? 1 : 0,
+                  }))
+                }
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                Check if senior advocate
+              </span>
+            </div>
           </div>
 
           {/* Textareas */}
