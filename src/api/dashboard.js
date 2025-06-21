@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleApiError } from "@/utilities/handleApiError";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL; // Base API URL
 
@@ -14,7 +15,8 @@ export const fetchTotalMembers = async () => {
     });
     return res;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to fetch courses");
+    // throw new Error(error.response?.data?.message || "Failed to fetch courses");
+    handleApiError(error, "admin");
   }
 };
 
@@ -30,6 +32,7 @@ export const fetchTotalPayments = async (paymentType) => {
 
     return res;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to fetch courses");
+    // throw new Error(error.response?.data?.message || "Failed to fetch courses");
+    handleApiError(error, "admin");
   }
 };

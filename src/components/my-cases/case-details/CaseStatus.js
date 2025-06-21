@@ -18,14 +18,26 @@ export default function CaseStatus() {
   ];
 
   return (
-    <section className="p-4 md:p-6 bg-white shadow rounded-xl mb-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">CASE STATUS</h2>
+    <section className="p-2 sm:p-6 bg-white border border-gray-300 rounded-lg shadow-sm mb-6">
+      <h2 className="text-base font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-400 text-center sm:rounded-lg py-2 mb-4">
+        CASE STATUS
+      </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 mb-6">
         {mainStatusFields.map(({ label, value }, idx) => (
           <div key={idx} className="flex flex-col">
             <span className="text-sm font-medium text-gray-500">{label}</span>
-            <span className="text-base font-semibold text-gray-900 break-words">
+            <span
+              className={`text-sm font-semibold break-words ${
+                label === "Case Status"
+                  ? value === "Pending"
+                    ? "text-red-600"
+                    : value === "Disposed"
+                    ? "text-green-600"
+                    : "text-gray-900"
+                  : "text-gray-900"
+              }`}
+            >
               {value}
             </span>
           </div>
@@ -34,33 +46,44 @@ export default function CaseStatus() {
 
       {lastListed.length > 0 && (
         <div className="mt-4">
-          <h3 className="text-lg font-semibold text-gray-700 mb-3">
+          <h3 className="text-base font-semibold text-gray-800 mb-4">
             Last Listed Details
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
             {lastListed.map((item, index) => (
-              <div key={index} className="bg-gray-50 p-4 rounded-lg border">
+              <div
+                key={index}
+                className="bg-gray-50 border border-gray-300 rounded-lg p-4 shadow-sm"
+              >
                 <div className="mb-2">
-                  <span className="text-sm text-gray-500">Date</span>
-                  <div className="font-medium text-gray-800">
+                  <span className="text-sm font-medium text-gray-500">
+                    Date
+                  </span>
+                  <div className="text-sm font-semibold text-gray-900">
                     {item.date || "—"}
                   </div>
                 </div>
                 <div className="mb-2">
-                  <span className="text-sm text-gray-500">Bench</span>
-                  <div className="font-medium text-gray-800">
+                  <span className="text-sm font-medium text-gray-500">
+                    Bench
+                  </span>
+                  <div className="text-sm font-semibold text-gray-900">
                     {item.bench || "—"}
                   </div>
                 </div>
                 <div className="mb-2">
-                  <span className="text-sm text-gray-500">List</span>
-                  <div className="font-medium text-gray-800">
+                  <span className="text-sm font-medium text-gray-500">
+                    List
+                  </span>
+                  <div className="text-sm font-semibold text-gray-900">
                     {item.list?.trim() || "—"}
                   </div>
                 </div>
                 <div>
-                  <span className="text-sm text-gray-500">Item</span>
-                  <div className="font-medium text-gray-800">
+                  <span className="text-sm font-medium text-gray-500">
+                    Item
+                  </span>
+                  <div className="text-sm font-semibold text-gray-900">
                     {item.item || "—"}
                   </div>
                 </div>

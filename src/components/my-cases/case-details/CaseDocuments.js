@@ -4,43 +4,73 @@ import { useCaseDetailsStore } from "@/store/caseDetailsStore";
 
 export default function CaseDocuments() {
   const { documents } = useCaseDetailsStore();
+
   return (
-    <section className="p-4 md:p-6 bg-white shadow rounded-xl mb-6 overflow-x-auto">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">DOCUMENTS</h2>
+    <section className="p-2 sm:p-6 bg-white border border-gray-300 rounded-lg shadow-sm mb-6">
+      <h2 className="text-base font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-400 text-center sm:rounded-lg py-2 mb-4">
+        DOCUMENTS
+      </h2>
 
       {documents && documents.length > 0 ? (
-        <table className="min-w-full table-auto border border-gray-300 text-sm text-left">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="px-4 py-2 border-b border-gray-300">#</th>
-              <th className="px-4 py-2 border-b border-gray-300">
-                Document No
-              </th>
-              <th className="px-4 py-2 border-b border-gray-300">Date</th>
-              <th className="px-4 py-2 border-b border-gray-300">File Type</th>
-              <th className="px-4 py-2 border-b border-gray-300">
-                Description
-              </th>
-              <th className="px-4 py-2 border-b border-gray-300">Party Name</th>
-              <th className="px-4 py-2 border-b border-gray-300">
-                Advocate Name
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {documents.map((doc, index) => (
-              <tr key={index} className="border-t border-gray-200">
-                <td className="px-4 py-2">{index + 1}</td>
-                <td className="px-4 py-2">{doc.doc_no || "—"}</td>
-                <td className="px-4 py-2">{doc.paperdate || "—"}</td>
-                <td className="px-4 py-2">{doc.docu_name || "—"}</td>
-                <td className="px-4 py-2">{doc.description?.trim() || "—"}</td>
-                <td className="px-4 py-2">{doc.party_name || "—"}</td>
-                <td className="px-4 py-2">{doc.filedBy || "—"}</td>
+        <div className="overflow-x-auto rounded-lg border border-gray-300">
+          <table className="min-w-full table-auto bg-white text-sm text-left">
+            <thead className="bg-gray-100 text-gray-700">
+              <tr>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  #
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Document No
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Date
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  File Type
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Description
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Party Name
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Advocate Name
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {documents.map((doc, index) => (
+                <tr
+                  key={index}
+                  className="border-t border-gray-300 hover:bg-gray-50"
+                >
+                  <td className="py-4 px-4 whitespace-nowrap text-gray-900">
+                    {index + 1}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap text-gray-900">
+                    {doc.doc_no || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap text-gray-900">
+                    {doc.paperdate || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap text-gray-900">
+                    {doc.docu_name || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap text-gray-900">
+                    {doc.description?.trim() || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap text-gray-900">
+                    {doc.party_name || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap text-gray-900">
+                    {doc.filedBy || "—"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <p className="text-sm text-gray-500">No documents available.</p>
       )}

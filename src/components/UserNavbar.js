@@ -28,9 +28,11 @@ const UserNavbar = () => {
     router.replace("/");
   };
 
+  // bg-[#3f51b5]
+
   return (
     <>
-      <nav className="w-full bg-[#3f51b5] text-white shadow-md">
+      <nav className="w-full bg-purple-700 text-white shadow-md">
         <div className="px-3 sm:px-4 md:px-8 lg:px-16">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}

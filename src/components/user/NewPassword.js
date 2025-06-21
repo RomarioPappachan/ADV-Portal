@@ -57,13 +57,13 @@ function NewPassword() {
       className="w-[90%] max-w-[420px] shadow-2xl rounded-lg bg-white mx-auto"
     >
       {/* Header */}
-      <div className="w-full h-20 flex justify-center items-center gap-3 bg-[#3f51b5] rounded-t-lg">
+      <div className="w-full h-20 flex justify-center items-center gap-3 bg-purple-700 rounded-t-lg">
         <img src="/khcaa-logo.png" alt="logo" className="size-16" />
         <h1 className="text-4xl text-white font-bold">KHCAA</h1>
       </div>
 
       <div className="p-6 space-y-4">
-        <h1 className="text-[#3f51b5] text-xl font-semibold text-center">
+        <h1 className="text-purple-700 text-xl font-semibold text-center">
           Create Password
         </h1>
 
@@ -75,7 +75,7 @@ function NewPassword() {
             name="password"
             value={passwords.password}
             onChange={handleChange}
-            className="h-12 px-4 pr-12 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-[#3f51b5] text-black"
+            className="h-12 px-4 pr-12 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-purple-700 text-black"
             placeholder="Enter new password"
           />
           <div
@@ -96,7 +96,7 @@ function NewPassword() {
             name="confirmPassword"
             value={passwords.confirmPassword}
             onChange={handleChange}
-            className="h-12 px-4 pr-12 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-[#3f51b5] text-black"
+            className="h-12 px-4 pr-12 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-purple-700 text-black"
             placeholder="Re-enter new password"
           />
           <div
@@ -119,8 +119,8 @@ function NewPassword() {
           disabled={loading}
           className={`w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg ${
             loading
-              ? "bg-[#3f51b580] cursor-not-allowed"
-              : "bg-[#3f51b5] hover:bg-[#3f51b5a8]"
+              ? "bg-purple-800 cursor-not-allowed"
+              : "bg-purple-700 hover:bg-purple-800"
           }`}
         >
           {loading ? "Submitting..." : "Submit"}

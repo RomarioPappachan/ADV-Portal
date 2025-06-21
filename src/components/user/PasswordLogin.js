@@ -42,7 +42,7 @@ function PasswordLogin({ onBack }) {
   return (
     <form className="py-6 px-6" onSubmit={handleSubmit}>
       <div className="space-y-8">
-        <h1 className="text-[#3f51b5] text-xl font-semibold text-center">
+        <h1 className="text-purple-700 text-xl font-semibold text-center">
           Member Login
         </h1>
 
@@ -56,15 +56,15 @@ function PasswordLogin({ onBack }) {
             minLength={10}
             maxLength={10}
             required
-            className="peer w-full p-3 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="peer w-full p-3 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
           />
           <label
             htmlFor="mobileNo"
             className={`absolute left-3 text-gray-500 transition-all bg-white px-1 
               ${
                 mobileNo
-                  ? "top-0 text-xs text-blue-500"
-                  : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-blue-500"
+                  ? "top-0 text-xs text-purple-500"
+                  : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-purple-500"
               }`}
           >
             Mobile number
@@ -79,15 +79,15 @@ function PasswordLogin({ onBack }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="peer w-full p-3 pr-10 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="peer w-full p-3 pr-10 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
           />
           <label
             htmlFor="password"
             className={`absolute left-3 text-gray-500 transition-all bg-white px-1 
               ${
                 password
-                  ? "top-0 text-xs text-blue-500"
-                  : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-blue-500"
+                  ? "top-0 text-xs text-purple-500"
+                  : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-purple-500"
               }`}
           >
             Password
@@ -109,7 +109,7 @@ function PasswordLogin({ onBack }) {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-[#3f51b5] cursor-pointer"
+          className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-purple-700 cursor-pointer"
           disabled={isLogging}
         >
           {isLogging ? "Logging..." : "Login"}

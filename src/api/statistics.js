@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleApiError } from "@/utilities/handleApiError";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL; // Base API URL
 
@@ -18,9 +19,10 @@ export const fetchAllPayments = async (paymentType) => {
     );
     return res;
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Failed to fetch payments"
-    );
+    // throw new Error(
+    //   error.response?.data?.message || "Failed to fetch payments"
+    // );
+    handleApiError(error, "admin");
   }
 };
 
@@ -32,6 +34,7 @@ export const createPayment = async (paymentData) => {
     });
     return res;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to add payment");
+    // throw new Error(error.response?.data?.message || "Failed to add payment");
+    handleApiError(error, "admin");
   }
 };

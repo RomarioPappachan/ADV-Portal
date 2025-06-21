@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useCaseDetailsStore } from "@/store/caseDetailsStore";
 import CaseBasicDetails from "@/components/my-cases/case-details/CaseBasicDetails";
@@ -17,10 +18,13 @@ import ServedOn from "@/components/my-cases/case-details/ServedOn";
 import Appealcases from "@/components/my-cases/case-details/AppealCases";
 import Connectedcases from "@/components/my-cases/case-details/ConnectedCases";
 import Araisedcases from "@/components/my-cases/case-details/AraisedCases";
+import { LuChevronLeft } from "react-icons/lu";
 
 export default function CaseDetailsSection() {
   const { caseNo } = useParams();
-  const { getCaseStatus } = useCaseDetailsStore();
+  const { getCaseStatus, caseDetails } = useCaseDetailsStore();
+
+  const { caseType, filingYear, regNo } = caseDetails;
 
   useEffect(() => {
     if (caseNo) {
@@ -28,37 +32,36 @@ export default function CaseDetailsSection() {
     }
   }, [caseNo]);
 
-  console.log(caseNo);
-
   return (
-    <div className="h-full px-2 lg:px-4 overflow-y-auto">
-      <CaseBasicDetails />
-
-      <Appealcases />
-
-      <CaseStatus />
-
-      <Connectedcases />
-
-      <Araisedcases />
-
-      <Petitioner />
-
-      <Respondent />
-
-      <ServedOn />
-
-      <ActsAndSections />
-
-      <IaDetails />
-
-      <CaseDocuments />
-
-      <HearingHistory />
-
-      <CategoryDetails />
-
-      <Objections />
-    </div>
+    <>
+      <div className="pb-5 pe-4 flex justify-between items-center">
+        <Link
+          href="/home/my-cases/cause-list"
+          className="max-w-max px-2 lg:px-4 flex justify-start items-center gap-2 text-blue-500"
+        >
+          <LuChevronLeft className="text-xl" />
+          <span>Back</span>
+        </Link>
+        <span className="text-base text-blue-500 font-bold">
+          {`${caseType} ${regNo}/${filingYear}`}
+        </span>
+      </div>
+      <div className="h-full px-2 lg:px-4 pb-20 overflow-y-auto">
+        <CaseBasicDetails />
+        <Appealcases />
+        <CaseStatus />
+        <Connectedcases />
+        <Araisedcases />
+        <Petitioner />
+        <Respondent />
+        <ServedOn />
+        <ActsAndSections />
+        <IaDetails />
+        <CaseDocuments />
+        <HearingHistory />
+        <CategoryDetails />
+        <Objections />
+      </div>
+    </>
   );
 }

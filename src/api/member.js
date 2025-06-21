@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleApiError } from "@/utilities/handleApiError";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL; // Base API URL
 
@@ -29,7 +30,8 @@ export const fetchAllMembers = async (page, limit, search) => {
     );
     return res;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to fetch members");
+    // throw new Error(error.response?.data?.message || "Failed to fetch members");
+    handleApiError(error, "admin");
   }
 };
 
@@ -44,7 +46,8 @@ export const fetchProfileUptdMembers = async (date, page, limit) => {
     );
     return res;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to fetch members");
+    // throw new Error(error.response?.data?.message || "Failed to fetch members");
+    handleApiError(error, "admin");
   }
 };
 
@@ -60,9 +63,10 @@ export const createMember = async (memberData) => {
     );
     return res;
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Failed to create a new member"
-    );
+    // throw new Error(
+    //   error.response?.data?.message || "Failed to create a new member"
+    // );
+    handleApiError(error, "admin");
   }
 };
 
@@ -76,7 +80,8 @@ export const updateMember = async (memberData, userRole) => {
     });
     return res;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to update member");
+    // throw new Error(error.response?.data?.message || "Failed to update member");
+    handleApiError(error, userRole);
   }
 };
 
@@ -90,9 +95,10 @@ export const addVehicle = async (vehicleData, userRole) => {
     });
     return res;
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Failed to add new vehicle"
-    );
+    // throw new Error(
+    //   error.response?.data?.message || "Failed to add new vehicle"
+    // );
+    handleApiError(error, userRole);
   }
 };
 
@@ -106,9 +112,10 @@ export const updateVehicle = async (vehicleData, userRole) => {
     });
     return res;
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Failed to update vehicle details"
-    );
+    // throw new Error(
+    //   error.response?.data?.message || "Failed to update vehicle details"
+    // );
+    handleApiError(error, userRole);
   }
 };
 
@@ -125,9 +132,10 @@ export const deleteVehicle = async (vehicleId, userRole) => {
     );
     return res;
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Failed to delete vehicle details"
-    );
+    // throw new Error(
+    //   error.response?.data?.message || "Failed to delete vehicle details"
+    // );
+    handleApiError(error, userRole);
   }
 };
 
@@ -141,7 +149,8 @@ export const addClerk = async (clerkData, userRole) => {
     });
     return res;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to add new clerk");
+    // throw new Error(error.response?.data?.message || "Failed to add new clerk");
+    handleApiError(error, userRole);
   }
 };
 
@@ -155,9 +164,11 @@ export const updateClerk = async (clerkData, userRole) => {
     });
     return res;
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Failed to update clerk details"
-    );
+    // throw new Error(
+    //   error.response?.data?.message || "Failed to update clerk details"
+    // );
+
+    handleApiError(error, userRole);
   }
 };
 
@@ -171,8 +182,10 @@ export const deleteClerk = async (clerkId, userRole) => {
     });
     return res;
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Failed to delete clerk details"
-    );
+    // throw new Error(
+    //   error.response?.data?.message || "Failed to delete clerk details"
+    // );
+
+    handleApiError(error, userRole);
   }
 };

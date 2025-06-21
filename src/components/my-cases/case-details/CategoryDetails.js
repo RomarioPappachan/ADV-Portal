@@ -1,27 +1,36 @@
 "use client";
+
 import React from "react";
 import { useCaseDetailsStore } from "@/store/caseDetailsStore";
 
 export default function CategoryDetails() {
   const { category } = useCaseDetailsStore();
+
   const rows = [
     { label: "Category", value: category?.category },
     { label: "Sub Category", value: category?.sub_category },
     { label: "Sub Sub Category", value: category?.sub_sub_category },
-  ].filter((item) => item.value); // Only show if value exists
+  ].filter((item) => item.value); // Only show non-empty values
 
   return (
-    <section className="p-4 md:p-6 bg-white shadow rounded-xl mb-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">
+    <section className="p-2 sm:p-6 bg-white border border-gray-300 rounded-lg shadow-sm mb-6">
+      <h2 className="text-base font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-400 text-center sm:rounded-lg py-2 mb-4">
         CATEGORY DETAILS
       </h2>
 
       {rows.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 text-sm">
+        <div className="space-y-4 text-sm">
           {rows.map((item, index) => (
-            <div key={index} className="flex">
-              <div className="w-40 text-gray-600 font-medium">{item.label}</div>
-              <div className="text-gray-900">{item.value}</div>
+            <div
+              key={index}
+              className="flex flex-col sm:flex-row sm:items-center"
+            >
+              <div className="w-full sm:w-48 text-sm font-medium text-gray-500">
+                {item.label}
+              </div>
+              <div className="text-sm font-semibold text-gray-900">
+                {item.value}
+              </div>
             </div>
           ))}
         </div>

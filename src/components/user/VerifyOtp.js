@@ -115,7 +115,7 @@ function VerifyOtp({ mobileNo, sessionId, setVerifyOpen, onSendOtp }) {
   return (
     <>
       <form className="py-6 px-6 space-y-4" onSubmit={handleVerifyOtp}>
-        <h1 className="text-[#3f51b5] text-xl font-semibold text-center">
+        <h1 className="text-purple-700 text-xl font-semibold text-center">
           Verify OTP
         </h1>
         <div>
@@ -132,7 +132,7 @@ function VerifyOtp({ mobileNo, sessionId, setVerifyOpen, onSendOtp }) {
               key={index}
               type="tel"
               maxLength={1}
-              className={`size-12 text-gray-700 text-center border rounded-md focus:outline-none focus:ring focus:ring-[#3f51b5] focus:[#3f51b5] ${
+              className={`size-12 text-gray-700 text-center border rounded-md focus:outline-none focus:ring focus:ring-purple-700 focus:purple-700 ${
                 isOtpError ? "border-rose-500" : "border-gray-300"
               }`}
               name={key}
@@ -153,7 +153,7 @@ function VerifyOtp({ mobileNo, sessionId, setVerifyOpen, onSendOtp }) {
         <p className="text-[#707784] text-xs  flex justify-center items-center gap-3">
           {isResend ? (
             <button
-              className="text-[#3f51b5] text-base hover:underline hover:font-semibold cursor-pointer"
+              className="text-purple-700 text-base hover:underline hover:font-semibold cursor-pointer"
               onClick={handleResendOtp}
             >
               Resend OTP
@@ -176,7 +176,7 @@ function VerifyOtp({ mobileNo, sessionId, setVerifyOpen, onSendOtp }) {
 
         <button
           type="submit"
-          className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-[#3f51b5] cursor-pointer"
+          className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-purple-700 cursor-pointer"
           disabled={isLogging}
         >
           {isLogging ? "Logging..." : "Login"}

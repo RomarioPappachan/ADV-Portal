@@ -6,52 +6,69 @@ export default function HearingHistory() {
   const { hearinghistory } = useCaseDetailsStore();
 
   return (
-    <section className="p-4 md:p-6 bg-white shadow rounded-xl mb-6 overflow-x-auto">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">
+    <section className="p-2 sm:p-6 bg-white border border-gray-300 rounded-lg shadow-sm mb-6">
+      <h2 className="text-base font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-400 text-center sm:rounded-lg py-2 mb-4">
         HISTORY OF CASE HEARING
       </h2>
 
       {hearinghistory && hearinghistory.length > 0 ? (
-        <table className="min-w-full table-auto border border-gray-300 text-sm text-left text-gray-600">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="px-4 py-2 border-b border-gray-300">#</th>
-              <th className="px-4 py-2 border-b border-gray-300">
-                Cause List Type
-              </th>
-              <th className="px-4 py-2 border-b border-gray-300">
-                Hon: Judge Name
-              </th>
-              <th className="px-4 py-2 border-b border-gray-300">
-                BusinessDate
-              </th>
-              <th className="px-4 py-2 border-b border-gray-300">
-                NextDate (Tentative Date)
-              </th>
-              <th className="px-4 py-2 border-b border-gray-300">
-                Purpose of Hearing
-              </th>
-              <th className="px-4 py-2 border-b border-gray-300">Order.</th>
-            </tr>
-          </thead>
-          <tbody>
-            {hearinghistory.map((item, index) => (
-              <tr key={index} className="border-t border-gray-200">
-                <td className="px-4 py-2">{index + 1}</td>
-                <td className="px-4 py-2">
-                  {item.cause_list_type?.trim() || "—"}
-                </td>
-                <td className="px-4 py-2">{item.judge_name || "—"}</td>
-                <td className="px-4 py-2">{item.business_date || "—"}</td>
-                <td className="px-4 py-2">{item.adjourned_date || "—"}</td>
-                <td className="px-4 py-2">{item.purpose || "—"}</td>
-                <td className="px-4 py-2 whitespace-pre-line">
-                  {item.remark?.trim() || "—"}
-                </td>
+        <div className="overflow-x-auto rounded-lg border border-gray-300">
+          <table className="min-w-full table-auto bg-white text-sm text-left text-gray-900">
+            <thead className="bg-gray-100 text-gray-700">
+              <tr>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  #
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Cause List Type
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Hon: Judge Name
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Business Date
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Next Date (Tentative)
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Purpose of Hearing
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Order
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {hearinghistory.map((item, index) => (
+                <tr
+                  key={index}
+                  className="border-t border-gray-300 hover:bg-gray-50"
+                >
+                  <td className="py-4 px-4 whitespace-nowrap">{index + 1}</td>
+                  <td className="py-4 px-4 whitespace-nowrap">
+                    {item.cause_list_type?.trim() || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap">
+                    {item.judge_name || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap">
+                    {item.business_date || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap">
+                    {item.adjourned_date || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap">
+                    {item.purpose || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-pre-line">
+                    {item.remark?.trim() || "—"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <p className="text-sm text-gray-500">No hearing history available.</p>
       )}

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleApiError } from "@/utilities/handleApiError";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL; // Base API URL
 
@@ -14,7 +15,8 @@ export const createRazorPayOrder = async (orderData) => {
     });
     return res;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to create order");
+    // throw new Error(error.response?.data?.message || "Failed to create order");
+    handleApiError(error, "user");
   }
 };
 
@@ -25,6 +27,7 @@ export const verifyRazorpayPayment = async (paymentIds) => {
     });
     return res;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to create order");
+    // throw new Error(error.response?.data?.message || "Failed to create order");
+    handleApiError(error, "user");
   }
 };

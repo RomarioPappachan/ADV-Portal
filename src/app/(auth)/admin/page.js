@@ -36,6 +36,11 @@ const AdminLogin = () => {
     setIsLogging(true);
     setError("");
 
+    if (!email || !password) {
+      toast.error("Enter Credentials");
+      return;
+    }
+
     try {
       const response = await loginAdmin(email, password);
       toast.success(response.data.message);

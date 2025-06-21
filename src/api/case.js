@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleApiError } from "@/utilities/handleApiError";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL; // Base API URL
 
@@ -18,7 +19,8 @@ export const fetchCauseList = async (date) => {
     );
     return res;
   } catch (error) {
-    throw new Error(error?.data?.message || "Failed to fetch cause list");
+    // throw new Error(error?.data?.message || "Failed to fetch cause list");
+    handleApiError(error, "user");
   }
 };
 
@@ -36,6 +38,7 @@ export const fetchCaseStatus = async (caseNo) => {
     );
     return res;
   } catch (error) {
-    throw new Error(error?.data?.message || "Failed to fetch case status");
+    // throw new Error(error?.data?.message || "Failed to fetch case status");
+    handleApiError(error, "user");
   }
 };

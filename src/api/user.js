@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleApiError } from "@/utilities/handleApiError";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL; // Base API URL
 
@@ -16,6 +17,7 @@ export const fetchUserById = async (userId, userRole) => {
     });
     return res;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to fetch members");
+    // throw new Error(error.response?.data?.message || "Failed to fetch members");
+    handleApiError(error, userRole);
   }
 };

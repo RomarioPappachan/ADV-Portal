@@ -6,34 +6,51 @@ export default function Araisedcases() {
   const { arisedCases } = useCaseDetailsStore();
 
   return (
-    <section className="p-4 md:p-6 bg-white shadow rounded-xl mb-6 overflow-x-auto">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">
+    <section className="p-2 sm:p-6 bg-white border border-gray-300 rounded-lg shadow-sm mb-6">
+      <h2 className="text-base font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-400 text-center sm:rounded-lg py-2 mb-4">
         ARAISED CASES
       </h2>
 
       {arisedCases && arisedCases.length > 0 ? (
-        <table className="min-w-full table-auto border border-gray-300 text-sm text-left">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="px-4 py-2 border-b border-gray-300">#</th>
-              <th className="px-4 py-2 border-b border-gray-300">Case No</th>
-              <th className="px-4 py-2 border-b border-gray-300">
-                Disposed by
-              </th>
-              <th className="px-4 py-2 border-b border-gray-300">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {arisedCases.map((item, index) => (
-              <tr key={index} className="border-t border-gray-200">
-                <td className="px-4 py-2">{index + 1}</td>
-                <td className="px-4 py-2">{item.casenumber || "—"}</td>
-                <td className="px-4 py-2">{item.disposedby || "—"}</td>
-                <td className="px-4 py-2">{item.status || "—"}</td>
+        <div className="overflow-x-auto rounded-lg border border-gray-300">
+          <table className="min-w-full table-auto bg-white text-sm text-left text-gray-900">
+            <thead className="bg-gray-100 text-gray-700">
+              <tr>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  #
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Case No
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Disposed by
+                </th>
+                <th className="py-4 px-4 border-b border-gray-300 whitespace-nowrap">
+                  Status
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {arisedCases.map((item, index) => (
+                <tr
+                  key={index}
+                  className="border-t border-gray-300 hover:bg-gray-50"
+                >
+                  <td className="py-4 px-4 whitespace-nowrap">{index + 1}</td>
+                  <td className="py-4 px-4 whitespace-nowrap">
+                    {item.casenumber || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap">
+                    {item.disposedby || "—"}
+                  </td>
+                  <td className="py-4 px-4 whitespace-nowrap">
+                    {item.status || "—"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <p className="text-sm text-gray-500">No arised cases available.</p>
       )}
