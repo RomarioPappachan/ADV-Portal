@@ -8,7 +8,6 @@
 
 // const page = () => {
 //   const { userInfo } = useAuthStore();
-//   console.log(userInfo);
 //   return (
 //     <div className="w-full flex flex-col lg:flex-row lg:justify-center gap-4 pb-10 bg-[#f6f8fa] box-border">
 //       {/* left section  */}
@@ -146,7 +145,6 @@ import {
 const Page = () => {
   const { userInfo } = useAuthStore();
   const { userDetails } = useUserStore();
-  console.log(userInfo);
 
   return (
     <div className="w-full flex flex-col lg:flex-row gap-6 pb-10 bg-transparent">
@@ -283,7 +281,7 @@ const Page = () => {
               <span>My Subscriptions</span>
             </div>
           </Link>
-          <Link href="/home/services/my-cases">
+          <Link href="/home/my-cases/cause-list">
             <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-300 via-indigo-500 to-violet-700 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
               <LuBriefcase className="text-2xl" />
               <span>My Cases</span>

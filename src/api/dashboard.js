@@ -14,8 +14,6 @@ export const fetchTotalMembers = async () => {
     });
     return res;
   } catch (error) {
-    console.log(error);
-
     throw new Error(error.response?.data?.message || "Failed to fetch courses");
   }
 };
@@ -32,7 +30,6 @@ export const fetchTotalPayments = async (paymentType) => {
 
     return res;
   } catch (error) {
-    console.log(error);
     throw new Error(error.response?.data?.message || "Failed to fetch courses");
   }
 };

@@ -50,17 +50,20 @@ function EditMemberDetail({ onClose }) {
 
   const [formData, setFormData] = useState({
     fullname: "",
+    adv_code: "",
+    enrollment_id: "",
     email: "",
     profile_image: "",
+    mobile: "",
     office_ph: "",
     home_ph: "",
     res_address: "",
     off_address: "",
-    date_of_birth: "",
+    date_of_birth: null,
     qualification: "",
-    date_of_enrol: "",
-    date_of_admission: "",
-    gender: "",
+    date_of_enrol: null,
+    date_of_admission: null,
+    gender: "Male",
     membership: null,
     chamber: 0,
     blood: "",
@@ -71,21 +74,25 @@ function EditMemberDetail({ onClose }) {
   useEffect(() => {
     setFormData({
       fullname: userDetails?.fullname || "",
+      adv_code: userDetails?.adv_code || "",
+      enrollment_id: userDetails?.enrollment_id || "",
       email: userDetails?.email || "",
       profile_image: userDetails?.profile_image || "",
+      mobile: userDetails?.mobile,
       office_ph: userDetails?.office_ph || "",
       home_ph: userDetails?.home_ph || "",
       res_address: userDetails?.res_address || "",
       off_address: userDetails?.off_address || "",
-      date_of_birth: userDetails?.date_of_birth?.slice(0, 10) || "",
+      date_of_birth: userDetails?.date_of_birth?.slice(0, 10) || null,
       membership: userDetails?.membership,
       blood: userDetails?.blood || "",
       other_bar: userDetails?.other_bar || "",
       senior: userDetails?.senior,
       qualification: additionalInfo?.qualification || "",
-      date_of_enrol: additionalInfo?.date_of_enrol?.slice(0, 10) || "",
-      date_of_admission: additionalInfo?.date_of_admission?.slice(0, 10) || "",
-      gender: additionalInfo?.gender || "",
+      date_of_enrol: additionalInfo?.date_of_enrol?.slice(0, 10) || null,
+      date_of_admission:
+        additionalInfo?.date_of_admission?.slice(0, 10) || null,
+      gender: additionalInfo?.gender || "Male",
     });
   }, [userDetails, additionalInfo]);
 
@@ -95,6 +102,12 @@ function EditMemberDetail({ onClose }) {
       setFormData((prev) => ({ ...prev, [name]: Number(value) }));
     } else if (name === "chamber") {
       setFormData((prev) => ({ ...prev, [name]: Number(value) || 0 }));
+    } else if (
+      name === "date_of_enrol" ||
+      name === "date_of_birth" ||
+      name === "date_of_admission"
+    ) {
+      setFormData((prev) => ({ ...prev, [name]: value ? value : null }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
@@ -120,15 +133,11 @@ function EditMemberDetail({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // console.log(formData);
     setIsEditting(true);
 
     try {
       const updatedMember = {
         id: selectedMemberId,
-        adv_code: userDetails.adv_code,
-        enrollment_id: userDetails.enrollment_id,
-        membership: userDetails.membership,
         ...formData,
       };
 
@@ -141,7 +150,6 @@ function EditMemberDetail({ onClose }) {
         onClose(); // close popup
       }, 2000);
     } catch (error) {
-      console.log(error);
       toast.error("Failed to update details");
     } finally {
       setIsEditting(false);
@@ -220,6 +228,32 @@ function EditMemberDetail({ onClose }) {
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
+              KHCAA Membership No.
+            </label>
+            <input
+              type="text"
+              name="adv_code"
+              value={formData.adv_code}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Bar council Enrollment No.
+            </label>
+            <input
+              type="text"
+              name="enrollment_id"
+              value={formData.enrollment_id}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
               Email
             </label>
             <input
@@ -228,7 +262,6 @@ function EditMemberDetail({ onClose }) {
               value={formData.email}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
 
@@ -255,6 +288,21 @@ function EditMemberDetail({ onClose }) {
               value={formData.date_of_admission}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Mobile Number
+            </label>
+            <input
+              type="text"
+              name="mobile"
+              value={formData.mobile}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              maxLength="13"
+              minLength="10"
               required
             />
           </div>
@@ -268,7 +316,6 @@ function EditMemberDetail({ onClose }) {
               value={formData.membership}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             >
               <option value="" selected disabled>
                 Select
@@ -291,14 +338,13 @@ function EditMemberDetail({ onClose }) {
               value={formData.chamber}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
             {/* <select
               name="chamber"
               value={formData.chamber}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
+              
             >
               <option value="" selected disabled>
                 Select
@@ -351,7 +397,6 @@ function EditMemberDetail({ onClose }) {
               onChange={handleChange}
               rows={3}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
 
@@ -365,7 +410,6 @@ function EditMemberDetail({ onClose }) {
               onChange={handleChange}
               rows={3}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
 
@@ -379,7 +423,6 @@ function EditMemberDetail({ onClose }) {
               value={formData.date_of_birth}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
 
@@ -392,7 +435,6 @@ function EditMemberDetail({ onClose }) {
               value={formData.gender}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             >
               <option value="" selected disabled>
                 Select
@@ -414,7 +456,6 @@ function EditMemberDetail({ onClose }) {
               value={formData.blood}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             >
               <option value="" selected disabled>
                 Select
@@ -437,7 +478,6 @@ function EditMemberDetail({ onClose }) {
               value={formData.qualification}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
 
@@ -466,7 +506,7 @@ function EditMemberDetail({ onClose }) {
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
-              Bar Association (If any other)
+              Whether Member of any other Bar Association?
             </label>
             <input
               type="text"

@@ -15,8 +15,6 @@ const page = () => {
     }
   }, [userInfo]);
 
-  // console.log( "payment detail",paymentDetails);
-
   return (
     <div className="p-3 bg-white">
       <h1 className="text-black font-semibold text-2xl">Subscriptions</h1>

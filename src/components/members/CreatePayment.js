@@ -43,8 +43,6 @@ function CreatePayment({ onClose }) {
   }, [userDetails]);
 
   const handleChange = (e) => {
-    console.log(form);
-
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -60,9 +58,7 @@ function CreatePayment({ onClose }) {
         status: "completed",
         ...form,
       };
-      console.log(paymentData);
       const response = await createPayment(paymentData);
-      console.log(response);
       if (response?.data?.payment_id) toast.success(response?.data?.message);
       getMemberById(selectedMemberId);
       onClose(); // Close the popup after submission

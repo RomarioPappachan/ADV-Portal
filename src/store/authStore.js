@@ -1,41 +1,5 @@
 import { create } from "zustand";
 
-// export const useAuthStore = create((set) => ({
-//   admin: null,
-//   adminToken: null,
-
-//   adminLogin: (admin, adminToken) => {
-//     localStorage.setItem("admin", JSON.stringify(admin));
-//     localStorage.setItem("adminToken", adminToken);
-//     set({ admin, adminToken });
-//   },
-
-//   adminLogout: () => {
-//     localStorage.removeItem("admin");
-//     localStorage.removeItem("adminToken");
-//     set({ admin: null, adminToken: null });
-//   },
-
-//   checkAdminAuth: () => {
-//     try {
-//       const adminToken = localStorage.getItem("adminToken");
-//       const admin = localStorage.getItem("admin");
-
-//       if (adminToken && admin) {
-//         set({ admin: JSON.parse(admin), adminToken });
-//         return { isAdminLoggedIn: true };
-//       } else {
-//         set({ admin: null, adminToken: null });
-//         return { isAdminLoggedIn: false };
-//       }
-//     } catch (error) {
-//       console.error("Error parsing auth data:", error);
-//       set({ admin: null, adminToken: null });
-//       return { isAdminLoggedIn: false };
-//     }
-//   },
-// }));
-
 import {
   adminLoginApi,
   loginWithPasswordApi,
@@ -56,7 +20,6 @@ export const useAuthStore = create((set, get) => ({
   loginAdmin: async (email, password) => {
     try {
       const res = await adminLoginApi(email, password);
-      console.log(res);
       const token = res.data.token; // token is directly inside the response
 
       localStorage.setItem("auth_token", token);
@@ -65,7 +28,6 @@ export const useAuthStore = create((set, get) => ({
       set({ isAuthenticated: true, userType: "admin", token });
       return res;
     } catch (err) {
-      console.error("Admin login failed");
       throw err;
     }
   },
@@ -77,7 +39,6 @@ export const useAuthStore = create((set, get) => ({
       set({ otpSent: true });
       return { ...res.data, status: true };
     } catch (err) {
-      console.error("Send OTP failed");
       return false;
     }
   },
@@ -97,7 +58,6 @@ export const useAuthStore = create((set, get) => ({
       set({ isAuthenticated: true, userType: "user", token, userInfo: user });
       return { message, status: true, firstLogin: user?.first_login };
     } catch (err) {
-      // console.error("Verify OTP failed");
       throw err;
     }
   },
@@ -139,8 +99,6 @@ export const useAuthStore = create((set, get) => ({
 
       return { status: true, message: res.data.message };
     } catch (err) {
-      console.error("Login failed with:", { mobile, password });
-      console.error("API Error:", err?.response?.data || err.message);
       throw new Error(err?.response?.data?.message || "Login failed");
     }
   },

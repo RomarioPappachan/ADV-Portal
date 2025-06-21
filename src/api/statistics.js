@@ -18,7 +18,6 @@ export const fetchAllPayments = async (paymentType) => {
     );
     return res;
   } catch (error) {
-    console.log(error);
     throw new Error(
       error.response?.data?.message || "Failed to fetch payments"
     );
@@ -31,7 +30,6 @@ export const createPayment = async (paymentData) => {
     const res = await axios.post(`${API_URL}/payment/others`, paymentData, {
       headers: { Authorization: `${getAdminToken()}` },
     });
-    console.log(res);
     return res;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to add payment");

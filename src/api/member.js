@@ -7,11 +7,41 @@ const getToken = () => localStorage.getItem("auth_token");
 const getAdminToken = () => localStorage.getItem("admin_token");
 
 // Fetch all members
-export const fetchAllMembers = async () => {
+// export const fetchAllMembers = async () => {
+//   try {
+//     const res = await axios.get(`${API_URL}/dashboard/all-members`, {
+//       headers: { Authorization: `${getAdminToken()}` },
+//     });
+//     return res;
+//   } catch (error) {
+//     throw new Error(error.response?.data?.message || "Failed to fetch members");
+//   }
+// };
+
+export const fetchAllMembers = async (page, limit, search) => {
   try {
-    const res = await axios.get(`${API_URL}/dashboard/all-members`, {
-      headers: { Authorization: `${getAdminToken()}` },
-    });
+    const res = await axios.get(
+      `${API_URL}/dashboard/all-advs`,
+      { params: { page, limit, search } },
+      {
+        headers: { Authorization: `${getAdminToken()}` },
+      }
+    );
+    return res;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Failed to fetch members");
+  }
+};
+
+export const fetchProfileUptdMembers = async (date, page, limit) => {
+  try {
+    const res = await axios.get(
+      `${API_URL}/dashboard/member-updates/${date}?page=${page}&limit=${limit}`,
+
+      {
+        headers: { Authorization: `${getAdminToken()}` },
+      }
+    );
     return res;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to fetch members");
@@ -28,7 +58,6 @@ export const createMember = async (memberData) => {
         headers: { Authorization: `${getAdminToken()}` },
       }
     );
-    console.log(res);
     return res;
   } catch (error) {
     throw new Error(
@@ -42,7 +71,6 @@ export const updateMember = async (memberData, userRole) => {
   try {
     const token = userRole === "admin" ? getAdminToken() : getToken();
 
-    console.log(token);
     const res = await axios.put(`${API_URL}/dashboard/upd-member`, memberData, {
       headers: { Authorization: token },
     });
@@ -60,7 +88,6 @@ export const addVehicle = async (vehicleData, userRole) => {
     const res = await axios.post(`${API_URL}/member/add-vehicle`, vehicleData, {
       headers: { Authorization: token },
     });
-    console.log(res);
     return res;
   } catch (error) {
     throw new Error(
@@ -77,7 +104,6 @@ export const updateVehicle = async (vehicleData, userRole) => {
     const res = await axios.put(`${API_URL}/member/upd-vehicle`, vehicleData, {
       headers: { Authorization: token },
     });
-    console.log(res);
     return res;
   } catch (error) {
     throw new Error(
@@ -97,7 +123,6 @@ export const deleteVehicle = async (vehicleId, userRole) => {
         headers: { Authorization: token },
       }
     );
-    console.log(res);
     return res;
   } catch (error) {
     throw new Error(
@@ -114,7 +139,6 @@ export const addClerk = async (clerkData, userRole) => {
     const res = await axios.post(`${API_URL}/member/add-clerk`, clerkData, {
       headers: { Authorization: token },
     });
-    console.log(res);
     return res;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to add new clerk");
@@ -129,7 +153,6 @@ export const updateClerk = async (clerkData, userRole) => {
     const res = await axios.put(`${API_URL}/member/upd-clerk`, clerkData, {
       headers: { Authorization: token },
     });
-    console.log(res);
     return res;
   } catch (error) {
     throw new Error(
@@ -146,7 +169,6 @@ export const deleteClerk = async (clerkId, userRole) => {
     const res = await axios.delete(`${API_URL}/member/dlt-clerk/${clerkId}`, {
       headers: { Authorization: token },
     });
-    console.log(res);
     return res;
   } catch (error) {
     throw new Error(

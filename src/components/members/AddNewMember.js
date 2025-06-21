@@ -48,24 +48,28 @@ function AddNewMember({ isOpen, onClose }) {
     profile_image: "",
     office_ph: "",
     home_ph: "",
-    date_of_birth: "",
+    date_of_birth: null,
     qualification: "",
-    date_of_enrol: "",
-    date_of_admission: "",
-    gender: "",
+    date_of_enrol: null,
+    date_of_admission: null,
+    gender: "Male",
     blood: "",
     other_bar: "",
     senior: 0,
   });
 
-  console.log(formData);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "membership") {
-      setFormData((prev) => ({ ...prev, [name]: Number(value) }));
+      setFormData((prev) => ({ ...prev, [name]: value ? Number(value) : 1 }));
     } else if (name === "chamber") {
       setFormData((prev) => ({ ...prev, [name]: Number(value) || 0 }));
+    } else if (
+      name === "date_of_enrol" ||
+      name === "date_of_admission" ||
+      name === "date_of_birth"
+    ) {
+      setFormData((prev) => ({ ...prev, [name]: value ? value : null }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
@@ -190,7 +194,7 @@ function AddNewMember({ isOpen, onClose }) {
             },
             {
               name: "other_bar",
-              label: "Bar Association (If any other)",
+              label: "Whether Member of any other Bar Association?",
               type: "text",
             },
             { name: "qualification", label: "Qualification", type: "text" },
@@ -207,12 +211,9 @@ function AddNewMember({ isOpen, onClose }) {
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
                 required={
-                  input.name === "office_ph" ||
-                  input.name === "home_ph" ||
-                  input.name === "other_bar" ||
-                  input.name === "date_of_enrol"
-                    ? false
-                    : true
+                  input.name === "fullname" || input.name === "mobile"
+                    ? true
+                    : false
                 }
               />
             </div>
@@ -228,7 +229,6 @@ function AddNewMember({ isOpen, onClose }) {
               value={formData.gender}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             >
               <option value="" selected disabled>
                 Select
@@ -250,7 +250,6 @@ function AddNewMember({ isOpen, onClose }) {
               value={formData.blood}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             >
               <option value="" selected disabled>
                 Select
@@ -272,7 +271,6 @@ function AddNewMember({ isOpen, onClose }) {
               value={formData.membership}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             >
               <option value="">Select</option>
               {membershipOptions.map((option) => (
@@ -292,7 +290,6 @@ function AddNewMember({ isOpen, onClose }) {
               value={formData.chamber}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
 
@@ -330,7 +327,6 @@ function AddNewMember({ isOpen, onClose }) {
               value={formData.res_address}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
 
@@ -344,7 +340,6 @@ function AddNewMember({ isOpen, onClose }) {
               value={formData.off_address}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
 

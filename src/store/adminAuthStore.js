@@ -13,7 +13,6 @@ export const useAdminAuthStore = create((set, get) => ({
   loginAdmin: async (email, password) => {
     try {
       const res = await adminLoginApi(email, password);
-      console.log(res);
       const adminToken = res.data.token; // token is directly inside the response
 
       localStorage.setItem("admin_token", adminToken);
@@ -22,7 +21,6 @@ export const useAdminAuthStore = create((set, get) => ({
       set({ isAdminAuthenticated: true, role: "admin", adminToken });
       return res;
     } catch (err) {
-      console.error("Admin login failed");
       throw err;
     }
   },

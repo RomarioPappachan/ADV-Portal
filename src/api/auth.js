@@ -40,7 +40,6 @@ export const verifyOtpApi = async (sessionId, mobileNo, otp) => {
       otp: otp,
       mobile: mobileNo,
     });
-    // console.log(res);
 
     return res; // Return the response data (user & token)
   } catch (error) {
@@ -69,12 +68,9 @@ export const loginWithPasswordApi = async (mobile, password) => {
       mobile,
       password,
     });
-    console.log(res);
 
     return res;
   } catch (error) {
-    console.log(error);
-
     throw new Error(error.response?.data?.message || "Login Failed");
   }
 };

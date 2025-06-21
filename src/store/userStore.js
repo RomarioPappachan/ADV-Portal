@@ -11,7 +11,6 @@ export const useUserStore = create((set) => ({
   error: null,
 
   getUserById: async (userId) => {
-    console.log(userId);
     set({ loading: true, error: null });
     try {
       const res = await fetchUserById(userId, "user");

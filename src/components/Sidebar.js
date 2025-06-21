@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import Logout from "./Logout";
+
 import { FiHome, FiUsers, FiLogOut } from "react-icons/fi";
 import { LuShieldCheck } from "react-icons/lu";
-import Logout from "./Logout";
+import { LiaUserEditSolid } from "react-icons/lia";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -23,6 +25,11 @@ const Sidebar = () => {
       path: "/dashboard/members",
     },
     {
+      name: "Updated Members",
+      icon: <LiaUserEditSolid size={20} />,
+      path: "/dashboard/profile-uptd-members",
+    },
+    {
       name: "Subscriptions",
       icon: <LuShieldCheck size={20} />,
       path: "/dashboard/payments/parking",
@@ -32,6 +39,8 @@ const Sidebar = () => {
   useEffect(() => {
     if (pathname === "/dashboard") setActiveTab("Dashboard");
     else if (pathname.startsWith("/dashboard/members")) setActiveTab("Members");
+    else if (pathname.startsWith("/dashboard/profile-uptd-members"))
+      setActiveTab("Updated Members");
     else if (pathname.startsWith("/dashboard/payments"))
       setActiveTab("Subscriptions");
   }, [pathname]);

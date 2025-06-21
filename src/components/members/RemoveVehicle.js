@@ -17,7 +17,6 @@ function RemoveVehicle({ vehicle, onClose }) {
       getMemberById(selectedMemberId); // re-render user data
       onClose();
     } catch (error) {
-      console.error("Error deleting vehicle:", error);
       toast.error("Failed to delete vehicle");
     }
   };

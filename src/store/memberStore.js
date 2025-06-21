@@ -4,6 +4,7 @@ import { fetchUserById } from "@/api/user";
 
 export const useMemberStore = create((set) => ({
   members: [],
+  totalPages: 1,
 
   selectedMemberId: null,
   userDetails: {}, //selected user
@@ -15,16 +16,16 @@ export const useMemberStore = create((set) => ({
   error: null,
 
   // Fetch all members
-  getAllMembers: async () => {
+  getAllMembers: async (page, limit, query) => {
     set({ loading: true, error: null });
     try {
-      const res = await fetchAllMembers();
+      const res = await fetchAllMembers(page, limit, query);
       const allMembers = res?.data?.result;
       // const startPoint = allMembers?.length - 50;
       // const updatedMembers = allMembers?.splice(startPoint, 50);
-      // console.log(updatedMembers);
       set({
-        members: allMembers,
+        members: res.data.members,
+        totalPages: res.data.totalPages,
         loading: false,
       });
     } catch (error) {
@@ -60,7 +61,6 @@ export const useMemberStore = create((set) => ({
 
   // Fetch a member by its Id
   getMemberById: async (memberId) => {
-    console.log(memberId);
     set({ loading: true, error: null });
     try {
       const res = await fetchUserById(memberId, "admin");

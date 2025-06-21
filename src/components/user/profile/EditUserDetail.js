@@ -27,6 +27,11 @@ const genderOptions = [
   { label: "Others", value: "others" },
 ];
 
+const membershipOptions = [
+  { label: "Ordinary", value: 1 },
+  { label: "Life", value: 0 },
+];
+
 function EditUserDetail({ onClose }) {
   const { userInfo } = useAuthStore();
   const { userDetails, additionalInfo, getUserById } = useUserStore();
@@ -48,9 +53,10 @@ function EditUserDetail({ onClose }) {
     off_address: "",
     date_of_birth: "",
     qualification: "",
-    date_of_enrol: "",
+    date_of_enrol: null,
     // date_of_admission: "",
     gender: "",
+    membership: null,
     blood: "",
     other_bar: "",
   });
@@ -67,20 +73,25 @@ function EditUserDetail({ onClose }) {
       res_address: userDetails?.res_address || "",
       off_address: userDetails?.off_address || "",
       date_of_birth: userDetails?.date_of_birth?.slice(0, 10) || "",
+      membership: userDetails?.membership,
       blood: userDetails?.blood || "",
       other_bar: userDetails?.other_bar || "",
       qualification: additionalInfo?.qualification || "",
-      date_of_enrol: additionalInfo?.date_of_enrol?.slice(0, 10) || "",
+      date_of_enrol: additionalInfo?.date_of_enrol?.slice(0, 10) || null,
       // date_of_admission: additionalInfo?.date_of_admission?.slice(0, 10) || "",
       gender: additionalInfo?.gender || "",
     });
   }, [userDetails, additionalInfo]);
 
-  console.log(userDetails);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === "membership") {
+      setFormData((prev) => ({ ...prev, [name]: Number(value) }));
+    } else if (name === "date_of_enrol") {
+      setFormData((prev) => ({ ...prev, [name]: value ? value : null }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleImageChange = async (e) => {
@@ -103,7 +114,6 @@ function EditUserDetail({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsEditting(true);
-    // console.log(formData);
 
     try {
       const userId = userInfo?.id;
@@ -124,7 +134,6 @@ function EditUserDetail({ onClose }) {
       getUserById(userId); // re-render user details
       onClose(); // close popup
     } catch (error) {
-      console.log(error);
       toast.error("Failed to update details");
     } finally {
       setIsEditting(false);
@@ -402,7 +411,7 @@ function EditUserDetail({ onClose }) {
 
           <div>
             <label className="block text-sm text-gray-600 font-medium">
-              Bar Association (If any other)
+              Whether Member of any other Bar Association?
             </label>
             <input
               type="text"
@@ -411,6 +420,28 @@ function EditUserDetail({ onClose }) {
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 font-medium">
+              Membership Type
+            </label>
+            <select
+              name="membership"
+              value={formData.membership}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            >
+              <option value="" selected disabled>
+                Select
+              </option>
+              {membershipOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Read-only Info */}

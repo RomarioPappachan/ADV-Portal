@@ -17,7 +17,6 @@ function RemoveClerk({ clerk, onClose }) {
       getMemberById(selectedMemberId); // re-render user data
       onClose();
     } catch (error) {
-      console.error("Error deleting clerk:", error);
       toast.error("Failed to delete clerk");
     }
   };

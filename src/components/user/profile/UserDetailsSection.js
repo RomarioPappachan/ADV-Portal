@@ -15,11 +15,13 @@ export default function UserDetailsSection() {
     let color = "";
 
     if (type === "membership") {
-      text = value === 1 ? "Ordinary" : "Lifelong";
+      text = value === 1 ? "Ordinary" : value === 0 ? "Lifelong" : "N/A";
       color =
         value === 1
           ? "bg-yellow-100 text-yellow-700"
-          : "bg-green-100 text-green-700";
+          : value === 0
+          ? "bg-green-100 text-green-700"
+          : "text-gray-900 font-semibold";
     } else if (type === "chamber") {
       text = value > 0 ? value : "No Chamber";
       color =
@@ -130,7 +132,7 @@ export default function UserDetailsSection() {
         </div>
         <div>
           <p className="text-gray-500 font-medium">
-            Bar Association (if any other)
+            Whether Member of any other Bar Association?
           </p>
           <p className="text-gray-900 font-semibold">
             {userDetails?.other_bar || "N/A"}

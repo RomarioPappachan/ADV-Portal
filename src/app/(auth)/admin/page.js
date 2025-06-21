@@ -37,7 +37,6 @@ const AdminLogin = () => {
     setError("");
 
     try {
-      // console.log("hello");
       const response = await loginAdmin(email, password);
       toast.success(response.data.message);
       router.push("/dashboard");

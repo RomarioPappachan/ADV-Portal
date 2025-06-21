@@ -85,7 +85,6 @@ function VerifyOtp({ mobileNo, sessionId, setVerifyOpen, onSendOtp }) {
         const fullOtp = `${num1}${num2}${num3}${num4}${num5}${num6}`;
 
         const response = await verifyOtp(sessionId, mobileNo, fullOtp);
-        console.log("Verify otp:", response);
         if (response.status) {
           if (response?.firstLogin === 1) {
             setShowNewPassword(true); // show the popup
@@ -95,7 +94,6 @@ function VerifyOtp({ mobileNo, sessionId, setVerifyOpen, onSendOtp }) {
           }
         }
       } catch (error) {
-        console.error(error);
         // toast.error("Verify OTP failed");
         toast.error(error.message);
 

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import AddNewMember from "@/components/members/AddNewMember";
 import MembersTable from "@/components/members/MembersTable";
+import MembersList from "@/components/members/MembersList";
 
 const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -9,7 +10,7 @@ const Page = () => {
   return (
     <div className="w-full bg-white rounded-lg relative">
       {/* <div className="sticky top-4 left-4 rounded-lg"> */}
-      <h1 className="text-gray-800 text-xl">Members</h1>
+      <h1 className="text-gray-800 text-xl ps-4">Members</h1>
       <div className="flex justify-end">
         {/* Add Member Button */}
         <button
@@ -22,7 +23,9 @@ const Page = () => {
       {/* </div> */}
 
       <div className="mt-6 relative overflow-y-auto">
-        <MembersTable />
+        {/* <MembersTable /> */}
+
+        <MembersList />
       </div>
 
       {/* Add Member Modal */}
