@@ -20,11 +20,11 @@ const NavLink = () => {
       label: "Subscriptions",
       icon: <MdSubscriptions size={20} />,
     },
-    {
-      href: "/home/services/my-cases",
-      label: "My Cases",
-      icon: <MdFolderSpecial size={20} />,
-    },
+    // {
+    //   href: "/home/services/my-cases",
+    //   label: "My Cases",
+    //   icon: <MdFolderSpecial size={20} />,
+    // },
     {
       href: "/home/services/qr-code",
       label: "QR Code",

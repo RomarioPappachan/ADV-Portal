@@ -44,7 +44,7 @@ export default function CauseList() {
 
   return (
     <div className="h-full px-2 lg:px-4 flex flex-col">
-      <div className="h-12 sm:h-16 px-4 bg-indigo-100 flex justify-between items-center rounded-lg">
+      <div className="h-12 sm:h-16 px-4 bg-sky-100 flex justify-between items-center rounded-lg">
         <h1 className="text-gray-500 text-sm sm:text-base">Cause List</h1>
         {/* <input
           type="date"

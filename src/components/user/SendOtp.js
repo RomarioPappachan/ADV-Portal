@@ -3,7 +3,7 @@
 // function SendOtp({ mobileNo, setMobileNo, onSendOtp }) {
 //   return (
 //     <form className="py-6 px-6 space-y-8" onSubmit={onSendOtp}>
-//       <h1 className="text-purple-700 text-xl font-semibold text-center">
+//       <h1 className="text-sky-600 text-xl font-semibold text-center">
 //         Member Login
 //       </h1>
 
@@ -19,15 +19,15 @@
 //           }}
 //           minLength={10}
 //           maxLength={10}
-//           className="peer w-full p-3 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+//           className="peer w-full p-3 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
 //         />
 //         <label
 //           htmlFor="mobileNo"
 //           className={`absolute left-3 text-gray-500 transition-all bg-white px-1
 //                 ${
 //                   mobileNo
-//                     ? "top-0 text-xs text-purple-500"
-//                     : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-purple-500"
+//                     ? "top-0 text-xs text-sky-500"
+//                     : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-sky-500"
 //                 }`}
 //         >
 //           Mobile number
@@ -36,7 +36,7 @@
 
 //       <button
 //         type="submit"
-//         className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-purple-700 cursor-pointer"
+//         className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-sky-600 cursor-pointer"
 //       >
 //         Send OTP
 //       </button>
@@ -61,7 +61,7 @@ function SendOtp({ mobileNo, setMobileNo, isSendingOtp, onSendOtp }) {
   return (
     <form className="py-6 px-6" onSubmit={onSendOtp}>
       <div className="space-y-8">
-        <h1 className="text-purple-700 text-xl font-semibold text-center">
+        <h1 className="text-sky-600 text-xl font-semibold text-center">
           Member Login
         </h1>
 
@@ -74,15 +74,15 @@ function SendOtp({ mobileNo, setMobileNo, isSendingOtp, onSendOtp }) {
             onChange={(e) => setMobileNo(e.target.value)}
             minLength={10}
             maxLength={10}
-            className="peer w-full p-3 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            className="peer w-full p-3 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
           />
           <label
             htmlFor="mobileNo"
             className={`absolute left-3 text-gray-500 transition-all bg-white px-1 
                 ${
                   mobileNo
-                    ? "top-0 text-xs text-purple-500"
-                    : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-purple-500"
+                    ? "top-0 text-xs text-sky-500"
+                    : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-sky-500"
                 }`}
           >
             Mobile number
@@ -91,7 +91,7 @@ function SendOtp({ mobileNo, setMobileNo, isSendingOtp, onSendOtp }) {
 
         <button
           type="submit"
-          className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-purple-700 cursor-pointer"
+          className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-sky-600 hover:bg-sky-500 cursor-pointer"
           disabled={isSendingOtp}
         >
           {isSendingOtp ? "Sending..." : "Send OTP"}

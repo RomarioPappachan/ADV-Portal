@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useCaseDetailsStore } from "@/store/caseDetailsStore";
 import CaseBasicDetails from "@/components/my-cases/case-details/CaseBasicDetails";
 import CaseStatus from "@/components/my-cases/case-details/CaseStatus";
@@ -22,6 +21,10 @@ import { LuChevronLeft } from "react-icons/lu";
 
 export default function CaseDetailsSection() {
   const { caseNo } = useParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const from = searchParams.get("from");
+
   const { getCaseStatus, caseDetails } = useCaseDetailsStore();
 
   const { caseType, filingYear, regNo } = caseDetails;
@@ -32,16 +35,24 @@ export default function CaseDetailsSection() {
     }
   }, [caseNo]);
 
+  const handleGoBack = () => {
+    if (from) {
+      router.push(from);
+    } else {
+      router.back(); // fallback
+    }
+  };
+
   return (
     <>
       <div className="pb-5 pe-4 flex justify-between items-center">
-        <Link
-          href="/home/my-cases/cause-list"
-          className="max-w-max px-2 lg:px-4 flex justify-start items-center gap-2 text-blue-500"
+        <button
+          onClick={handleGoBack}
+          className="max-w-max px-2 lg:px-4 flex justify-start items-center gap-2 text-blue-500 cursor-pointer"
         >
           <LuChevronLeft className="text-xl" />
           <span>Back</span>
-        </Link>
+        </button>
         <span className="text-base text-blue-500 font-bold">
           {`${caseType} ${regNo}/${filingYear}`}
         </span>

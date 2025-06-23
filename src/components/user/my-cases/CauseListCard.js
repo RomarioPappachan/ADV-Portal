@@ -1,9 +1,13 @@
-import Link from "next/link";
+"use client";
 import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function CauseListCard({ index, item }) {
+  const pathname = usePathname();
+
   return (
-    <Link href={`/home/my-cases/${item?.cino}`}>
+    <Link href={`/home/my-cases/${item?.cino}?from=${pathname}`}>
       <div
         key={index}
         className="min-h-48 h-full px-4 py-2 border border-gray-200 rounded-lg shadow-md relative flex flex-col justify-between"

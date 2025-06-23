@@ -156,9 +156,9 @@ const Page = () => {
             <img
               src={
                 userDetails?.profile_image
-                  ? userDetails.profile_image
-                  : userInfo.profile_image
-                  ? userInfo.profile_image
+                  ? userDetails?.profile_image
+                  : userInfo?.profile_image
+                  ? userInfo?.profile_image
                   : "/user-icon.jpg"
               }
               // src="/user-icon.jpg"

@@ -6,6 +6,25 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL; // Base API URL
 // Get token from localStorage
 const getToken = () => localStorage.getItem("auth_token");
 
+// Get live court room
+export const fetchDisplayBoard = async () => {
+  try {
+    const res = await axios.post(
+      `${API_URL}/hc/displayboard`,
+      {},
+      {
+        headers: { Authorization: `${getToken()}` },
+      }
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+    // throw new Error(error?.data?.message || "Failed to fetch cause list");
+    handleApiError(error, "user");
+  }
+};
+
+// Get cause list
 export const fetchCauseList = async (date) => {
   try {
     const res = await axios.post(

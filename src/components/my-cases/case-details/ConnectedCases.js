@@ -7,7 +7,7 @@ export default function Connectedcases() {
 
   return (
     <section className="p-2 sm:p-6 bg-white border border-gray-300 rounded-lg shadow-sm mb-6">
-      <h2 className="text-base font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-400 text-center sm:rounded-lg py-2 mb-4">
+      <h2 className="text-base font-semibold text-white bg-gradient-to-r from-sky-600 to-sky-400 text-center sm:rounded-lg py-2 mb-4">
         CONNECTED CASES
       </h2>
 
