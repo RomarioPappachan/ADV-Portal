@@ -9,7 +9,7 @@ import CauseListCard, {
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
 
-export default function CauseList() {
+export default function TodaysCases() {
   const { causeList, courts, count, getCauseList, loading } =
     useCauseListStore();
   const { userInfo } = useAuthStore();
@@ -40,17 +40,10 @@ export default function CauseList() {
     }
   };
 
-  // if (loading)
-  //   return (
-  //     <div className="w-full h-full flex justify-center items-center animate-pulse">
-  //       <span className="text-blue-500 text-xl">Loading...</span>
-  //     </div>
-  //   );
-
   return (
     <div className="h-full px-2 lg:px-4 flex flex-col">
-      <div className="h-12 sm:h-16 px-4 bg-sky-100 flex justify-between items-center rounded-lg">
-        <h1 className="text-gray-500 text-sm sm:text-base">Cause List</h1>
+      <div className="h-12 sm:h-16 px-4 py-3 bg-sky-100 flex justify-between items-center rounded-lg">
+        <h1 className="text-gray-500 text-sm sm:text-base">Today's Cases</h1>
         {/* <input
           type="date"
           name="date"
@@ -68,7 +61,7 @@ export default function CauseList() {
         />
       </div>
 
-      <div className="flex-1 py-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto">
+      <div className="py-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto">
         {loading ? (
           Array.from({ length: 12 }, (_, index) => (
             <CauseListCardLoader key={index} />

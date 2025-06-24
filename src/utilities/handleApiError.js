@@ -17,16 +17,17 @@ export function handleApiError(error, userRole = null) {
         window.location.href = "/admin";
       } else {
         // Fallback: auto-detect from localStorage
-        const token = localStorage.getItem("auth_token");
-        const adminToken = localStorage.getItem("admin_token");
+        // const token = localStorage.getItem("auth_token");
+        // const adminToken = localStorage.getItem("admin_token");
 
-        if (token) {
-          useAuthStore.getState().logout();
-          window.location.href = "/";
-        } else if (adminToken) {
-          useAdminAuthStore.getState().adminLogout();
-          window.location.href = "/admin";
-        }
+        // if (token) {
+        //   useAuthStore.getState().logout();
+        //   window.location.href = "/";
+        // } else if (adminToken) {
+        //   useAdminAuthStore.getState().adminLogout();
+        //   window.location.href = "/admin";
+        // }
+        return;
       }
     }
   }

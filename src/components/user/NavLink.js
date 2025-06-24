@@ -25,11 +25,11 @@ const NavLink = () => {
     //   label: "My Cases",
     //   icon: <MdFolderSpecial size={20} />,
     // },
-    {
-      href: "/home/services/qr-code",
-      label: "QR Code",
-      icon: <MdQrCodeScanner size={20} />,
-    },
+    // {
+    //   href: "/home/services/qr-code",
+    //   label: "QR Code",
+    //   icon: <MdQrCodeScanner size={20} />,
+    // },
   ];
 
   useEffect(() => {

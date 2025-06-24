@@ -13,9 +13,6 @@ export const useUpdatedMemberStore = create((set) => ({
     try {
       const res = await fetchProfileUptdMembers(date, page, limit);
 
-      //   const allMembers = res?.data?.result;
-      console.log(res);
-
       set({
         updatedMembers: res.data.result,
         totalPages: res.data.totalPages,

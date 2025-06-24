@@ -140,6 +140,7 @@ import {
   LuQrCode,
   LuBriefcase,
   LuHouse,
+  LuMonitor,
 } from "react-icons/lu";
 
 const Page = () => {
@@ -275,22 +276,22 @@ const Page = () => {
           Services
         </h2>
         <div className="flex flex-col gap-4">
-          <Link href="/home/services/subscription">
-            <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-700 via-blue-500 to-indigo-600 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
-              <LuUser className="text-2xl" />
-              <span>My Subscriptions</span>
-            </div>
-          </Link>
-          <Link href="/home/my-cases/cause-list">
+          <Link href="/home/my-cases/todays-cases">
             <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-300 via-indigo-500 to-violet-700 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
               <LuBriefcase className="text-2xl" />
               <span>My Cases</span>
             </div>
           </Link>
-          <Link href="/home/services/qr-code">
+          <Link href="/home/my-cases/live-board">
             <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-500 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
-              <LuQrCode className="text-2xl" />
-              <span>QR Code</span>
+              <LuMonitor className="text-2xl" />
+              <span>Live Board</span>
+            </div>
+          </Link>
+          <Link href="/home/services/subscription">
+            <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-700 via-blue-500 to-indigo-600 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
+              <LuUser className="text-2xl" />
+              <span>My Subscriptions</span>
             </div>
           </Link>
         </div>

@@ -25,12 +25,13 @@ export const fetchDisplayBoard = async () => {
 };
 
 // Get cause list
-export const fetchCauseList = async (date) => {
+export const fetchCauseList = async (date, enrollmentNo) => {
   try {
     const res = await axios.post(
       `${API_URL}/hc/causelist`,
       {
         cldate: date,
+        en_no: enrollmentNo,
       },
       {
         headers: { Authorization: `${getToken()}` },
@@ -38,6 +39,26 @@ export const fetchCauseList = async (date) => {
     );
     return res;
   } catch (error) {
+    // throw new Error(error?.data?.message || "Failed to fetch cause list");
+    handleApiError(error, "user");
+  }
+};
+
+// Get cause list
+export const fetchAdvCases = async (hcCode) => {
+  try {
+    const res = await axios.post(
+      `${API_URL}/hc/advcases`,
+      {
+        advCode: hcCode,
+      },
+      {
+        headers: { Authorization: `${getToken()}` },
+      }
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
     // throw new Error(error?.data?.message || "Failed to fetch cause list");
     handleApiError(error, "user");
   }

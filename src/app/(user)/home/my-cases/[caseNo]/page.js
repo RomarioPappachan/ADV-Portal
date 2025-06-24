@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useCaseDetailsStore } from "@/store/caseDetailsStore";
 import CaseBasicDetails from "@/components/my-cases/case-details/CaseBasicDetails";
@@ -18,6 +18,7 @@ import Appealcases from "@/components/my-cases/case-details/AppealCases";
 import Connectedcases from "@/components/my-cases/case-details/ConnectedCases";
 import Araisedcases from "@/components/my-cases/case-details/AraisedCases";
 import { LuChevronLeft } from "react-icons/lu";
+import Proceedings from "@/components/my-cases/case-details/Proceedings";
 
 export default function CaseDetailsSection() {
   const { caseNo } = useParams();
@@ -28,6 +29,8 @@ export default function CaseDetailsSection() {
   const { getCaseStatus, caseDetails } = useCaseDetailsStore();
 
   const { caseType, filingYear, regNo } = caseDetails;
+
+  const [isProceedingsOpen, setIsProceedingOpen] = useState(false);
 
   useEffect(() => {
     if (caseNo) {
@@ -45,17 +48,25 @@ export default function CaseDetailsSection() {
 
   return (
     <>
-      <div className="pb-5 pe-4 flex justify-between items-center">
+      <div className="py-6 sm:pb-5 pe-4 flex justify-between items-center">
         <button
           onClick={handleGoBack}
-          className="max-w-max px-2 lg:px-4 flex justify-start items-center gap-2 text-blue-500 cursor-pointer"
+          className="max-w-max px-2 lg:px-4 flex justify-start items-center gap-1 sm:gap-2 text-sm sm:text-base text-blue-500 cursor-pointer"
         >
-          <LuChevronLeft className="text-xl" />
+          <LuChevronLeft className="text-lg sm:text-xl" />
           <span>Back</span>
         </button>
-        <span className="text-base text-blue-500 font-bold">
+        <span className="text-sm sm:text-base text-blue-500 font-bold">
           {`${caseType} ${regNo}/${filingYear}`}
         </span>
+        <button
+          type="button"
+          title="Case Proceedings"
+          className="px-2 sm:px-4 py-2 text-xs sm:text-base bg-green-500 text-white rounded-lg hover:bg-green-600 cursor-pointer"
+          onClick={() => setIsProceedingOpen(true)}
+        >
+          Proceedings
+        </button>
       </div>
       <div className="h-full px-2 lg:px-4 pb-20 overflow-y-auto">
         <CaseBasicDetails />
@@ -73,6 +84,10 @@ export default function CaseDetailsSection() {
         <CategoryDetails />
         <Objections />
       </div>
+
+      {isProceedingsOpen && (
+        <Proceedings onClose={() => setIsProceedingOpen(false)} />
+      )}
     </>
   );
 }

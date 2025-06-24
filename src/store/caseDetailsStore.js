@@ -28,7 +28,6 @@ export const useCaseDetailsStore = create((set) => ({
     set({ loading: true, error: null });
     try {
       const res = await fetchCaseStatus(caseNo);
-      console.log(res);
 
       set({
         caseDetails: res.data?.data?.basicDetails,

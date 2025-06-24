@@ -14,17 +14,17 @@ export default function CauseListCard({ index, item }) {
       >
         <div
           className={`px-2 py-1 absolute top-2 right-2 rounded flex justify-center items-center font-semibold ${
-            item?.status === "P"
-              ? "bg-purple-100 text-purple-500"
-              : item?.status === "D"
+            item?.status === "P" || item?.status === "Pending"
               ? "bg-green-100 text-green-500"
+              : item?.status === "D" || item?.status === "Disposed"
+              ? "bg-rose-100 text-rose-500"
               : "bg-gray-100 text-gray-500"
           }`}
         >
           <span className="text-xs">
-            {item?.status === "P"
+            {item?.status === "P" || item?.status === "Pending"
               ? "Pending"
-              : item?.status === "D"
+              : item?.status === "D" || item?.status === "Disposed"
               ? "Disposed"
               : "N/A"}
           </span>
