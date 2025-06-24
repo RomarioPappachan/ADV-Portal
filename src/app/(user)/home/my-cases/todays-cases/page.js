@@ -10,19 +10,17 @@ import { DatePicker } from "antd";
 import dayjs from "dayjs";
 
 export default function TodaysCases() {
-  const { causeList, courts, count, getCauseList, loading } =
-    useCauseListStore();
+  const { causeList, getCauseList, loading } = useCauseListStore();
   const { userInfo } = useAuthStore();
 
-  const [date, setDate] = useState();
+  const [date, setDate] = useState("");
 
   const enrolId = userInfo?.enrollment_id;
 
   useEffect(() => {
     // Format today's date as "YYYY-MM-DD"
-    const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0]; // "2025-06-19"
-    setDate(formattedDate);
+    const today = dayjs().format("YYYY-MM-DD");
+    setDate(today);
   }, []);
 
   useEffect(() => {
@@ -44,14 +42,7 @@ export default function TodaysCases() {
     <div className="h-full px-2 lg:px-4 flex flex-col">
       <div className="h-12 sm:h-16 px-4 py-3 bg-sky-100 flex justify-between items-center rounded-lg">
         <h1 className="text-gray-500 text-sm sm:text-base">Today's Cases</h1>
-        {/* <input
-          type="date"
-          name="date"
-          id=""
-          className="h-10 text-gray-500 bg-white rounded-lg border border-gray-200"
-          value={date}
-          onChange={handleDateChange}
-        /> */}
+
         <DatePicker
           value={date ? dayjs(date, "YYYY-MM-DD") : null}
           onChange={handleDateChange}

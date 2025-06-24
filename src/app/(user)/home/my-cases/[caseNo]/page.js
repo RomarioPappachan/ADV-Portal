@@ -86,7 +86,10 @@ export default function CaseDetailsSection() {
       </div>
 
       {isProceedingsOpen && (
-        <Proceedings onClose={() => setIsProceedingOpen(false)} />
+        <Proceedings
+          caseNo={caseNo}
+          onClose={() => setIsProceedingOpen(false)}
+        />
       )}
     </>
   );

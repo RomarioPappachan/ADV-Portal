@@ -7,7 +7,6 @@ const LOCAL_KEYS = {
 };
 
 export const useCauseListStore = create((set) => ({
-  courts: [],
   causeList: [],
   count: null,
 
@@ -24,23 +23,11 @@ export const useCauseListStore = create((set) => ({
     try {
       const res = await fetchCauseList(date, enrollmentNo);
 
-      const newData = {
-        advCode: res.data?.advcode || [],
-        causeList: res.data?.cases || [],
-        count: res.data?.count || 0,
-      };
-
-      const newStr = JSON.stringify(newData);
-      const cachedStr = localStorage.getItem(LOCAL_KEYS.CAUSE_LIST);
-
-      if (newStr !== cachedStr) {
-        localStorage.setItem(LOCAL_KEYS.CAUSE_LIST, newStr);
-        set({
-          advCode: newData.advCode,
-          causeList: newData.causeList,
-          myCasesCount: newData.count,
-        });
-      }
+      set({
+        advCode: res.data?.advCode || null,
+        causeList: res.data?.causeList || [],
+        count: res.data?.count,
+      });
     } catch (error) {
       set({ error: error.message });
     } finally {
@@ -67,7 +54,7 @@ export const useCauseListStore = create((set) => ({
         set({
           advCode: newData.advCode,
           myCases: newData.myCases,
-          count: newData.count,
+          myCasesCount: newData.count,
         });
       }
     } catch (error) {
@@ -80,26 +67,15 @@ export const useCauseListStore = create((set) => ({
   // Optional: Load cached data initially
   loadCachedData: () => {
     try {
-      const causeListCache = JSON.parse(
-        localStorage.getItem(LOCAL_KEYS.CAUSE_LIST)
-      );
       const myCasesCache = JSON.parse(
         localStorage.getItem(LOCAL_KEYS.MY_CASES)
       );
-
-      if (causeListCache) {
-        set({
-          courts: causeListCache.courts || [],
-          causeList: causeListCache.causeList || [],
-          myCasesCount: causeListCache.count || 0,
-        });
-      }
 
       if (myCasesCache) {
         set({
           advCode: myCasesCache.advCode,
           myCases: myCasesCache.myCases || [],
-          count: myCasesCache.count || 0,
+          myCasesCount: myCasesCache.count || 0,
         });
       }
     } catch (err) {
