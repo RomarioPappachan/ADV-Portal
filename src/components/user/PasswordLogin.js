@@ -117,10 +117,10 @@ function PasswordLogin({ onBack }) {
       </div>
 
       <p
-        className="pt-4 text-blue-700 underline font-thin cursor-pointer"
+        className="pt-4 text-sky-600 font-light cursor-pointer"
         onClick={onBack}
       >
-        Login with OTP
+        Login with OTP?
       </p>
     </form>
   );

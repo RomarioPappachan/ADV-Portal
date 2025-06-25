@@ -100,10 +100,10 @@ function SendOtp({ mobileNo, setMobileNo, isSendingOtp, onSendOtp }) {
 
       {/* Toggle to password login */}
       <p
-        className="pt-4 text-blue-700 underline font-thin cursor-pointer"
+        className="pt-4 text-sky-600 font-light cursor-pointer"
         onClick={() => setShowPasswordLogin(true)}
       >
-        Login with Password
+        Login with Password?
       </p>
     </form>
   );
