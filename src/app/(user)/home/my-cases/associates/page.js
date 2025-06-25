@@ -30,7 +30,7 @@ export default function Associates() {
           <span className="hidden sm:inline">Add Associate</span>
         </button>
       </div>
-      <div className="flex-1 mt-4 overflow-y-auto">
+      <div className="flex-1 mt-4 pb-10 overflow-y-auto">
         <AssociatesSection />
       </div>
 

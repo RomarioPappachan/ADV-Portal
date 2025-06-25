@@ -19,18 +19,21 @@ export default function CaseBasicDetails() {
   } = caseDetails;
 
   const items = [
-    { label: "Case Type", value: caseType },
-    { label: "Status", value: caseStatus },
-    { label: "Filing Number", value: `${caseType} ${filingNo}/${filingYear}` },
-    { label: "Filing Date", value: filingDate },
+    { label: "Case Type", value: caseType || "--" },
+    { label: "Status", value: caseStatus || "--" },
+    {
+      label: "Filing Number",
+      value: `${caseType} ${filingNo}/${filingYear}` || "--",
+    },
+    { label: "Filing Date", value: filingDate || "--" },
     {
       label: "Registration Number",
-      value: `${caseType} ${regNo}/${filingYear}`,
+      value: `${caseType} ${regNo}/${filingYear}` || "--",
     },
-    { label: "Registration Date", value: registrationDate },
-    { label: "CNR Number", value: cnr },
-    { label: "E-File No", value: efileNo },
-    { label: "Disposed Date", value: disposal_date || "N/A" },
+    { label: "Registration Date", value: registrationDate || "--" },
+    { label: "CNR Number", value: cnr || "--" },
+    { label: "E-File No", value: efileNo || "--" },
+    { label: "Disposed Date", value: disposal_date || "--" },
   ];
 
   return (
@@ -53,7 +56,7 @@ export default function CaseBasicDetails() {
                   : "text-gray-900"
               }`}
             >
-              {value || "—"}
+              {value ? value : "—"}
             </span>
           </div>
         ))}

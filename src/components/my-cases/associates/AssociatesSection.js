@@ -19,7 +19,7 @@ export default function AssociatesSection() {
           ))}
         </div>
       ) : (
-        <p className="text-gray-500 text-sm sm:text-base">
+        <p className="text-rose-500 text-sm sm:text-base">
           No associates found.
         </p>
       )}

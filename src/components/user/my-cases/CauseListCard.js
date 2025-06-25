@@ -10,7 +10,7 @@ export default function CauseListCard({ index, item }) {
     <Link href={`/home/my-cases/${item?.cino}?from=${pathname}`}>
       <div
         key={index}
-        className="min-h-48 h-full px-4 py-2 border border-gray-200 rounded-lg shadow-md relative flex flex-col justify-between"
+        className="min-h-48 max-h-max px-4 py-2 border border-gray-300 rounded-lg shadow-md relative flex flex-col justify-between hover:bg-gray-100"
       >
         <div
           className={`px-2 py-1 absolute top-2 right-2 rounded flex justify-center items-center font-semibold ${

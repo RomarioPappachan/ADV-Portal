@@ -52,7 +52,7 @@ export default function TodaysCases() {
         />
       </div>
 
-      <div className="py-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto">
+      <div className="flex-1 py-4 pb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto">
         {loading ? (
           Array.from({ length: 12 }, (_, index) => (
             <CauseListCardLoader key={index} />
@@ -63,7 +63,7 @@ export default function TodaysCases() {
           ))
         ) : (
           <div className="p-6">
-            <span className="text-red-400 text-base">No cases available</span>
+            <span className="text-rose-500 text-base">No cases available</span>
           </div>
         )}
       </div>

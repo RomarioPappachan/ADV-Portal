@@ -25,7 +25,7 @@ export default function ProceedingCard({
             value={editedText}
             onChange={(e) => setEditedText(e.target.value)}
           />
-          <div className="flex gap-2">
+          <div className="flex justify-end gap-2">
             <button
               onClick={() => onUpdate(proceeding.id)}
               className="bg-blue-600 hover:bg-blue-700 text-white py-1 px-4 rounded-md text-sm"
@@ -45,12 +45,12 @@ export default function ProceedingCard({
           <p className="text-sm text-gray-800 whitespace-pre-wrap">
             {proceeding.description}
           </p>
-          <div className="flex gap-4 text-gray-500">
+          <div className="flex justify-end gap-4 text-gray-500">
             <button onClick={() => onEdit(proceeding)}>
               <LuPencil className="hover:text-blue-600" />
             </button>
             <button onClick={() => onDelete(proceeding.id)}>
-              <LuTrash2 className="hover:text-red-600" />
+              <LuTrash2 className="hover:text-rose-600" />
             </button>
           </div>
         </>
@@ -62,7 +62,7 @@ export default function ProceedingCard({
           <div className="flex gap-2">
             <button
               onClick={() => onConfirmDelete(proceeding.id)}
-              className="text-sm px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-md"
+              className="text-sm px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded-md"
             >
               Delete
             </button>

@@ -104,15 +104,15 @@ export default function MyCases() {
         <h1 className="text-gray-500 text-sm sm:text-base">My Cases</h1>
 
         {/* Filter Buttons */}
-        <div className="max-w-max flex items-center gap-3 bg-white border border-gray-200 px-4 py-2 rounded-lg shadow text-[10px] sm:text-sm font-medium text-gray-700">
+        <div className="max-w-max flex items-center gap-3 bg-white border border-gray-200 px-2 py-1 rounded-lg shadow text-[10px] sm:text-sm font-medium text-gray-700">
           {["All", "Pending", "Disposed"].map((status) => (
             <button
               key={status}
               onClick={() => setFilter(status)}
-              className={`flex items-center ${
+              className={`px-2 py-1 flex items-center rounded-md cursor-pointer ${
                 filter === status
-                  ? "text-blue-600 font-semibold"
-                  : "text-gray-700"
+                  ? "text-blue-600 bg-blue-100 font-semibold "
+                  : "text-gray-700 hover:underline"
               }`}
             >
               <span>{status}</span>
@@ -121,7 +121,7 @@ export default function MyCases() {
         </div>
       </div>
 
-      <div className="flex-1 py-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto">
+      <div className="flex-1 py-4 pb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto">
         {loading && myCases.length < 1 ? (
           Array.from({ length: 12 }, (_, index) => (
             <CauseListCardLoader key={index} />
@@ -133,7 +133,7 @@ export default function MyCases() {
           )
         ) : (
           <div className="p-6">
-            <span className="text-red-400 text-base">No cases available</span>
+            <span className="text-rose-500 text-base">No cases available</span>
           </div>
         )}
       </div>

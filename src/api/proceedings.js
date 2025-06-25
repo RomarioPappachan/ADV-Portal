@@ -7,11 +7,14 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL; // Base API URL
 const getToken = () => localStorage.getItem("auth_token");
 
 // Get case proceedings
-export const fetchProceedings = async (userId) => {
+export const fetchProceedings = async (caseNo, userId) => {
   try {
-    const res = await axios.get(`${API_URL}/member/proceedings/${userId}`, {
-      headers: { Authorization: `${getToken()}` },
-    });
+    const res = await axios.get(
+      `${API_URL}/member/proceedings/${caseNo}/${userId}`,
+      {
+        headers: { Authorization: `${getToken()}` },
+      }
+    );
     return res;
   } catch (error) {
     // throw new Error(error?.data?.message || "Failed to fetch case proceedings");

@@ -7,60 +7,16 @@ import {
 } from "@/api/proceedings";
 
 export const useProceedingsStore = create((set) => ({
-  // {
-  //     id: 1,
-  //     cn_no: "KLHC010711322022",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  //   },
-  //   {
-  //     id: 2,
-  //     cn_no: "KLHC010711322022",
-  //     description: "hello world 1",
-  //   },
-  //   {
-  //     id: 3,
-  //     cn_no: "KLHC010711322022",
-  //     description: "hello world 1",
-  //   },
-  //   {
-  //     id: 4,
-  //     cn_no: "KLHC010711322022",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  //   },
-  //   {
-  //     id: 5,
-  //     cn_no: "KLHC010711322022",
-  //     description: "hello world 1",
-  //   },
-  //   {
-  //     id: 6,
-  //     cn_no: "KLHC010711322022",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  //   },
-  //   {
-  //     id: 7,
-  //     cn_no: "KLHC010711322022",
-  //     description: "hello world 1",
-  //   },
-  //   {
-  //     id: 8,
-  //     cn_no: "KLHC010711322022",
-  //     description: "hello world 1",
-  //   },
-
   proceedingsList: [],
   loading: false,
   error: null,
 
-  getProceedings: async (userId) => {
+  getProceedings: async (caseNo, userId) => {
     set({ loading: true, error: null });
     try {
-      const res = await fetchProceedings(userId);
+      const res = await fetchProceedings(caseNo, userId);
       set({
-        proceedingsList: res.data.data,
+        proceedingsList: res.data.data || [],
         loading: false,
         error: null,
       });
@@ -86,6 +42,7 @@ export const useProceedingsStore = create((set) => ({
     set({ loading: true, error: null });
     try {
       const res = await updateProceeding(proceedingId, proceedingData);
+
       return res;
     } catch (err) {
       set({ error: err.message, loading: false });
@@ -97,6 +54,7 @@ export const useProceedingsStore = create((set) => ({
     set({ loading: true, error: null });
     try {
       const res = await deleteProceeding(proceedingId);
+
       return res;
     } catch (err) {
       set({ error: err.message, loading: false });

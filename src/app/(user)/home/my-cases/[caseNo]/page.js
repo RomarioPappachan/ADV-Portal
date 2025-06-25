@@ -57,7 +57,9 @@ export default function CaseDetailsSection() {
           <span>Back</span>
         </button>
         <span className="text-sm sm:text-base text-blue-500 font-bold">
-          {`${caseType} ${regNo}/${filingYear}`}
+          {`${caseType ? caseType : "--"} ${regNo ? regNo : "--"}/${
+            filingYear ? filingYear : "--"
+          }`}
         </span>
         <button
           type="button"

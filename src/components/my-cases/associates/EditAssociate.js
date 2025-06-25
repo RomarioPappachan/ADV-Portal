@@ -84,7 +84,7 @@ export default function EditAssociate({ associate, onClose }) {
         </button>
 
         <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6 text-center">
-          Add Associate
+          Edit Associate
         </h2>
 
         <form
@@ -112,11 +112,13 @@ export default function EditAssociate({ associate, onClose }) {
               Mobile No.
             </label>
             <input
-              type="text"
+              type="tel"
               name="mobile"
               value={form.mobile}
               onChange={handleChange}
               required
+              minLength={10}
+              maxLength={13}
               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
