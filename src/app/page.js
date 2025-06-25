@@ -61,8 +61,8 @@ const Login = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-gray-100 px-2 sm:px-4 md:px-8 lg:px-16">
-      <div className="min-w-[320px] sm:w-md max-w-lg h-auto shadow-2xl rounded-lg bg-white pb-10">
+    <div className="w-screen h-screen flex justify-center items-center bg-gray-100 px-2.5 sm:px-4 md:px-8 lg:px-16">
+      <div className="w-full sm:w-md max-w-lg h-auto shadow-2xl rounded-lg bg-white pb-10">
         {/* Header */}
         <div className="w-full h-20 flex justify-center items-center gap-3 bg-sky-600 rounded-t-lg">
           <img src="/khcaa-logo.png" alt="logo" className="size-16" />

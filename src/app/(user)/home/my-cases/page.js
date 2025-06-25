@@ -104,7 +104,7 @@ export default function MyCases() {
         <h1 className="text-gray-500 text-sm sm:text-base">My Cases</h1>
 
         {/* Filter Buttons */}
-        <div className="max-w-max flex items-center gap-3 bg-white border border-gray-200 px-2 py-1 rounded-lg shadow text-[10px] sm:text-sm font-medium text-gray-700">
+        <div className="max-w-max flex items-center gap-3 bg-white border border-gray-200 px-2 py-1 sm:py-2 rounded-lg shadow text-[10px] sm:text-sm font-medium text-gray-700">
           {["All", "Pending", "Disposed"].map((status) => (
             <button
               key={status}
@@ -112,7 +112,7 @@ export default function MyCases() {
               className={`px-2 py-1 flex items-center rounded-md cursor-pointer ${
                 filter === status
                   ? "text-blue-600 bg-blue-100 font-semibold "
-                  : "text-gray-700 hover:underline"
+                  : "text-gray-700 hover:bg-gray-100 hover:underline"
               }`}
             >
               <span>{status}</span>
