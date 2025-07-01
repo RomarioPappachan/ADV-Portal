@@ -141,6 +141,7 @@ import {
   LuMonitor,
   LuFile,
   LuBriefcaseBusiness,
+  LuUserCog,
 } from "react-icons/lu";
 
 const Page = () => {
@@ -238,14 +239,13 @@ const Page = () => {
         </div>
 
         {/* View Profile */}
-        <div className="md:mt-6">
-          <Link
-            href="/home/profile"
-            className="text-blue-600 hover:text-purple-600 hover:underline text-base font-medium"
-          >
-            View Profile Details
-          </Link>
-        </div>
+        <Link
+          href="/home/profile"
+          className="md:mt-6 max-w-max px-4 py-2 flex justify-center items-center gap-2 text-base font-medium rounded-md  bg-sky-900 text-sky-50 hover:bg-sky-950 hover:text-sky-100 hover:underline "
+        >
+          <LuUserCog className="text-2xl" />
+          <span>Profile Details</span>
+        </Link>
       </div>
 
       {/* Right Section - Services */}

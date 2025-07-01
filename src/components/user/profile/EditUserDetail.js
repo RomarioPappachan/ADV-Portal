@@ -462,7 +462,7 @@ function EditUserDetail({ onClose }) {
           <div className="sm:col-span-2 mt-6 flex justify-end">
             <button
               type="submit"
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition duration-200 text-sm sm:text-base cursor-pointer"
+              className="px-6 py-2 bg-sky-900 hover:bg-sky-950 text-white rounded-lg font-medium transition duration-200 text-sm sm:text-base cursor-pointer"
               disabled={isEditting}
             >
               {isEditting ? "Saving..." : "Save Changes"}

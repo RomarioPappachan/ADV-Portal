@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const myCasesRoutes = [
   { label: "My Cause List", path: "/home/my-cases/todays-cases" },
-  { label: "Live Board", path: "/home/my-cases/live-board" },
+  { label: "Live Court Status", path: "/home/my-cases/live-board" },
   { label: "My Cases", path: "/home/my-cases" },
   { label: "Associates", path: "/home/my-cases/associates" },
   // { label: "Cause List", path: "/home/my-cases/cause-list" },

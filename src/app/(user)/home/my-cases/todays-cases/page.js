@@ -269,11 +269,17 @@ export default function TodaysCases() {
   );
 
   const selectedJudge = useMemo(() => {
-    if (room === "All") return null;
-    const judge =
-      causeList.find((item) => item.room_no.trim() === room)?.judge || null;
-    if (!judge) return null;
-    return judge.replace(/HONOURABLE\s*/i, "").trim();
+    if (room === "All") return [];
+
+    const judgeStr =
+      causeList.find((item) => item.room_no.trim() === room)?.judge || "";
+
+    if (!judgeStr) return [];
+
+    return judgeStr
+      .split(",")
+      .map((name) => name.replace(/HONOURABLE\s*/i, "").trim())
+      .filter((name) => name); // removes empty entries
   }, [room, causeList]);
 
   const selectedCourtRoom = useMemo(() => {
@@ -409,9 +415,16 @@ export default function TodaysCases() {
                 className="size-8 object-cover"
               />
             </div>
-            <span className="text-white text-[10px] sm:text-xs">
-              {selectedJudge || "N/A"}
-            </span>
+            <ul className="flex flex-col justify-start items-start gap-1">
+              {selectedJudge.map((name, ind) => (
+                <li
+                  key={`${name}${ind}`}
+                  className="text-white text-[10px] sm:text-xs"
+                >
+                  {name || "N/A"}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       )}

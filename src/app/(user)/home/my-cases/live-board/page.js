@@ -90,7 +90,7 @@ export default function LiveBoard() {
               </div>
             ))
           ) : (
-            <div className="col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-5 bg-blue-50 rounded shadow px-3 py-2 flex justify-between items-center text-blue-800 text-sm font-medium">
+            <div className="col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-5 bg-blue-50 rounded shadow px-3 py-2 flex justify-between items-center text-rose-500 text-sm font-medium">
               <span>Court rooms are not available</span>
             </div>
           )}
@@ -98,16 +98,4 @@ export default function LiveBoard() {
       </div>
     </div>
   );
-}
-
-//jhgf
-
-{
-  /* <div
-  key={room?.room_no}
-  className="bg-blue-50 rounded shadow px-3 py-2 flex justify-between items-center text-blue-800 text-sm font-medium"
->
-  <span>{room?.room_no}</span>
-  <span>{room?.cause_list_sr_no ? room?.cause_list_sr_no : "--"}</span>
-</div> */
 }
