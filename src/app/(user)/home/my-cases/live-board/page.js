@@ -34,7 +34,7 @@ export default function LiveBoard() {
 
   return (
     <div className="h-full px-2 lg:px-4 flex flex-col">
-      <div className="h-12 sm:h-16 px-2 bg-sky-950 rounded-lg relative flex justify-between items-center gap-2">
+      <div className="h-12 sm:h-16 px-2 sm:px-4 bg-sky-950 rounded-lg relative flex justify-between items-center gap-2">
         {/* 📅 Date - top left */}
 
         <div className="max-w-max flex items-center gap-1 bg-white border border-gray-200 px-4 py-2 rounded-full shadow text-[10px] sm:text-sm font-medium text-gray-700">

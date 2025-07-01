@@ -181,7 +181,7 @@ export default function MyCases() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-4 h-10 bg-transparent text-sm text-sky-950 border border-sky-950 rounded-md focus:outline-none focus:border-2 focus:ring-0"
-          placeholder="Search case..."
+          placeholder="Search by case number..."
         />
       </div>
 

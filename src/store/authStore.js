@@ -117,6 +117,11 @@ export const useAuthStore = create((set, get) => ({
     });
   },
 
+  updateUserAssociates: (newUserInfo) => {
+    localStorage.setItem("user_info", JSON.stringify(newUserInfo));
+    set({ userInfo: newUserInfo });
+  },
+
   restoreSession: () => {
     try {
       const token = localStorage.getItem("auth_token");

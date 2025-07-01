@@ -369,7 +369,7 @@ export default function TodaysCases() {
           <div className="flex justify-between items-center">
             {/* court no. & vconsol */}
             <div className="flex justify-start items-center gap-4">
-              <div className="px-2 py-1 bg-white/30 flex flex-col justify-center items-center">
+              <div className="px-2 py-1 bg-white/30 rounded flex flex-col justify-center items-center">
                 <span className="text-white text-[10px] sm:text-xs">Court</span>
                 <span className="text-white text-[10px] sm:text-xs">
                   {room}

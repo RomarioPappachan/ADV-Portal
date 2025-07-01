@@ -358,7 +358,7 @@ export default function CreateAssociate({ onClose }) {
           </div>
 
           {/* Submit */}
-          <div className="md:col-span-2 mt-8">
+          <div className="mt-8">
             <button
               type="submit"
               className="w-full bg-sky-900 hover:bg-sky-950 text-white py-2 rounded-lg font-medium transition duration-200 text-sm"

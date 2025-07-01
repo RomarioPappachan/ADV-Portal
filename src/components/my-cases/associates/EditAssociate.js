@@ -294,7 +294,7 @@ export default function EditAssociate({ associate, onClose }) {
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-6 overflow-y-auto">
-      <div className="bg-white w-full max-w-4xl rounded-xl shadow-xl p-4 sm:p-6 md:p-8 mt-20 max-h-screen overflow-y-auto relative">
+      <div className="bg-white w-full max-w-3xl rounded-xl shadow-xl p-4 sm:p-6 md:p-8 mt-20 max-h-screen overflow-y-auto relative">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -307,10 +307,7 @@ export default function EditAssociate({ associate, onClose }) {
           Edit Associate
         </h2>
 
-        <form
-          onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4"
-        >
+        <form onSubmit={handleSubmit} className="mt-10">
           {/* Enrollment No */}
           <div>
             <label className="block text-sm font-medium text-gray-600">
@@ -348,7 +345,7 @@ export default function EditAssociate({ associate, onClose }) {
           </div>
 
           {/* Submit */}
-          <div className="md:col-span-2 pt-4">
+          <div className="mt-8">
             <button
               type="submit"
               className="w-full bg-sky-900 hover:bg-sky-950 text-white py-2 rounded-lg font-medium transition duration-200 text-sm"
