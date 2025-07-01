@@ -34,7 +34,7 @@ export default function LiveBoard() {
 
   return (
     <div className="h-full px-2 lg:px-4 flex flex-col">
-      <div className="h-20 sm:h-16 relative flex flex-col sm:flex-row items-end sm:justify-between sm:items-center gap-2">
+      <div className="h-12 sm:h-16 px-2 bg-sky-950 rounded-lg relative flex justify-between items-center gap-2">
         {/* 📅 Date - top left */}
 
         <div className="max-w-max flex items-center gap-1 bg-white border border-gray-200 px-4 py-2 rounded-full shadow text-[10px] sm:text-sm font-medium text-gray-700">
@@ -71,20 +71,20 @@ export default function LiveBoard() {
             Array.from({ length: 20 }, (_, index) => (
               <div
                 key={index}
-                className="animate-pulse bg-blue-50 rounded shadow px-3 py-2 flex justify-between items-center"
+                className="animate-pulse bg-gray-50 rounded shadow px-3 py-2 flex justify-between items-center"
               >
                 <span className="h-3 bg-gray-200 rounded"></span>
                 <span className="h-3 bg-gray-200 rounded"></span>
               </div>
             ))
           ) : courtRooms.length > 1 ? (
-            courtRooms.map((room) => (
+            courtRooms.map((room, index) => (
               <div
-                key={room?.room_no}
-                className="bg-blue-50 rounded shadow px-3 py-2 flex justify-between items-center text-blue-800 text-sm font-medium"
+                key={`${room?.room_no}${index}`}
+                className="bg-sky-950 rounded shadow px-3 py-2 flex justify-between items-center text-sky-100 text-sm font-medium"
               >
                 <span>{room?.room_no}</span>
-                <span>
+                <span className="text-orange-400">
                   {room?.cause_list_sr_no ? room?.cause_list_sr_no : "--"}
                 </span>
               </div>
@@ -98,4 +98,16 @@ export default function LiveBoard() {
       </div>
     </div>
   );
+}
+
+//jhgf
+
+{
+  /* <div
+  key={room?.room_no}
+  className="bg-blue-50 rounded shadow px-3 py-2 flex justify-between items-center text-blue-800 text-sm font-medium"
+>
+  <span>{room?.room_no}</span>
+  <span>{room?.cause_list_sr_no ? room?.cause_list_sr_no : "--"}</span>
+</div> */
 }

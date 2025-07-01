@@ -38,7 +38,7 @@ export default function CaseBasicDetails() {
 
   return (
     <section className="p-2 sm:p-6 bg-white border border-gray-300 rounded-lg shadow-sm mb-6">
-      <h2 className="text-base font-semibold text-white bg-gradient-to-r from-sky-600 to-sky-400 text-center sm:rounded-lg py-2 mb-4">
+      <h2 className="text-base font-semibold text-white bg-gradient-to-r from-sky-950 via-sky-800 to-sky-600 text-center sm:rounded-lg py-2 mb-4">
         CASE DETAILS
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">

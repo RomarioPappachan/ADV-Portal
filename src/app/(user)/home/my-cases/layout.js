@@ -10,7 +10,7 @@ export default function MyCasesLayout({ children }) {
         <div className="w-full sm:w-1/4 sm:h-full lg:w-1/5 border-b-2 sm:border-r-2 border-slate-100">
           <MyCasesSideBar />
         </div>
-        <div className="w-full sm:w-3/4 lg:w-4/5 min-h-full sm:h-full py-2 sm:p-4">
+        <div className="w-full sm:w-3/4 lg:w-4/5 min-h-full sm:h-full py-2 sm:px-4 sm:pt-0">
           {children}
         </div>
       </div>

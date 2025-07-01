@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { fetchAdvCases, fetchCauseList } from "@/api/case";
+import { fetchAdvCases, fetchCauseList, getCauseListPdf } from "@/api/case";
 
 const LOCAL_KEYS = {
   CAUSE_LIST: "cached_cause_list",
@@ -18,14 +18,14 @@ export const useCauseListStore = create((set) => ({
   error: null,
 
   getCauseList: async (date, enrollmentNo) => {
-    set({ loading: true, error: null });
+    set({ loading: true, error: null, causeList: [] });
 
     try {
       const res = await fetchCauseList(date, enrollmentNo);
 
       set({
         advCode: res.data?.advCode || null,
-        causeList: res.data?.causeList || [],
+        causeList: res.data?.cases || [],
         count: res.data?.count,
       });
     } catch (error) {
@@ -35,11 +35,12 @@ export const useCauseListStore = create((set) => ({
     }
   },
 
-  getAdvCases: async (hcCode) => {
+  getAdvCases: async (enrollmentId) => {
     set({ loading: true, error: null });
 
     try {
-      const res = await fetchAdvCases(hcCode);
+      const res = await fetchAdvCases(enrollmentId);
+      console.log(res);
       const newData = {
         advCode: res.data?.advCode,
         myCases: res.data?.cases || [],
@@ -61,6 +62,15 @@ export const useCauseListStore = create((set) => ({
       set({ error: error.message });
     } finally {
       set({ loading: false });
+    }
+  },
+
+  downloadCauseListPdf: async (dataToDownload) => {
+    try {
+      const res = await getCauseListPdf(dataToDownload);
+      return res;
+    } catch (error) {
+      set({ error: error.message });
     }
   },
 

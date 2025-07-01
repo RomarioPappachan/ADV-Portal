@@ -144,13 +144,13 @@ export default function Proceedings({ caseNo, onClose }) {
             value={newText}
             onChange={(e) => setNewText(e.target.value)}
             rows={3}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-sky-900"
             placeholder="Write proceeding..."
           />
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition duration-200 text-sm"
+            className="mt-3 w-full bg-sky-900 hover:bg-sky-950 text-white py-2 rounded-lg font-medium transition duration-200 text-sm"
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>

@@ -32,7 +32,7 @@ const UserNavbar = () => {
 
   return (
     <>
-      <nav className="w-full bg-sky-600 text-white shadow-md">
+      <nav className="w-full bg-sky-950 text-white shadow-md">
         <div className="px-3 sm:px-4 md:px-8 lg:px-16">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}

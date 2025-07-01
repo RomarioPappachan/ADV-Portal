@@ -9,7 +9,7 @@ export const useDisplayBoardStore = create((set) => ({
   // Get cause list
 
   getDisplayBoard: async (date) => {
-    set({ loading: true, error: null });
+    set({ loading: true, error: null, courtRooms: [] });
     try {
       const res = await fetchDisplayBoard(date);
       set({

@@ -20,11 +20,11 @@ export default function Associates() {
 
   return (
     <div className="h-full px-2 lg:px-4 flex flex-col">
-      <div className="h-12 sm:h-16 px-4 py-3 bg-sky-100 flex justify-between items-center rounded-lg">
-        <h1 className="text-gray-500 text-sm sm:text-base">Associates</h1>
+      <div className="h-12 sm:h-16 px-4 py-3 bg-sky-950 flex justify-between items-center rounded-lg">
+        <h1 className="text-sky-50 text-sm sm:text-base">Associates</h1>
         <button
           onClick={() => setShowCreateAssociate(true)}
-          className="flex items-center gap-2 text-sm sm:text-base text-blue-600 hover:text-blue-800 font-medium cursor-pointer"
+          className="flex items-center gap-2 text-sm sm:text-base text-sky-200 hover:text-sky-100 font-medium cursor-pointer"
         >
           <LuPlus size={18} />
           <span className="hidden sm:inline">Add Associate</span>

@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
           position="top-right"
           reverseOrder={false}
           toastOptions={{
-            duration: 5000,
+            duration: 3000,
             style: { width: "500", zIndex: 9999 },
           }}
         />

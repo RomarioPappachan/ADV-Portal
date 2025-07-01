@@ -42,7 +42,7 @@ function PasswordLogin({ onBack }) {
   return (
     <form className="py-6 px-6" onSubmit={handleSubmit}>
       <div className="space-y-8">
-        <h1 className="text-sky-600 text-xl font-semibold text-center">
+        <h1 className="text-sky-950 text-xl font-semibold text-center">
           Member Login
         </h1>
 
@@ -56,15 +56,15 @@ function PasswordLogin({ onBack }) {
             minLength={10}
             maxLength={10}
             required
-            className="peer w-full p-3 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+            className="peer w-full p-3 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-900 focus:border-sky-900"
           />
           <label
             htmlFor="mobileNo"
             className={`absolute left-3 text-gray-500 transition-all bg-white px-1 
               ${
                 mobileNo
-                  ? "top-0 text-xs text-sky-500"
-                  : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-sky-500"
+                  ? "top-0 text-xs text-sky-900"
+                  : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-sky-900"
               }`}
           >
             Mobile number
@@ -79,15 +79,15 @@ function PasswordLogin({ onBack }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="peer w-full p-3 pr-10 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+            className="peer w-full p-3 pr-10 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-900 focus:border-sky-900"
           />
           <label
             htmlFor="password"
             className={`absolute left-3 text-gray-500 transition-all bg-white px-1 
               ${
                 password
-                  ? "top-0 text-xs text-sky-500"
-                  : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-sky-500"
+                  ? "top-0 text-xs text-sky-900"
+                  : "top-3 text-gray-400 text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-sky-900"
               }`}
           >
             Password
@@ -109,7 +109,7 @@ function PasswordLogin({ onBack }) {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-sky-600 cursor-pointer"
+          className="w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg bg-sky-950 hover:bg-sky-900 cursor-pointer"
           disabled={isLogging}
         >
           {isLogging ? "Logging..." : "Login"}
@@ -117,7 +117,7 @@ function PasswordLogin({ onBack }) {
       </div>
 
       <p
-        className="pt-4 text-sky-600 font-light cursor-pointer"
+        className="pt-4 text-sky-950 font-light cursor-pointer"
         onClick={onBack}
       >
         Login with OTP?

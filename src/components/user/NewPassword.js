@@ -57,7 +57,7 @@ function NewPassword() {
       className="w-[90%] max-w-[420px] shadow-2xl rounded-lg bg-white mx-auto"
     >
       {/* Header */}
-      <div className="w-full h-20 flex justify-center items-center gap-3 bg-sky-600 rounded-t-lg">
+      <div className="w-full h-20 flex justify-center items-center gap-3 bg-sky-950 rounded-t-lg">
         <img src="/khcaa-logo.png" alt="logo" className="size-16" />
         <h1 className="text-4xl text-white font-bold">KHCAA</h1>
       </div>
@@ -75,7 +75,7 @@ function NewPassword() {
             name="password"
             value={passwords.password}
             onChange={handleChange}
-            className="h-12 px-4 pr-12 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-sky-600 text-black"
+            className="h-12 px-4 pr-12 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-sky-950 text-black"
             placeholder="Enter new password"
           />
           <div
@@ -96,7 +96,7 @@ function NewPassword() {
             name="confirmPassword"
             value={passwords.confirmPassword}
             onChange={handleChange}
-            className="h-12 px-4 pr-12 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-sky-600 text-black"
+            className="h-12 px-4 pr-12 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-sky-950 text-black"
             placeholder="Re-enter new password"
           />
           <div
@@ -119,8 +119,8 @@ function NewPassword() {
           disabled={loading}
           className={`w-full h-12 flex justify-center items-center text-base text-white font-semibold rounded-lg ${
             loading
-              ? "bg-sky-700 cursor-not-allowed"
-              : "bg-sky-600 hover:bg-sky-700"
+              ? "bg-sky-950 cursor-not-allowed"
+              : "bg-sky-950 hover:bg-sky-900"
           }`}
         >
           {loading ? "Submitting..." : "Submit"}

@@ -45,12 +45,13 @@ export const fetchCauseList = async (date, enrollmentNo) => {
 };
 
 // Get cause list
-export const fetchAdvCases = async (hcCode) => {
+export const fetchAdvCases = async (enrollmentId) => {
   try {
     const res = await axios.post(
       `${API_URL}/hc/advcases`,
       {
-        advCode: hcCode,
+        advCode: 0,
+        barRegCode: enrollmentId,
       },
       {
         headers: { Authorization: `${getToken()}` },
@@ -79,6 +80,24 @@ export const fetchCaseStatus = async (caseNo) => {
     return res;
   } catch (error) {
     // throw new Error(error?.data?.message || "Failed to fetch case status");
+    handleApiError(error, "user");
+  }
+};
+
+export const getCauseListPdf = async (dataToDownload) => {
+  try {
+    const res = await axios.post(
+      `${API_URL}/dashboard/get-pdf`,
+      dataToDownload,
+      {
+        responseType: "blob", // ✅ must be here
+        headers: {
+          Authorization: `${getToken()}`,
+        },
+      }
+    );
+    return res;
+  } catch (error) {
     handleApiError(error, "user");
   }
 };

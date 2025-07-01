@@ -1,3 +1,235 @@
+// "use client";
+
+// import { useState, useEffect } from "react";
+// import { createPortal } from "react-dom";
+// import { useAuthStore } from "@/store/authStore";
+// import { useAssociateStore } from "@/store/associatesStore";
+// import { LuX } from "react-icons/lu";
+// import toast from "react-hot-toast";
+
+// const bloodGroupOptions = [
+//   { label: "A+", value: "A+" },
+//   { label: "A-", value: "A-" },
+//   { label: "B+", value: "B+" },
+//   { label: "B-", value: "B-" },
+//   { label: "AB+", value: "AB+" },
+//   { label: "AB-", value: "AB-" },
+//   { label: "O+", value: "O+" },
+//   { label: "O-", value: "O-" },
+//   { label: "Others", value: "Others" },
+// ];
+
+// export default function EditAssociate({ associate, onClose }) {
+//   const { userInfo } = useAuthStore();
+//   const { editAssociate, getAssociates } = useAssociateStore();
+
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+//   const [mounted, setMounted] = useState(false);
+
+//   const [form, setForm] = useState({
+//     name: associate.name || "",
+//     enrollment_no: associate.enrollment_no || "",
+//     mobile: associate.mobile || "",
+//     address: associate.address || "",
+//     hc_code: associate.hc_code || "",
+//     adm_no: associate.adm_no || "",
+//     email: associate.email || "",
+//     blood: associate.blood || "",
+//   });
+
+//   const userId = userInfo?.id;
+
+//   useEffect(() => {
+//     setMounted(true);
+//   }, []);
+
+//   const handleChange = (e) => {
+//     setForm({ ...form, [e.target.name]: e.target.value });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setIsSubmitting(true);
+//     const { name, mobile } = form;
+//     if (!name || !mobile) return;
+
+//     try {
+//       const associateData = {
+//         associated: userId,
+//         ...form,
+//       };
+//       const response = await editAssociate(associate?.id, associateData);
+
+//       if (response?.data?.message) toast.success(response?.data?.message);
+//       getAssociates(userId);
+//       onClose();
+//     } catch (error) {
+//       toast.error("Failed to add associate");
+//     } finally {
+//       setIsSubmitting(false);
+//     }
+//   };
+
+//   if (!mounted) return null;
+
+//   return createPortal(
+//     <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 px-4 py-6 overflow-y-auto">
+//       <div className="bg-white w-full max-w-4xl rounded-xl shadow-xl p-4 sm:p-6 md:p-8 mt-20 max-h-screen overflow-y-auto relative">
+//         {/* Close Button */}
+//         <button
+//           onClick={onClose}
+//           className="absolute top-4 right-4 text-gray-500 hover:text-red-500"
+//         >
+//           <LuX size={20} />
+//         </button>
+
+//         <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6 text-center">
+//           Edit Associate
+//         </h2>
+
+//         <form
+//           onSubmit={handleSubmit}
+//           className="grid grid-cols-1 md:grid-cols-2 gap-4"
+//         >
+//           {/* Advocate Name */}
+//           <div>
+//             <label className="block text-sm font-medium text-gray-600">
+//               Advocate Name
+//             </label>
+//             <input
+//               type="text"
+//               name="name"
+//               value={form.name}
+//               onChange={handleChange}
+//               required
+//               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+//             />
+//           </div>
+
+//           {/* Mobile */}
+//           <div>
+//             <label className="block text-sm font-medium text-gray-600">
+//               Mobile No.
+//             </label>
+//             <input
+//               type="tel"
+//               name="mobile"
+//               value={form.mobile}
+//               onChange={handleChange}
+//               required
+//               minLength={10}
+//               maxLength={13}
+//               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+//             />
+//           </div>
+
+//           {/* Enrollment No */}
+//           <div>
+//             <label className="block text-sm font-medium text-gray-600">
+//               Bar Council Enrollment No.
+//             </label>
+//             <input
+//               type="text"
+//               name="enrollment_no"
+//               value={form.enrollment_no}
+//               onChange={handleChange}
+//               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+//             />
+//           </div>
+
+//           {/* HC Code */}
+//           <div>
+//             <label className="block text-sm font-medium text-gray-600">
+//               High Court Code
+//             </label>
+//             <input
+//               type="text"
+//               name="hc_code"
+//               value={form.hc_code}
+//               onChange={handleChange}
+//               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+//             />
+//           </div>
+
+//           {/* Admission No */}
+//           <div>
+//             <label className="block text-sm font-medium text-gray-600">
+//               KHCAA Membership No.
+//             </label>
+//             <input
+//               type="text"
+//               name="adm_no"
+//               value={form.adm_no}
+//               onChange={handleChange}
+//               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+//             />
+//           </div>
+
+//           {/* Email */}
+//           <div>
+//             <label className="block text-sm font-medium text-gray-600">
+//               Email
+//             </label>
+//             <input
+//               type="email"
+//               name="email"
+//               value={form.email}
+//               onChange={handleChange}
+//               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+//             />
+//           </div>
+
+//           {/* Blood Group */}
+//           <div>
+//             <label className="block text-sm font-medium text-gray-600">
+//               Blood Group
+//             </label>
+//             <select
+//               name="blood"
+//               value={form.blood}
+//               onChange={handleChange}
+//               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+//             >
+//               <option value="">-- Select --</option>
+//               {bloodGroupOptions.map((option) => (
+//                 <option key={option.value} value={option.value}>
+//                   {option.label}
+//                 </option>
+//               ))}
+//             </select>
+//           </div>
+
+//           {/* Address (Full Width) */}
+//           <div className="md:col-span-2">
+//             <label className="block text-sm font-medium text-gray-600">
+//               Address
+//             </label>
+//             <textarea
+//               name="address"
+//               value={form.address}
+//               onChange={handleChange}
+//               rows={3}
+//               className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+//             />
+//           </div>
+
+//           {/* Submit */}
+//           <div className="md:col-span-2 pt-4">
+//             <button
+//               type="submit"
+//               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition duration-200 text-sm"
+//               disabled={isSubmitting}
+//             >
+//               {isSubmitting ? "Submitting..." : "Submit"}
+//             </button>
+//           </div>
+//         </form>
+//       </div>
+//     </div>,
+//     document.body
+//   );
+// }
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,18 +239,6 @@ import { useAssociateStore } from "@/store/associatesStore";
 import { LuX } from "react-icons/lu";
 import toast from "react-hot-toast";
 
-const bloodGroupOptions = [
-  { label: "A+", value: "A+" },
-  { label: "A-", value: "A-" },
-  { label: "B+", value: "B+" },
-  { label: "B-", value: "B-" },
-  { label: "AB+", value: "AB+" },
-  { label: "AB-", value: "AB-" },
-  { label: "O+", value: "O+" },
-  { label: "O-", value: "O-" },
-  { label: "Others", value: "Others" },
-];
-
 export default function EditAssociate({ associate, onClose }) {
   const { userInfo } = useAuthStore();
   const { editAssociate, getAssociates } = useAssociateStore();
@@ -27,14 +247,9 @@ export default function EditAssociate({ associate, onClose }) {
   const [mounted, setMounted] = useState(false);
 
   const [form, setForm] = useState({
-    name: associate.name || "",
-    enrollment_no: associate.enrollment_no || "",
-    mobile: associate.mobile || "",
-    address: associate.address || "",
-    hc_code: associate.hc_code || "",
-    adm_no: associate.adm_no || "",
-    email: associate.email || "",
-    blood: associate.blood || "",
+    stateCode: associate.enrollment_no.split("/")[0] || "",
+    barCode: associate.enrollment_no.split("/")[1] || "",
+    year: associate.enrollment_no.split("/")[2] || "",
   });
 
   const userId = userInfo?.id;
@@ -50,13 +265,18 @@ export default function EditAssociate({ associate, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const { name, mobile } = form;
-    if (!name || !mobile) return;
+    const { stateCode, barCode, year } = form;
+    if (!stateCode || !barCode || !year) {
+      toast.error("Enter all fields");
+      setIsSubmitting(false);
+      return;
+    }
 
+    const enrolNo = `${stateCode}/${barCode}/${year}`;
     try {
       const associateData = {
-        associated: userId,
-        ...form,
+        // associated: userId,
+        enrollment_no: enrolNo,
       };
       const response = await editAssociate(associate?.id, associateData);
 
@@ -73,7 +293,7 @@ export default function EditAssociate({ associate, onClose }) {
   if (!mounted) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 px-4 py-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-6 overflow-y-auto">
       <div className="bg-white w-full max-w-4xl rounded-xl shadow-xl p-4 sm:p-6 md:p-8 mt-20 max-h-screen overflow-y-auto relative">
         {/* Close Button */}
         <button
@@ -91,133 +311,47 @@ export default function EditAssociate({ associate, onClose }) {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 gap-4"
         >
-          {/* Advocate Name */}
-          <div>
-            <label className="block text-sm font-medium text-gray-600">
-              Advocate Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          {/* Mobile */}
-          <div>
-            <label className="block text-sm font-medium text-gray-600">
-              Mobile No.
-            </label>
-            <input
-              type="tel"
-              name="mobile"
-              value={form.mobile}
-              onChange={handleChange}
-              required
-              minLength={10}
-              maxLength={13}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
           {/* Enrollment No */}
           <div>
             <label className="block text-sm font-medium text-gray-600">
-              Bar Council Enrollment No.
+              Bar Council Enrollment No :
             </label>
-            <input
-              type="text"
-              name="enrollment_no"
-              value={form.enrollment_no}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
+            <div className="flex justify-center items-center gap-1">
+              <input
+                type="text"
+                name="stateCode"
+                value={form.stateCode}
+                onChange={handleChange}
+                placeholder="State code"
+                className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-900"
+              />
+              <span className="text-gray-800">/</span>
+              <input
+                type="text"
+                name="barCode"
+                value={form.barCode}
+                onChange={handleChange}
+                placeholder="Bar code"
+                className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-900"
+              />
+              <span className="text-gray-800">/</span>
 
-          {/* HC Code */}
-          <div>
-            <label className="block text-sm font-medium text-gray-600">
-              High Court Code
-            </label>
-            <input
-              type="text"
-              name="hc_code"
-              value={form.hc_code}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          {/* Admission No */}
-          <div>
-            <label className="block text-sm font-medium text-gray-600">
-              KHCAA Membership No.
-            </label>
-            <input
-              type="text"
-              name="adm_no"
-              value={form.adm_no}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          {/* Email */}
-          <div>
-            <label className="block text-sm font-medium text-gray-600">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          {/* Blood Group */}
-          <div>
-            <label className="block text-sm font-medium text-gray-600">
-              Blood Group
-            </label>
-            <select
-              name="blood"
-              value={form.blood}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              <option value="">-- Select --</option>
-              {bloodGroupOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Address (Full Width) */}
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-600">
-              Address
-            </label>
-            <textarea
-              name="address"
-              value={form.address}
-              onChange={handleChange}
-              rows={3}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
+              <input
+                type="text"
+                name="year"
+                value={form.year}
+                onChange={handleChange}
+                placeholder="Year"
+                className="w-full border border-gray-300 rounded-md px-4 py-2 mt-1 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-900"
+              />
+            </div>
           </div>
 
           {/* Submit */}
           <div className="md:col-span-2 pt-4">
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition duration-200 text-sm"
+              className="w-full bg-sky-900 hover:bg-sky-950 text-white py-2 rounded-lg font-medium transition duration-200 text-sm"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Submitting..." : "Submit"}

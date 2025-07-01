@@ -4,9 +4,9 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const myCasesRoutes = [
-  { label: "Today's Cases", path: "/home/my-cases/todays-cases" },
-  { label: "My Cases", path: "/home/my-cases" },
+  { label: "My Cause List", path: "/home/my-cases/todays-cases" },
   { label: "Live Board", path: "/home/my-cases/live-board" },
+  { label: "My Cases", path: "/home/my-cases" },
   { label: "Associates", path: "/home/my-cases/associates" },
   // { label: "Cause List", path: "/home/my-cases/cause-list" },
 ];
@@ -24,8 +24,8 @@ export default function MyCasesSideBar() {
             <li
               className={`sm:w-full p-2 rounded-lg text-xs lg:text-sm  ${
                 pathname === route.path || from === route.path
-                  ? " bg-sky-50 text-sky-400"
-                  : "text-gray-500 hover:bg-gray-50"
+                  ? " bg-sky-950 text-sky-50"
+                  : "text-sky-950 hover:bg-sky-50"
               }`}
             >
               {route.label}

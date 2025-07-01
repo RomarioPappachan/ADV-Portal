@@ -137,10 +137,10 @@ import {
   LuBuilding2,
   LuUserCheck,
   LuUser,
-  LuQrCode,
   LuBriefcase,
-  LuHouse,
   LuMonitor,
+  LuFile,
+  LuBriefcaseBusiness,
 } from "react-icons/lu";
 
 const Page = () => {
@@ -150,7 +150,7 @@ const Page = () => {
   return (
     <div className="w-full flex flex-col lg:flex-row gap-6 pb-10 bg-transparent">
       {/* Left Section */}
-      <div className="w-full lg:w-3/4 bg-white rounded-xl p-6 border border-gray-200 shadow-sm flex flex-col gap-6">
+      <div className="w-full lg:w-1/2 bg-white rounded-xl p-6 border border-gray-200 shadow-sm flex flex-col gap-6">
         {/* Profile Header */}
         <div className="flex flex-col sm:flex-row items-center gap-6">
           <div className="w-28 h-28 bg-gray-200 rounded-full overflow-hidden border">
@@ -162,100 +162,78 @@ const Page = () => {
                   ? userInfo?.profile_image
                   : "/user-icon.jpg"
               }
-              // src="/user-icon.jpg"
               alt="profile"
               className="w-full h-full object-cover rounded-full"
             />
           </div>
           <div className="text-center sm:text-left">
             <h1 className="text-2xl font-bold text-gray-800">
-              {userDetails?.fullname
-                ? userDetails?.fullname?.toUpperCase()
-                : userInfo?.fullname?.toUpperCase()}
+              {(
+                userDetails?.fullname ||
+                userInfo?.fullname ||
+                ""
+              ).toUpperCase()}
             </h1>
             <p className="text-gray-500">
-              {userDetails?.adv_code
-                ? userDetails?.adv_code
-                : userInfo?.adv_code}
+              {userDetails?.adv_code || userInfo?.adv_code}
             </p>
           </div>
         </div>
 
-        {/* Info Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Unified Info Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <div className="flex items-center gap-2 text-gray-500 mb-1">
               <LuMail /> Email
             </div>
             <p className="text-black font-semibold break-all">
-              {userDetails?.email ? userDetails?.email : userInfo?.email}
+              {userDetails?.email || userInfo?.email}
             </p>
           </div>
+
           <div>
             <div className="flex items-center gap-2 text-gray-500 mb-1">
               <LuPhone /> Mobile Number
             </div>
             <p className="text-black font-semibold">
-              {userDetails?.mobile ? userDetails?.mobile : userInfo?.mobile}
+              {userDetails?.mobile || userInfo?.mobile}
             </p>
           </div>
+
           <div>
             <div className="flex items-center gap-2 text-gray-500 mb-1">
               <LuUserCheck /> Bar council Enrollment No.
             </div>
             <p className="text-black font-semibold">
-              {userDetails?.enrollment_id
-                ? userDetails?.enrollment_id
-                : userInfo?.enrollment_id}
+              {userDetails?.enrollment_id || userInfo?.enrollment_id}
             </p>
           </div>
-        </div>
 
-        {/* Address Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:mt-10">
-          <div className="space-y-3">
-            <div>
-              <div className="flex items-center gap-2 text-gray-500 mb-1">
-                <LuMapPin /> Residential Address
-              </div>
-              <p className="text-black font-semibold">
-                {userDetails?.res_address
-                  ? userDetails?.res_address
-                  : userInfo?.res_address}
-              </p>
+          <div>
+            <div className="flex items-center gap-2 text-gray-500 mb-1">
+              <LuPhone /> Emergency Phone no.
             </div>
-            <div>
-              <div className="flex items-center gap-2 text-gray-500 mb-1">
-                <LuPhone /> Emergency Phone no.
-              </div>
-              <p className="text-black font-semibold">
-                {userDetails?.home_ph
-                  ? userDetails?.home_ph
-                  : userInfo?.home_ph}
-              </p>
-            </div>
+            <p className="text-black font-semibold">
+              {userDetails?.home_ph || userInfo?.home_ph}
+            </p>
           </div>
-          <div className="space-y-3">
-            <div>
-              <div className="flex items-center gap-2 text-gray-500 mb-1">
-                <LuBuilding2 /> Office Address
-              </div>
-              <p className="text-black font-semibold">
-                {userDetails?.off_address
-                  ? userDetails?.off_address
-                  : userInfo?.off_address}
-              </p>
+
+          <div>
+            <div className="flex items-center gap-2 text-gray-500 mb-1">
+              <LuBuilding2 /> Office Address
             </div>
-            <div>
-              <div className="flex items-center gap-2 text-gray-500 mb-1">
-                <LuPhone /> Office Phone / Additional Mobile no.
-              </div>
-              <p className="text-black font-semibold">
-                {userDetails?.office_ph
-                  ? userDetails?.office_ph
-                  : userInfo?.office_ph}
-              </p>
+            <p className="text-black font-semibold">
+              {userDetails?.off_address || userInfo?.off_address}
+            </p>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2 text-gray-500 mb-1">
+              <LuPhone /> Office Phone / Additional Mobile no.
             </div>
+            <p className="text-black font-semibold">
+              {userDetails?.office_ph || userInfo?.office_ph}
+            </p>
           </div>
         </div>
 
@@ -271,25 +249,45 @@ const Page = () => {
       </div>
 
       {/* Right Section - Services */}
-      <div className="w-full lg:w-1/4 bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
+      <div className="w-full lg:w-1/2 bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
         <h2 className="text-2xl font-semibold text-center text-blue-900 mb-4">
           Services
         </h2>
-        <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Link href="/home/my-cases/todays-cases">
-            <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-300 via-indigo-500 to-violet-700 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
+            <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-sky-950 via-sky-800 to-sky-600 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
+              <LuBriefcaseBusiness className="text-2xl" />
+              <span>My Cause List</span>
+            </div>
+          </Link>
+
+          <Link href="/home/my-cases/live-board">
+            <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-sky-950 via-sky-800 to-sky-600 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
+              <LuMonitor className="text-2xl" />
+              <span>Live Court Status</span>
+            </div>
+          </Link>
+
+          <Link href="/home/my-cases">
+            <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-sky-950 via-sky-800 to-sky-600 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
               <LuBriefcase className="text-2xl" />
               <span>My Cases</span>
             </div>
           </Link>
-          <Link href="/home/my-cases/live-board">
-            <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-500 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
-              <LuMonitor className="text-2xl" />
-              <span>Live Board</span>
+
+          <a
+            href="https://ecourt.keralacourts.in/digicourt/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-sky-950 via-sky-800 to-sky-600 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
+              <LuFile className="text-2xl" />
+              <span>E-Filing</span>
             </div>
-          </Link>
+          </a>
+
           <Link href="/home/services/subscription">
-            <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-700 via-blue-500 to-indigo-600 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
+            <div className="w-full h-32 flex items-center justify-center gap-2 bg-gradient-to-r from-sky-950 via-sky-800 to-sky-600 text-white text-xl font-semibold rounded-lg hover:scale-105 transition-transform duration-300">
               <LuUser className="text-2xl" />
               <span>My Subscriptions</span>
             </div>
