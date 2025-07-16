@@ -36,3 +36,22 @@ export const fetchTotalPayments = async (paymentType) => {
     handleApiError(error, "admin");
   }
 };
+
+// Importcauselist by admin
+export const importCauseList = async (date) => {
+  try {
+    const res = await axios.post(
+      `${API_URL}/hc/updlist`,
+      {
+        cldate: date,
+      },
+      {
+        headers: { Authorization: `${getAdminToken()}` },
+      }
+    );
+    return res;
+  } catch (error) {
+    // throw new Error(error?.data?.message || "Failed to import cause list");
+    handleApiError(error, "admin");
+  }
+};

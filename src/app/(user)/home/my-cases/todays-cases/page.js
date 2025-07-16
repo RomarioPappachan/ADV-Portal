@@ -395,7 +395,7 @@ export default function TodaysCases() {
               <div className="flex items-center gap-1 font-semibold">
                 <span className="w-1 h-1 rounded-full bg-green-500 animate-pulse" />
                 <span className="text-sky-100 text-[10px] sm:text-xs">
-                  Live Board
+                  Live Court
                 </span>
               </div>
               <div className="px-2 sm:px-3 py-1 bg-white rounded-xs flex justify-center items-center">
@@ -438,7 +438,7 @@ export default function TodaysCases() {
             ))
           ) : visibleCases.length > 0 ? (
             visibleCases.map((item, index) => (
-              <CauseListCard item={item} key={index} />
+              <CauseListCard key={index} item={item} room={room} date={date} />
             ))
           ) : (
             <div className="p-6">

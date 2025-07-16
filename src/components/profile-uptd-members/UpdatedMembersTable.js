@@ -18,6 +18,7 @@ export default function UpdatedMembersTable() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(50); // Rows per page
   const [date, setDate] = useState();
+  const [completed, setCompleted] = useState(0);
 
   useEffect(() => {
     // Format today's date as "YYYY-MM-DD"
@@ -27,8 +28,8 @@ export default function UpdatedMembersTable() {
   }, []);
 
   useEffect(() => {
-    if (date) getUpdatedMembers(date, page, limit);
-  }, [date, page, limit]);
+    if (date) getUpdatedMembers(date, page, limit, completed);
+  }, [date, page, limit, completed]);
 
   console.log(updatedMembers);
 
@@ -49,7 +50,33 @@ export default function UpdatedMembersTable() {
   return (
     <div className="p-4 bg-white rounded-xl text-gray-800">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold">Updated Members List</h2>
+        <div className="flex items-center justify-start gap-2">
+          <button
+            type="button"
+            disabled={completed === 0}
+            className={`text-sm px-4 py-2 rounded-md cursor-pointer disabled:cursor-not-allowed ${
+              completed === 0
+                ? "bg-[#3f51b5] text-white"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+            }`}
+            onClick={() => setCompleted(Number(0))}
+          >
+            Updated Members
+          </button>
+          <button
+            type="button"
+            disabled={completed === 1}
+            className={`text-sm px-4 py-2 rounded-md cursor-pointer disabled:cursor-not-allowed ${
+              completed === 1
+                ? "bg-[#3f51b5] text-white"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+            }`}
+            onClick={() => setCompleted(Number(1))}
+          >
+            Completed
+          </button>
+        </div>
+        {/* <h2 className="text-lg font-semibold">Updated Members List</h2> */}
         {/* <input
           type="search"
           placeholder="Search..."

@@ -8,10 +8,10 @@ export const useUpdatedMemberStore = create((set) => ({
   loading: false,
   error: null,
 
-  getUpdatedMembers: async (date, page, limit) => {
+  getUpdatedMembers: async (date, page, limit, completed) => {
     set({ loading: true, error: null });
     try {
-      const res = await fetchProfileUptdMembers(date, page, limit);
+      const res = await fetchProfileUptdMembers(date, page, limit, completed);
 
       set({
         updatedMembers: res.data.result,

@@ -35,10 +35,10 @@ export const fetchAllMembers = async (page, limit, search) => {
   }
 };
 
-export const fetchProfileUptdMembers = async (date, page, limit) => {
+export const fetchProfileUptdMembers = async (date, page, limit, completed) => {
   try {
     const res = await axios.get(
-      `${API_URL}/dashboard/member-updates/${date}?page=${page}&limit=${limit}`,
+      `${API_URL}/dashboard/member-updates/${date}?page=${page}&limit=${limit}&completed=${completed}`,
 
       {
         headers: { Authorization: `${getAdminToken()}` },

@@ -108,6 +108,10 @@ export const useAuthStore = create((set, get) => ({
     localStorage.removeItem("user_type");
     localStorage.removeItem("user_info");
 
+    localStorage.removeItem("cached_my_cases"); //cached my cases
+
+    localStorage.removeItem("cached_room_nos"); //cached court rooms
+
     set({
       isAuthenticated: false,
       token: null,

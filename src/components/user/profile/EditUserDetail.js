@@ -123,6 +123,7 @@ function EditUserDetail({ onClose }) {
         // adv_code: userDetails.adv_code,
         // enrollment_id: userDetails.enrollment_id,
         membership: userDetails.membership,
+        completed: 0, // flag for admin to set to 1
         ...formData,
       };
 

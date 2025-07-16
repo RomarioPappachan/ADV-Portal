@@ -2,12 +2,19 @@
 
 import React, { useEffect, useState } from "react";
 import { useDisplayBoardStore } from "@/store/displayBoardStore";
+import { useCauseListStore } from "@/store/causeListStore.";
 
 import { LuCalendar1, LuClock3 } from "react-icons/lu";
 
 export default function LiveBoard() {
   const { courtRooms, getDisplayBoard, loading } = useDisplayBoardStore();
+  const { cachedRoomMeta, loadCachedRoomMeta } = useCauseListStore();
   const [currentTime, setCurrentTime] = useState(new Date());
+
+  // ✅ Load cachedRoomMeta on first mount
+  useEffect(() => {
+    loadCachedRoomMeta();
+  }, []);
 
   // ⏰ Live Clock
   useEffect(() => {
@@ -78,17 +85,32 @@ export default function LiveBoard() {
               </div>
             ))
           ) : courtRooms.length > 1 ? (
-            courtRooms.map((room, index) => (
-              <div
-                key={`${room?.room_no}${index}`}
-                className="bg-sky-950 rounded shadow px-3 py-2 flex justify-between items-center text-sky-100 text-sm font-medium"
-              >
-                <span>{room?.room_no}</span>
-                <span className="text-orange-400">
-                  {room?.cause_list_sr_no ? room?.cause_list_sr_no : "--"}
-                </span>
-              </div>
-            ))
+            courtRooms.map((room, index) => {
+              const trimmedRoomNo = room?.room_no?.trim();
+              const isCached = cachedRoomMeta?.rooms?.includes(trimmedRoomNo);
+
+              return (
+                <div
+                  key={`${trimmedRoomNo}-${index}`}
+                  className={`rounded shadow px-3 py-2 flex justify-between items-center text-sm font-medium ${
+                    isCached
+                      ? "bg-gradient-to-r from-orange-500 to-orange-800 text-rose-100"
+                      : "bg-sky-950 text-sky-100"
+                  }`}
+                >
+                  <span>{trimmedRoomNo || "—"}</span>
+                  <span
+                    className={`${
+                      isCached
+                        ? "text-rose-50 drop-shadow-md"
+                        : "text-orange-400"
+                    }`}
+                  >
+                    {room?.cause_list_sr_no || "--"}
+                  </span>
+                </div>
+              );
+            })
           ) : (
             <div className="col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-5 bg-blue-50 rounded shadow px-3 py-2 flex justify-between items-center text-rose-500 text-sm font-medium">
               <span>Court rooms are not available</span>

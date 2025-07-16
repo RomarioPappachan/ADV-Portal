@@ -69,6 +69,7 @@ function EditMemberDetail({ onClose }) {
     blood: "",
     other_bar: "",
     senior: 0,
+    completed: 0,
   });
 
   useEffect(() => {
@@ -88,6 +89,8 @@ function EditMemberDetail({ onClose }) {
       blood: userDetails?.blood || "",
       other_bar: userDetails?.other_bar || "",
       senior: userDetails?.senior,
+      completed: userDetails?.completed,
+
       qualification: additionalInfo?.qualification || "",
       date_of_enrol: additionalInfo?.date_of_enrol?.slice(0, 10) || null,
       date_of_admission:
@@ -176,40 +179,59 @@ function EditMemberDetail({ onClose }) {
         >
           {/* Image Upload  */}
 
-          <div className="sm:col-span-2">
-            {/* <label className="block text-sm text-gray-600 font-medium mb-1">
+          <div className="sm:col-span-2 flex flex-col sm:flex-row gap-6">
+            <div className="w-full sm:w-1/2">
+              {/* <label className="block text-sm text-gray-600 font-medium mb-1">
               Profile Image
             </label> */}
-            <div
-              onClick={handleImageClick}
-              className="w-32 h-32 rounded-full border-2 border-dashed border-gray-300 cursor-pointer flex items-center justify-center overflow-hidden"
-            >
-              {formData.profile_image ? (
-                <img
-                  src={formData.profile_image}
-                  alt="Profile Image"
-                  className="w-full h-full object-cover bg-gray-100 text-gray-600"
-                />
-              ) : (
-                <span className="flex flex-col justify-center items-center gap-y-2">
-                  <LuImagePlus className="text-gray-400 text-3xl" />
-                  <span className="text-gray-400 text-sm">Click to Upload</span>
+              <div
+                onClick={handleImageClick}
+                className="w-32 h-32 rounded-full border-2 border-dashed border-gray-300 cursor-pointer flex items-center justify-center overflow-hidden"
+              >
+                {formData.profile_image ? (
+                  <img
+                    src={formData.profile_image}
+                    alt="Profile Image"
+                    className="w-full h-full object-cover bg-gray-100 text-gray-600"
+                  />
+                ) : (
+                  <span className="flex flex-col justify-center items-center gap-y-2">
+                    <LuImagePlus className="text-gray-400 text-3xl" />
+                    <span className="text-gray-400 text-sm">
+                      Click to Upload
+                    </span>
+                  </span>
+                )}
+              </div>
+              {formData?.profile_image && (
+                <span className="text-gray-400 text-sm ps-4">
+                  Click to Upload
                 </span>
               )}
-            </div>
-            {formData?.profile_image && (
-              <span className="text-gray-400 text-sm ps-4">
-                Click to Upload
-              </span>
-            )}
 
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              className="hidden"
-              onChange={handleImageChange}
-            />
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                className="hidden"
+                onChange={handleImageChange}
+              />
+            </div>
+            <div className="w-full sm:w-1/2 flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="completed"
+                checked={formData.completed === 1}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    completed: e.target.checked ? 1 : 0,
+                  }))
+                }
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">Profile Completed</span>
+            </div>
           </div>
 
           <div>

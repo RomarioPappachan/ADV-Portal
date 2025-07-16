@@ -74,9 +74,15 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useDisplayBoardStore } from "@/store/displayBoardStore";
 
-export default function CauseListCard({ index, item }) {
+import dayjs from "dayjs";
+
+export default function CauseListCard({ item, room, date }) {
   const pathname = usePathname();
+  const { courtRooms } = useDisplayBoardStore();
+
+  const isToday = dayjs(date, "YYYY/MM/DD").isSame(dayjs(), "day");
 
   return (
     <Link href={`/home/my-cases/${item?.cino}?from=${pathname}`}>
@@ -104,6 +110,31 @@ export default function CauseListCard({ index, item }) {
             </span>
           </div>
         </div>
+
+        {/* court room and live case  */}
+        {room === "All" && (
+          <div className="p-2 flex justify-between items-center">
+            <div className="px-2 sm:px-3 py-1 bg-sky-900 rounded-xs shadow-sm flex justify-center items-center">
+              <span className="text-white text-xs sm:text-sm font-bold">
+                {item?.room_no || "—"}
+              </span>
+            </div>
+            <div className="px-2 sm:px-3 py-1 bg-white rounded-xs shadow-sm flex justify-center items-center">
+              <span className="text-orange-500 text-xs sm:text-sm font-bold">
+                {
+                  // Find the court room object that matches item.room_no and show for todays date only,  trimmed due to white spaces in room_no
+                  isToday
+                    ? courtRooms.find(
+                        (roomObj) =>
+                          roomObj.room_no?.toString().trim() ===
+                          item?.room_no?.toString().trim()
+                      )?.cause_list_sr_no || "—"
+                    : "—"
+                }
+              </span>
+            </div>
+          </div>
+        )}
 
         {/* body  */}
         <div className="p-2 flex flex-col justify-center">
@@ -138,46 +169,6 @@ export default function CauseListCard({ index, item }) {
           </span>
         </div>
       </div>
-
-      {/* <div
-        key={index}
-        className="min-h-48 max-h-max px-4 py-2 border border-gray-300 rounded-lg shadow-md relative flex flex-col justify-between hover:bg-gray-100"
-      >
-        <div
-          className={`px-2 py-1 absolute top-2 right-2 rounded flex justify-center items-center font-semibold ${
-            item?.status === "P" || item?.status === "Pending"
-              ? "bg-green-100 text-green-500"
-              : item?.status === "D" || item?.status === "Disposed"
-              ? "bg-rose-100 text-rose-500"
-              : "bg-gray-100 text-gray-500"
-          }`}
-        >
-          <span className="text-xs">
-            {item?.status === "P" || item?.status === "Pending"
-              ? "Pending"
-              : item?.status === "D" || item?.status === "Disposed"
-              ? "Disposed"
-              : "N/A"}
-          </span>
-        </div>
-        <h3 className="text-gray-800 text-base font-bold">{item?.ctitle}</h3>
-
-        <div className="mt-5 mb-3 flex flex-col justify-center">
-          <span className="text-gray-600 text-xs font-semibold">
-            {item?.petitioner}
-          </span>
-          <span className="text-gray-400 text-xs font-thin">vs</span>
-
-          <span className="text-gray-600 text-xs font-semibold">
-            {item?.respondent}
-          </span>
-        </div>
-        <div>
-          <p className="text-gray-600 text-[10px] text-right">
-            {item?.originalsr_no}
-          </p>
-        </div>
-      </div> */}
     </Link>
   );
 }

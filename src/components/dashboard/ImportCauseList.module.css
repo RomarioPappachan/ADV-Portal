@@ -1,0 +1,15 @@
+.datePicker {
+  height: 40px;
+  width: 240px;
+  border: 1px solid #024a70;
+  color: #024a70;
+  cursor: pointer;
+}
+
+.datePicker:focus {
+  border-width: 2px;
+}
+
+.datePicker::placeholder {
+  color: #024a70;
+}

@@ -56,6 +56,7 @@ function AddNewMember({ isOpen, onClose }) {
     blood: "",
     other_bar: "",
     senior: 0,
+    completed: 0,
   });
 
   const handleChange = (e) => {
@@ -131,39 +132,59 @@ function AddNewMember({ isOpen, onClose }) {
           className="grid grid-cols-1 sm:grid-cols-2 gap-6"
         >
           {/* Image Upload */}
-          <div className="sm:col-span-2">
-            {/* <label className="block text-sm text-gray-600 font-medium mb-1">
+          <div className="sm:col-span-2 flex flex-col sm:flex-row gap-6">
+            <div className="w-full sm:w-1/2">
+              {/* <label className="block text-sm text-gray-600 font-medium mb-1">
               Profile Image
             </label> */}
-            <div
-              onClick={handleImageClick}
-              className="w-32 h-32 rounded-full border-2 border-dashed border-gray-300 cursor-pointer flex items-center justify-center overflow-hidden"
-            >
-              {formData.profile_image ? (
-                <img
-                  src={formData.profile_image}
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <span className="flex flex-col justify-center items-center gap-y-2">
-                  <LuImagePlus className="text-gray-400 text-3xl" />
-                  <span className="text-gray-400 text-sm">Click to Upload</span>
+              <div
+                onClick={handleImageClick}
+                className="w-32 h-32 rounded-full border-2 border-dashed border-gray-300 cursor-pointer flex items-center justify-center overflow-hidden"
+              >
+                {formData.profile_image ? (
+                  <img
+                    src={formData.profile_image}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="flex flex-col justify-center items-center gap-y-2">
+                    <LuImagePlus className="text-gray-400 text-3xl" />
+                    <span className="text-gray-400 text-sm">
+                      Click to Upload
+                    </span>
+                  </span>
+                )}
+              </div>
+              {formData?.profile_image && (
+                <span className="text-gray-400 text-sm ps-4">
+                  Click to Upload
                 </span>
               )}
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                className="hidden"
+                onChange={handleImageChange}
+              />
             </div>
-            {formData?.profile_image && (
-              <span className="text-gray-400 text-sm ps-4">
-                Click to Upload
-              </span>
-            )}
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              className="hidden"
-              onChange={handleImageChange}
-            />
+
+            <div className="w-full sm:w-1/2 flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="completed"
+                checked={formData.completed === 1}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    completed: e.target.checked ? 1 : 0,
+                  }))
+                }
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">Profile Completed</span>
+            </div>
           </div>
 
           {[

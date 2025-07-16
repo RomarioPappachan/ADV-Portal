@@ -251,7 +251,8 @@ const Page = () => {
       {/* Right Section - Services */}
       <div className="w-full lg:w-1/2 bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
         <h2 className="text-2xl font-semibold text-center text-blue-900 mb-4">
-          Services
+          Services{" "}
+          <span className="text-lg text-black">(Under Development)</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Link href="/home/my-cases/todays-cases">
