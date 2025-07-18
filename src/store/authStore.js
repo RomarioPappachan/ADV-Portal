@@ -6,6 +6,7 @@ import {
   sendOtpApi,
   setPasswordApi,
   verifyOtpApi,
+  verifyOtpPwdApi,
 } from "@/api/auth";
 
 export const useAuthStore = create((set, get) => ({
@@ -62,12 +63,34 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
+  verifyOtpPwd: async (sessionId, mobileNo, otp) => {
+    try {
+      const res = await verifyOtpPwdApi(sessionId, mobileNo, otp);
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  },
+
   setPassword: async (password) => {
     try {
       const { userInfo } = get(); // ✅ get() pulls from store state
       const mobile = userInfo?.mobile;
       const adv_id = userInfo?.id;
 
+      if (!mobile || !adv_id) {
+        throw new Error("Missing user information. Cannot set password.");
+      }
+
+      const res = await setPasswordApi(adv_id, mobile, password);
+      return { message: res.data.message, status: true };
+    } catch (error) {
+      throw new Error(error.message || "Failed to set password");
+    }
+  },
+
+  resetPassword: async (adv_id, mobile, password) => {
+    try {
       if (!mobile || !adv_id) {
         throw new Error("Missing user information. Cannot set password.");
       }

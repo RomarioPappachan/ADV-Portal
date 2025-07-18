@@ -19,10 +19,10 @@ const getAdminToken = () => localStorage.getItem("admin_token");
 //   }
 // };
 
-export const fetchAllMembers = async (page, limit, search) => {
+export const fetchAllMembers = async (page, limit, search, expired) => {
   try {
     const res = await axios.get(
-      `${API_URL}/dashboard/all-advs`,
+      `${API_URL}/dashboard/all-advs?active_status=${expired}`,
       { params: { page, limit, search } },
       {
         headers: { Authorization: `${getAdminToken()}` },
@@ -82,6 +82,23 @@ export const updateMember = async (memberData, userRole) => {
   } catch (error) {
     // throw new Error(error.response?.data?.message || "Failed to update member");
     handleApiError(error, userRole);
+  }
+};
+
+// Update member details
+export const deactivateMember = async (memberId) => {
+  try {
+    const res = await axios.put(
+      `${API_URL}/dashboard/member/${memberId}`,
+      {},
+      {
+        headers: { Authorization: `${getAdminToken()}` },
+      }
+    );
+    return res;
+  } catch (error) {
+    // throw new Error(error.response?.data?.message || "Failed to update member");
+    handleApiError(error, "admin");
   }
 };
 

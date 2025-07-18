@@ -16,10 +16,10 @@ export const useMemberStore = create((set) => ({
   error: null,
 
   // Fetch all members
-  getAllMembers: async (page, limit, query) => {
+  getAllMembers: async (page, limit, query, expired) => {
     set({ loading: true, error: null });
     try {
-      const res = await fetchAllMembers(page, limit, query);
+      const res = await fetchAllMembers(page, limit, query, expired);
       const allMembers = res?.data?.result;
       // const startPoint = allMembers?.length - 50;
       // const updatedMembers = allMembers?.splice(startPoint, 50);

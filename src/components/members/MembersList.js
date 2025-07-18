@@ -2,6 +2,7 @@
 import { useMemberStore } from "@/store/memberStore";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import DeactivateMember from "./DeactivateMember";
 
 export default function MembersList() {
   const { getAllMembers, members, loading, totalPages, resetSelectedMember } =
@@ -11,10 +12,14 @@ export default function MembersList() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(50); // Rows per page
+  const [expired, setExpired] = useState(1);
+
+  const [isDeleteMemberOpen, setIsDeleteMemberOpen] = useState(false);
+  const [memberToDeactivate, setMemberToDeactivate] = useState(null);
 
   useEffect(() => {
-    getAllMembers(page, limit, search);
-  }, [page, limit, search]);
+    getAllMembers(page, limit, search, expired);
+  }, [page, limit, search, expired]);
 
   const handleRowsChange = (e) => {
     setLimit(Number(e.target.value));
@@ -24,7 +29,33 @@ export default function MembersList() {
   return (
     <div className="p-4 bg-white rounded-xl text-gray-800">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold">Members List</h2>
+        {/* <h2 className="text-lg font-semibold">Members List</h2> */}
+        <div className="flex items-center justify-start gap-2">
+          <button
+            type="button"
+            disabled={expired === 1}
+            className={`text-sm px-4 py-2 rounded-md cursor-pointer disabled:cursor-not-allowed ${
+              expired === 1
+                ? "bg-[#3f51b5] text-white"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+            }`}
+            onClick={() => setExpired(Number(1))}
+          >
+            Members
+          </button>
+          <button
+            type="button"
+            disabled={expired === 0}
+            className={`text-sm px-4 py-2 rounded-md cursor-pointer disabled:cursor-not-allowed ${
+              expired === 0
+                ? "bg-[#3f51b5] text-white"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+            }`}
+            onClick={() => setExpired(Number(0))}
+          >
+            Expired Accounts
+          </button>
+        </div>
 
         <input
           type="search"
@@ -136,6 +167,17 @@ export default function MembersList() {
                   </td>
                   <td className="text-center">
                     <div className="flex justify-center items-center gap-4">
+                      {member?.active_status === 1 && (
+                        <button
+                          className="text-xs text-gray-600 hover:text-rose-500 font-semibold cursor-pointer hover:underline"
+                          onClick={() => {
+                            setMemberToDeactivate(member);
+                            setIsDeleteMemberOpen(true);
+                          }}
+                        >
+                          Deactivate
+                        </button>
+                      )}
                       <button
                         className="text-xs text-gray-600 hover:text-cyan-500 font-semibold cursor-pointer hover:underline"
                         onClick={() => {
@@ -189,6 +231,15 @@ export default function MembersList() {
           </button>
         </div>
       </div>
+      {isDeleteMemberOpen && (
+        <DeactivateMember
+          isOpen={isDeleteMemberOpen}
+          onClose={() => setIsDeleteMemberOpen(false)}
+          memberToDeactivate={memberToDeactivate}
+          key={memberToDeactivate.id}
+          onExpired={setExpired} // to trigger render
+        />
+      )}
     </div>
   );
 }

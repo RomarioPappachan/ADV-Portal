@@ -13,16 +13,16 @@ function SubscriptionCards() {
           <p className="mb-2">Rs. 50.00</p>
           <p>Parking Sticker</p>
         </div>
-        <button className="w-full h-10 bg-blue-500 shadow-amber-50 shadow-2xl hover:bg-blue-600 cursor-pointer text-white font-semibold rounded-lg">
+        {/* <button className="w-full h-10 bg-blue-500 shadow-amber-50 shadow-2xl hover:bg-blue-600 cursor-pointer text-white font-semibold rounded-lg">
           Pay Now
-        </button>
-        {/* <RazorpayButton
+        </button> */}
+        <RazorpayButton
           key="parking"
           buttonStyle="w-full h-10 bg-blue-500 shadow-amber-50 shadow-2xl hover:bg-blue-600 cursor-pointer text-white font-semibold rounded-lg"
           amount={Number(50)}
           category="Subscription"
           payment_type="sticker"
-        /> */}
+        />
       </div>
 
       {/* Identity Card */}
@@ -34,16 +34,16 @@ function SubscriptionCards() {
           <p className="mb-2">Rs. 200.00</p>
           <p>Identity Card</p>
         </div>
-        <button className="w-full h-10 bg-teal-500 text-white font-semibold rounded-lg">
+        {/* <button className="w-full h-10 bg-teal-500 text-white font-semibold rounded-lg">
           Pay Now
-        </button>
-        {/* <RazorpayButton
+        </button> */}
+        <RazorpayButton
           key="idcard"
           buttonStyle="w-full h-10 bg-teal-500 shadow-amber-50 shadow-2xl hover:bg-teal-600 cursor-pointer text-white font-semibold rounded-lg"
           amount={Number(200)}
           category="Subscription"
           payment_type="idcard"
-        /> */}
+        />
       </div>
 
       {/* Medical Aid */}
@@ -55,16 +55,16 @@ function SubscriptionCards() {
           <p className="mb-2">Rs. 500.00</p>
           <p>Medical Aid Scheme Subscription</p>
         </div>
-        <button className="w-full h-10 bg-teal-500 text-white font-semibold rounded-lg">
+        {/* <button className="w-full h-10 bg-teal-500 text-white font-semibold rounded-lg">
           Pay Now
-        </button>
-        {/* <RazorpayButton
+        </button> */}
+        <RazorpayButton
           key="medical"
           buttonStyle="w-full h-10 bg-teal-500 shadow-amber-50 shadow-2xl hover:bg-teal-600 cursor-pointer text-white font-semibold rounded-lg"
           amount={Number(500)}
           category="Subscription"
           payment_type="medical"
-        /> */}
+        />
       </div>
     </div>
   );

@@ -47,6 +47,22 @@ export const verifyOtpApi = async (sessionId, mobileNo, otp) => {
   }
 };
 
+// verify OTP for password reset
+export const verifyOtpPwdApi = async (sessionId, mobileNo, otp) => {
+  // console.log(mobileNo, otp);
+  try {
+    const res = await axios.post(`${API_URL}/otp/verify-otp-pwd`, {
+      session_id: sessionId,
+      otp: otp,
+      mobile: mobileNo,
+    });
+
+    return res; // Return the response data (user & token)
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Invalid credentials");
+  }
+};
+
 // Set members password on first login
 export const setPasswordApi = async (adv_id, mobile, password) => {
   try {
